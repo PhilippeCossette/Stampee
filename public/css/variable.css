@@ -1,0 +1,21 @@
+:root {
+    /* Colors */
+
+    --accent-color: #B22222;
+    --white-color: #FAF9F6;
+    --grey-accent: #747474;
+    --footer-background-color: #dedede;
+    --main-blue: #333587;
+    --main-blue-hover: #3b3c96;
+    --nav-blue: #484ab6;
+
+
+
+    /* Spacing */
+    --small-spacing: 24px;
+    --medium-spacing: 32px;
+    --big-spacing: 40px;
+    --huge-spacing: 48px;
+
+    --nav-link-spacing: 40px;
+}

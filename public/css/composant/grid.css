@@ -1,0 +1,15 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(300px, auto)
+  );
+  justify-content: center;
+  gap: 16px;
+}
+
+@media screen and (max-width: 630px) {
+  .grid.biggerGap {
+    gap: 50px;
+  }
+}

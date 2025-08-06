@@ -1,0 +1,10 @@
+.title-paragraph-button {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.title-paragraph-button button {
+    margin-top: var(--small-spacing);
+}

@@ -1,0 +1,43 @@
+.nav-desktop__main,
+.nav-desktop__secondary {
+    display: flex;
+    justify-content: flex-end;
+    gap: var(--nav-link-spacing);
+
+    padding: 15px;
+    padding-inline: var(--medium-spacing);
+}
+
+.nav-desktop__main {
+    background-color: var(--nav-blue);
+    align-items: center;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.455);
+}
+
+.nav-desktop__main a {
+    color: white;
+}
+
+.nav-desktop__secondary {
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.nav-desktop_logo {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+}
+
+.nav-desktop_logo img {
+    max-width: 30px;
+}
+.nav-desktop__secondary label {
+    display: flex;
+}
+
+
+@media screen and (max-width: 900px) {
+    .nav-desktop {
+        display: none;
+    }
+}

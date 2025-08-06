@@ -1,0 +1,12 @@
+.desktop-dropdown {
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+    position: absolute;
+    top: 50px;
+    right: 460px;
+    padding: 20px;
+    background-color: var(--nav-blue);
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    z-index: 9;
+}

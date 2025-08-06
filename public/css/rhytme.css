@@ -1,0 +1,9 @@
+section {
+    margin-block: var(--huge-spacing);
+    margin-inline: var(--medium-spacing);
+}
+
+
+.noMarginInline {
+    margin: 0;
+}

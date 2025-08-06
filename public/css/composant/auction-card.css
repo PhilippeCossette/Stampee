@@ -1,0 +1,115 @@
+.auction-card {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 40px;
+  margin-inline: var(--medium-spacing);
+  margin-block: var(--huge-spacing);
+}
+
+.auction-card_right-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.auction-card_img-container {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.auction-card_left-section {
+  justify-content: center;
+  flex-direction: column-reverse;
+  display: flex;
+  flex-wrap: wrap-reverse;
+  gap: 20px;
+}
+
+.auction-card_img-container img {
+  max-width: 70px;
+  border-radius: 5px;
+
+  transition: all linear 0.2s;
+}
+
+.auction-card_img-container img:hover,
+.auction-card_img-container img:focus-within {
+  transform: scale(1.2);
+}
+
+.auction-card-main-img {
+  max-width: 100%;
+  aspect-ratio: 1;
+  object-fit: fill;
+}
+
+.auction-card_main-img img {
+  border-radius: 5px;
+  max-width: 100%;
+  cursor: zoom-in;
+  object-fit: cover;
+}
+
+.auction-card_header-title {
+  font-size: clamp(24px, 3vw, 48px);
+}
+
+.auction-card_action {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  gap: 10px;
+}
+
+.auction-card_header-title {
+  font-family: inter;
+}
+
+.auction-card_action-info {
+  display: block;
+  color: var(--grey-accent);
+  border-bottom: solid var(--grey-accent) 1px;
+}
+
+.auction-card_header-small {
+  font-family: inter;
+  color: var(--grey-accent);
+  margin-top: -10px;
+  margin-bottom: 20px;
+  display: block;
+}
+
+.auction-card_action-price {
+  font-family: inter;
+  font-size: 32px;
+  color: var(--main-blue);
+  margin-bottom: -15px;
+  margin-top: -10px;
+  display: block;
+}
+
+@media screen and (max-width: 1000px) {
+  .auction-card {
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  .auction-card_left-section {
+    flex-direction: row;
+  }
+
+  .auction-card_img-container {
+    flex-direction: column;
+  }
+}
+
+@media screen and (max-width: 723px) {
+  .auction-card_img-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(25px, 50px));
+    align-items: center;
+    flex-grow: 1;
+  }
+  .auction-card_img-container img {
+    max-width: 100%;
+  }
+}

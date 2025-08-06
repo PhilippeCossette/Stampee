@@ -1,0 +1,13 @@
+.header-secondary {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    margin-bottom: var(--medium-spacing);
+}
+
+.header-secondary-button {
+    color: var(--main-blue);
+    text-decoration: underline;
+    margin-top: -10px;
+}

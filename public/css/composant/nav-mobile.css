@@ -1,0 +1,29 @@
+.nav-mobile {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px var(--big-spacing);
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.nav-mobile_logo img,
+.nav-mobile_menu img{
+    display: flex;
+    align-items: center;
+    max-width: 30px;
+
+    transition: all linear 0.2s;
+}
+
+.nav-mobile_menu img:hover,
+.nav-mobile_menu img:focus-within {
+    transform: scale(1.2);
+}
+
+
+@media screen and (min-width: 901px) {
+    .nav-mobile {
+        display: none;
+    }
+}

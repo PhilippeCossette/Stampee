@@ -1,0 +1,9 @@
+.secondary-button {
+  color: var(--main-blue);
+  border: 1px solid var(--main-blue);
+}
+
+.secondary-button:focus,
+.secondary-button:hover {
+  color: white;
+}
