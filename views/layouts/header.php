@@ -45,7 +45,7 @@
               value="Recherche..."
             />
             <button class="search_button">
-              <img src="./{{asset}}/img/search.webp" alt="search icon" />
+              <img src="{{asset}}/img/search.webp" alt="search icon" />
             </button>
           </form>
         </div>
