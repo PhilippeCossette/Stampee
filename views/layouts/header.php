@@ -42,7 +42,7 @@
           {% else %}
           <a href="#" class="nav-link nav-link--profile">
             <small class="nav-link--profile-name">Bonjour, {{ session.username }}</small>
-            <p class="nav-link--profile-button">Voir Profile &#8618;</p>  
+            <p class="nav-link--profile-button">Voir Profile &#8594;</p>  
           </a>
           <a href="{{base}}/logout" class="nav-link-button"><img src="{{asset}}/img/logout.png" alt=""></a>
           {% endif %} 
