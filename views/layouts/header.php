@@ -18,17 +18,20 @@
           <a href="#" class="nav-desktop_logo"
             ><img src="{{asset}}/img/logo.webp" alt="logo stampee"
           /></a>
-          <a href="#" class="nav-link" data-dropdown="true"
-            >Enchères
-            <img src="{{asset}}/img/down-arrow.webp" alt="menu deroulant icone"
-          /></a>
-          <div class="desktop-dropdown hideContent">
-            <a href="#" class="nav-link">Explorer les enchères</a>
-            <a href="#" class="nav-link">Catégories</a>
-            <a href="#" class="nav-link">Mes enchères</a>
-            <a href="#" class="nav-link">Ajouter une enchère</a>
-            <a href="#" class="nav-link">Offres récentes</a>
-          </div>
+          <div class="desktop-dropdown-wrapper">
+  <a href="#" class="nav-link" data-dropdown="true">
+    Enchères
+    <img src="{{asset}}/img/down-arrow.webp" alt="menu déroulant icône" />
+  </a>
+  <div class="desktop-dropdown hideContent">
+    <a href="#" class="nav-link">Explorer les enchères</a>
+    <a href="#" class="nav-link">Catégories</a>
+    <a href="#" class="nav-link">Mes enchères</a>
+    <a href="#" class="nav-link">Ajouter une enchère</a>
+    <a href="#" class="nav-link">Offres récentes</a>
+  </div>
+</div>
+          
           {% if guest %}
           <a href="{{base}}/register" class="nav-link">Devenir membre</a>
            {% else %}
@@ -37,8 +40,11 @@
           {% if guest %}
           <a href="{{base}}/login" class="nav-link"><strong>Se connecter</strong></a>
           {% else %}
-          <a href="#" class="nav-link"><strong>Profile</strong></a>
-          <a href="{{base}}/logout" class="nav-link"><strong>Se déconnecter</strong></a>
+          <a href="#" class="nav-link nav-link--profile">
+            <small class="nav-link--profile-name">Bonjour, {{ session.username }}</small>
+            <p class="nav-link--profile-button">Voir Profile &#8618;</p>  
+          </a>
+          <a href="{{base}}/logout" class="nav-link-button"><img src="{{asset}}/img/logout.png" alt=""></a>
           {% endif %} 
         </div>
         <div class="nav-desktop__secondary">
