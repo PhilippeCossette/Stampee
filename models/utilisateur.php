@@ -1,6 +1,11 @@
 <?php
 namespace App\Models;
+
 use App\Models\CRUD;
+use App\Models\Utilisateur;
+use App\Providers\View;
+use App\Providers\Validator;
+use App\Providers\Auth;
 
 class Utilisateur extends CRUD{
     protected $table = 'utilisateur';
@@ -8,7 +13,7 @@ class Utilisateur extends CRUD{
     protected $fillable = ['nom_utilisateur', 'email', 'mot_de_passe'];
 
     public function checkUser($username, $password) {
-        $user = this->unique('nom_utilisateur', $username);
+        $user = $this->unique('nom_utilisateur', $username);
         if ($user) {
             if (password_verify($password, $user['mot_de_passe'])) {
                 session_regenerate_id(); // Regenerate session ID to prevent session fixation

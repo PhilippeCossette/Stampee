@@ -119,8 +119,12 @@ abstract class CRUD extends \PDO {
         $stmt = $this->prepare($sql);
         $stmt->bindValue("$field", $value);
         $stmt->execute();
-       
-        return $stmt->fetch() !== false;
+        $count = $stmt->rowCount();
+        if($count == 1){
+            return $stmt->fetch();
+        }else{
+            return false;
+        }
     }
 }
 

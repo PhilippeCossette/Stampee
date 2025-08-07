@@ -59,8 +59,25 @@ class AuthController {
     }
     }
 
-    public function login(){
-
+    public function login($data){
+        $validator = new Validator();
+        $nom = $_POST['nom_utilisateur'];
+        $motDePasse = $_POST['mot_de_passe'];   
+        $validator->field("nom_utilisateur", $nom, "Nom d'utilisateur")->required()->min(3)->max(50);
+        $validator->field("mot_de_passe", $motDePasse, "Mot de passe")->required()->min(6)->max(40);
+        if ($validator->isSuccess()) {
+            $utilisateurModel = new Utilisateur();
+            $isAuthenticated = $utilisateurModel->checkUser($nom, $motDePasse);
+            if ($isAuthenticated) {
+                return View::redirect(''); // Redirect to homepage after successful login
+            } else {
+                $errors["message"] = "Nom d'utilisateur ou mot de passe incorrect.";
+                return View::render('login', ['errors' => $errors, 'inputs' => $data]);
+            }
+        } else {    
+            $errors = $validator->getErrors();
+            return View::render('login', ['errors' => $errors, 'inputs' => $data]);
+        }
     }
 
     public function logout(){
