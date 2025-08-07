@@ -29,7 +29,7 @@
             <a href="#" class="nav-link">Ajouter une enchère</a>
             <a href="#" class="nav-link">Offres récentes</a>
           </div>
-          <a href="#" class="nav-link">Devenir membre</a>
+          <a href="{{base}}/register" class="nav-link">Devenir membre</a>
           <a href="#" class="nav-link">Actualité</a>
           <a href="#" class="nav-link"><strong>Se connecter</strong></a>
         </div>
@@ -61,7 +61,7 @@
       <div class="nav-mobile-menu" id="mobile-menu">
         <button id="close-menu" class="close-btn">&times;</button>
         <a href="#" class="nav-link">Enchères</a>
-        <a href="#" class="nav-link">Devenir membre</a>
+        <a href="{{base}}/register" class="nav-link">Devenir membre</a>
         <a href="#" class="nav-link">Actualité</a>
         <a href="#" class="nav-link">À propos de Lord Reginald Stampee III</a>
         <a href="#" class="nav-link">Langues</a>
