@@ -4,9 +4,11 @@ namespace App\Controllers;
 
 use App\Models\Utilisateur;
 use App\Providers\View;
+use App\Providers\Auth;
 use App\Providers\Validator;
 
 class AuthController {
+
     public function index() {
         return View::render('register');
     }
@@ -36,10 +38,14 @@ class AuthController {
 
 
         if ($insertId) {
-            // Save user ID in session to log them in (optional)
+            session_regenerate_id();
+
             $_SESSION['user_id'] = $insertId;
-            // Redirect or show success message
-            echo "User registered successfully! User ID: $insertId";
+            $_SESSION['username'] = $nom;
+            $_SESSION['email'] = $email;
+            $_SESSION['finger_print'] = md5($_SERVER['HTTP_USER_AGENT'] . $_SERVER['REMOTE_ADDR']);
+            
+            return View::redirect(''); // Redirect to homepage after successful registration
         } else {
             echo "Failed to register user.";
         }
@@ -48,5 +54,10 @@ class AuthController {
         return View::render('register', ['errors' => $errors, 'inputs' => $_POST]);
     }
 
+    }
+
+    public function logout(){
+        session_destroy(); // End session
+        return View::redirect(''); // Redirect to login
     }
 }

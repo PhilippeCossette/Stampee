@@ -29,9 +29,17 @@
             <a href="#" class="nav-link">Ajouter une enchère</a>
             <a href="#" class="nav-link">Offres récentes</a>
           </div>
+          {% if guest %}
           <a href="{{base}}/register" class="nav-link">Devenir membre</a>
+           {% else %}
+           {% endif %}
           <a href="#" class="nav-link">Actualité</a>
+          {% if guest %}
           <a href="#" class="nav-link"><strong>Se connecter</strong></a>
+          {% else %}
+          <a href="#" class="nav-link"><strong>Profile</strong></a>
+          <a href="{{base}}/logout" class="nav-link"><strong>Se déconnecter</strong></a>
+          {% endif %} 
         </div>
         <div class="nav-desktop__secondary">
           <a href="#" class="nav-link">À propos de Lord Reginald Stampee III</a>

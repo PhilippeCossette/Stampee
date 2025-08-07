@@ -115,8 +115,7 @@ abstract class CRUD extends \PDO {
     }
 
     final public function unique($field, $value){
-        // LIMIT no need to fetch more than once if you find one identical value
-        $sql = "SELECT * FROM $this->table WHERE $field = :$field LIMIT 1";
+        $sql = "SELECT * FROM $this->table WHERE $field = :$field";
         $stmt = $this->prepare($sql);
         $stmt->bindValue("$field", $value);
         $stmt->execute();

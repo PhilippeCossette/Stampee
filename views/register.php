@@ -1,3 +1,5 @@
+{{ include('layouts/header.php', {title:'Page d\'inscription - Stampee'})}}
+
 <form action="{{base}}/register" method="post">
   <div>
   <label for="nom_utilisateur">Nom d'utilisateur:</label><br>
@@ -25,3 +27,6 @@
 
   <button type="submit">S'inscrire</button>
 </form>
+
+
+{{ include('layouts/footer.php')}}
