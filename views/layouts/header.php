@@ -35,7 +35,7 @@
            {% endif %}
           <a href="#" class="nav-link">Actualité</a>
           {% if guest %}
-          <a href="#" class="nav-link"><strong>Se connecter</strong></a>
+          <a href="{{base}}/login" class="nav-link"><strong>Se connecter</strong></a>
           {% else %}
           <a href="#" class="nav-link"><strong>Profile</strong></a>
           <a href="{{base}}/logout" class="nav-link"><strong>Se déconnecter</strong></a>

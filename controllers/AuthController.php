@@ -9,8 +9,12 @@ use App\Providers\Validator;
 
 class AuthController {
 
-    public function index() {
+    public function registerIndex() {
         return View::render('register');
+    }
+
+    public function loginIndex() {
+        return View::render('login');
     }
 
     public function registerAccount() {
@@ -53,6 +57,9 @@ class AuthController {
         $errors = $validator->getErrors();
         return View::render('register', ['errors' => $errors, 'inputs' => $_POST]);
     }
+    }
+
+    public function login(){
 
     }
 

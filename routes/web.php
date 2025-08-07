@@ -8,8 +8,11 @@ use App\Models\Utilisateur;
 Route::get('/', 'HomeController@index');
 
 
-Route::get('/register', 'AuthController@index');
+Route::get('/register', 'AuthController@registerIndex');
 Route::post('/register', 'AuthController@registerAccount');
+
+Route::get('/login', 'AuthController@loginIndex');
+Route::post('/login', 'AuthController@login');
 
 Route::get('/logout', 'AuthController@logout');
 
