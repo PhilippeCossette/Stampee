@@ -16,7 +16,10 @@
       <span class="error">{{ errors.mot_de_passe }}</span>
     {% endif %}
   </div>
-   <button type="submit">S'inscrire</button>
+    {% if errors.message is defined %}
+    <span class="error">{{ errors.message }}</span>
+    {% endif %}
+   <button type="submit">Se Connecter</button>
 </form>
 
 
