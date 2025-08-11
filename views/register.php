@@ -1,23 +1,25 @@
 {{ include('layouts/header.php', {title:'Page d\'inscription - Stampee'})}}
+<div class="wrapper-centered">
 
-<form action="{{base}}/register" method="post">
+<form class="form" action="{{base}}/register" method="post">
+  <header class="form-header">
+  <p class="form-header-undertitle">Entrez vos informations</p>
+  <h1 class="form-header-title">Bon retour !</h1>
+</header>
   <div>
-  <label for="nom_utilisateur">Nom d'utilisateur:</label><br>
-  <input type="text" id="nom_utilisateur" name="nom_utilisateur" required><br><br>
+  <input class="form-input" type="text" id="nom_utilisateur" name="nom_utilisateur" placeholder="Nom d'utilisateur" required>
   {% if errors.nom_utilisateur is defined %}                   
     <span class="error">{{ errors.nom_utilisateur }}</span>
   {% endif %}
   </div>
   <div>
-    <label for="email">Adresse courriel:</label><br>
-    <input type="email" id="email" name="email" required><br><br>
+    <input class="form-input" type="email" id="email" name="email" placeholder="Adresse Email" required>
     {% if errors.email is defined %}
       <span class="error">{{ errors.email }}</span>
     {% endif %}
   </div>
   <div>
-    <label for="mot_de_passe">Mot de passe:</label><br>
-    <input type="password" id="mot_de_passe" name="mot_de_passe" required><br><br>
+    <input class="form-input" type="password" id="mot_de_passe" name="mot_de_passe" placeholder="Mot de Passe" required>
     {% if errors.mot_de_passe is defined %}
       <span class="error">{{ errors.mot_de_passe }}</span>
     {% endif %}
@@ -27,6 +29,7 @@
 
   <button type="submit">S'inscrire</button>
 </form>
+</div>
 
 
 {{ include('layouts/footer.php')}}

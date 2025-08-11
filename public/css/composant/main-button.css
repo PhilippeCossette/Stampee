@@ -1,4 +1,16 @@
 .main-button {
   color: white;
   background-color: var(--main-blue);
+  padding: 0.5em;
+  border-radius: 0.5em;
+  text-align: center;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  transition: all 0.1s linear;
+}
+
+.main-button:hover,
+.main-button:focus {
+  background-color: var(--main-blue-hover);
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  scale: 1.01;
 }
