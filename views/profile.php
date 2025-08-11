@@ -13,19 +13,20 @@
                 <p><strong>Email:</strong> {{ session.email }}</p>
             </div>
             <div>
-                <a class="button secondary-button" href="">Modifier Compte</a>
-                <a class="button red-button" href="">Supprimer Compte</a>
+                <a class="button secondary-button" href="{{base}}/login/edit">Modifier Compte</a>
+                <a class="button red-button" href="{{base}}/login/delete">Supprimer Compte</a>
             </div>
         </div>
     </header>
-</section>
-<section class="favorite-auctions">
+    <article class="my-auctions">
 
-</section>
-<section class="my-auctions">
+</article>
+<article class="favorite-auctions">
 
-</section>
-<section class="offer-history">
+</article>
+<article class="offer-history">
+
+</article>
 
 </section>
 

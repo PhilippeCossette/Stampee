@@ -1,0 +1,33 @@
+.profile {
+  margin: 2em auto;
+  max-width: 1200px;
+  padding: 2em;
+}
+
+.profile-details {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1em;
+  margin-block: 2em;
+  border: 1px solid var(--light-grey-accent);
+  border-radius: 0.5em;
+  padding: 1em;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+.profile-details div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75em;
+}
+
+.profile-details a {
+  flex-grow: 1;
+}
+
+@media screen and (max-width: 700px) {
+  .profile-details {
+    flex-direction: column;
+  }
+}
