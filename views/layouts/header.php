@@ -75,11 +75,22 @@
       <div class="nav-mobile-menu" id="mobile-menu">
         <button id="close-menu" class="close-btn">&times;</button>
         <a href="#" class="nav-link">Enchères</a>
-        <a href="{{base}}/register" class="nav-link">Devenir membre</a>
+        {% if guest %}
+          <a href="{{base}}/register" class="nav-link">Devenir membre</a>
+        {% else %}
+        {% endif %}
         <a href="#" class="nav-link">Actualité</a>
         <a href="#" class="nav-link">À propos de Lord Reginald Stampee III</a>
         <a href="#" class="nav-link">Langues</a>
-        <a href="#" class="nav-link"><strong>Se connecter</strong></a>
+        {% if guest %}
+          <a href="{{base}}/login" class="nav-link"><strong>Se connecter</strong></a>
+          {% else %}
+          <a href="#" class="nav-link nav-link--profile">
+            <small class="nav-link--profile-name">Bonjour, {{ session.username }}</small>
+            <p class="nav-link--profile-button">Voir Profile &#8594;</p>  
+          </a>
+          <a href="{{base}}/logout" class="nav-link-button"><img src="{{asset}}/img/logout-mobile.png" alt=""></a>
+          {% endif %} 
       </div>
     </header>
     <main>
