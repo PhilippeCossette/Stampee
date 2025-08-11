@@ -45,7 +45,7 @@ class AuthController {
             session_regenerate_id();
 
             $_SESSION['user_id'] = $insertId;
-            $_SESSION['username'] = $nom;
+            $_SESSION['nom_utilisateur'] = $nom;
             $_SESSION['email'] = $email;
             $_SESSION['finger_print'] = md5($_SERVER['HTTP_USER_AGENT'] . $_SERVER['REMOTE_ADDR']);
             

@@ -14,7 +14,7 @@
         <div class="profile-details">
             <img src="{{asset}}/img/user.png" alt="">
             <div>
-                <p><strong>Nom:</strong> {{ session.username }}</p>
+                <p><strong>Nom:</strong> {{ session.nom_utilisateur }}</p>
                 <p><strong>Email:</strong> {{ session.email }}</p>
             </div>
             <div>

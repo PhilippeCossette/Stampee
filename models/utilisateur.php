@@ -19,7 +19,7 @@ class Utilisateur extends CRUD{
                 session_regenerate_id(); // Regenerate session ID to prevent session fixation
 
                 $_SESSION['user_id'] = $user['id']; // Store user ID in session 
-                $_SESSION['username'] = $user['nom_utilisateur']; // Store username in session
+                $_SESSION['nom_utilisateur'] = $user['nom_utilisateur']; // Store username in session
                 $_SESSION['email'] = $user['email']; // Store password hash in session
                 $_SESSION['finger_print'] = md5($_SERVER['HTTP_USER_AGENT'] . $_SERVER['REMOTE_ADDR']); // Store fingerprint in session
                 return true; // Authentication successful
