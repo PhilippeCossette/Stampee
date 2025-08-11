@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Models\Utilisateur;
 use App\Providers\View;
 use App\Providers\Auth; 
 
