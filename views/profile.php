@@ -18,7 +18,7 @@
                 <p><strong>Email:</strong> {{ session.email }}</p>
             </div>
             <div>
-                <a class="button secondary-button" href="{{base}}/user/edit">Modifier Compte</a>
+                <a class="button secondary-button" href="{{base}}/user/update">Modifier Compte</a>
                 <a class="button red-button" id="delete-btn">Supprimer Compte</a>
             </div>
         </div>

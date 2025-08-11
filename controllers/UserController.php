@@ -12,6 +12,15 @@ class UserController {
         return View::render('profile');
     }
 
+    public function updateIndex($data = []) {
+        Auth::session(); // Ensure the user is authenticated    
+        $userId = $_SESSION['user_id'];
+
+        $userModel = new Utilisateur();
+        $userData = $userModel->selectId($userId);  
+        return View::render('update', ['inputs' => $userData]);
+    }
+
     public function deleteUser() {
         $userModel = new Utilisateur();
         $userId = $_SESSION['user_id'];
