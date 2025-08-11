@@ -19,7 +19,7 @@
             </div>
             <div>
                 <a class="button secondary-button" href="{{base}}/user/edit">Modifier Compte</a>
-                <a class="button red-button" href="{{base}}/user/delete">Supprimer Compte</a>
+                <a class="button red-button" id="delete-btn">Supprimer Compte</a>
             </div>
         </div>
     </header>

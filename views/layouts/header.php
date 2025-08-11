@@ -9,7 +9,7 @@
     />
     <title>{{ title }}</title>
     <link rel="stylesheet" href="{{asset}}css/main.css" />
-    <script src="{{asset}}js/main.js" defer></script>
+    <script src="{{asset}}js/main.js" type="module"></script>
   </head>
   <body>
     <header>
