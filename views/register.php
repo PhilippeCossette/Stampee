@@ -4,7 +4,7 @@
 <form class="form" action="{{base}}/register" method="post">
   <header class="form-header">
   <p class="form-header-undertitle">Entrez vos informations</p>
-  <h1 class="form-header-title">Bon retour !</h1>
+  <h1 class="form-header-title">Créez votre compte</h1>
 </header>
   <div>
   <input class="form-input" type="text" id="nom_utilisateur" name="nom_utilisateur" placeholder="Nom d'utilisateur" required>
@@ -25,9 +25,7 @@
     {% endif %}
   </div>
 
-  
-
-  <button type="submit">S'inscrire</button>
+  <button class="main-button" type="submit">S'inscrire</button>
 </form>
 </div>
 
