@@ -19,6 +19,8 @@ Route::get('/logout', 'AuthController@logout');
 
 Route::get('/profile', 'UserController@profileIndex');
 
+Route::get('/user/delete', 'UserController@deleteUser');
+
 
 
 
