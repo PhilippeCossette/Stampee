@@ -19,7 +19,7 @@ class UserController {
         if ($userModel->delete($userId)) {
             session_unset();
             session_destroy();
-            return View::redirect('login');
+            return View::redirect('', ['success' => 'Compte supprimé avec succès.']);
     } else {
             return View::render('profile', ['error' => 'Erreur lors de la suppression du compte.']);
     }
