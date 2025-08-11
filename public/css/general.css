@@ -24,3 +24,10 @@ img {
 .hideContent {
   visibility: hidden;
 }
+
+.wrapper-centered {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}

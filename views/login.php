@@ -1,17 +1,19 @@
 {{ include('layouts/header.php', {title:'Page de connexion - Stampee'})}}
-
-<form action="{{base}}/login" method="post">
+<div class="wrapper-centered">
+<form class="login-form" action="{{base}}/login" method="post">
+  <header class="login-form-header">
+  <p>Entrez vos informations</p>
+  <h1>Bon retour !</h1>
+</header>
   <div>
-  <label for="nom_utilisateur">Nom d'utilisateur:</label><br>
-  <input type="text" id="nom_utilisateur" name="nom_utilisateur" required><br><br>
+  <input type="text" id="nom_utilisateur" aria-label="Nom d'utilisateur" name="nom_utilisateur" placeholder="Nom d'utilisateur" required>
   {% if errors.nom_utilisateur is defined %}                   
     <span class="error">{{ errors.nom_utilisateur }}</span>
   {% endif %}
   </div>
 
   <div>
-    <label for="mot_de_passe">Mot de passe:</label><br>
-    <input type="password" id="mot_de_passe" name="mot_de_passe" required><br><br>
+    <input type="password" id="mot_de_passe" aria-label="Mot de passe" name="mot_de_passe" placeholder="Mot de Passe" required>
     {% if errors.mot_de_passe is defined %}
       <span class="error">{{ errors.mot_de_passe }}</span>
     {% endif %}
@@ -21,6 +23,7 @@
     {% endif %}
    <button type="submit">Se Connecter</button>
 </form>
+</div>
 
 
 {{ include('layouts/footer.php')}}
