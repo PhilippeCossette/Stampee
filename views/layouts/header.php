@@ -40,7 +40,7 @@
           {% if guest %}
           <a href="{{base}}/login" class="nav-link"><strong>Se connecter</strong></a>
           {% else %}
-          <a href="#" class="nav-link nav-link--profile">
+          <a href="{{base}}/profile" class="nav-link nav-link--profile">
             <small class="nav-link--profile-name">Bonjour, {{ session.username }}</small>
             <p class="nav-link--profile-button">Voir Profile &#8594;</p>  
           </a>
