@@ -8,9 +8,6 @@
       {{ error }}
     </span>
     {% endif %}
-    {% if success %}
-  <div class="alert alert-success">{{ success }}</div>
-{% endif %}
     <div class="profile-details">
       <img src="{{ asset }}/img/user.png" alt="" />
       <div>

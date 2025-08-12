@@ -32,7 +32,7 @@ class UserController {
         
         $validator = new Validator();
         $validator->field('nom_utilisateur', $nom, 'Nom d\'utilisateur')->required()->min(3)->max(50);
-        $validator->field('email', $email, 'Adresse courriel')->required()->email()->unique("Utilisateur", $userId);
+        $validator->field('email', $email, 'Adresse courriel')->required()->email()->uniqueUpdate("Utilisateur", $userId);
 
         // Validate password only if entered
         if(!empty($motDePasse)) {

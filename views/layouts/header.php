@@ -106,6 +106,5 @@
         {% endif %}
       </div>
     </header>
-    <main></main>
-  </body>
-</html>
+    <main>
+

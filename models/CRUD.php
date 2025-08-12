@@ -114,7 +114,7 @@ abstract class CRUD extends \PDO {
 
     }
 
-    final public function unique($field, $value, $excludeId = null){
+    final public function uniqueUpdate($field, $value, $excludeId = null){
         $sql = "SELECT * FROM $this->table WHERE $field = :$field";
 
         if($excludeId !== null){
@@ -133,6 +133,24 @@ abstract class CRUD extends \PDO {
 
 
         return $count === 0;
+    }
+
+    final public function unique($field, $value){
+        $sql = "SELECT * FROM $this->table WHERE $field = :$field";
+
+
+        $stmt = $this->prepare($sql);
+        $stmt->bindValue("$field", $value);
+
+        $stmt->execute();
+        $count = $stmt->rowCount();
+
+
+        if($count == 1){
+            return $stmt->fetch();
+        }else{
+            return false;
+        }
     }
 }
 
