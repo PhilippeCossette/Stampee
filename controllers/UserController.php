@@ -72,6 +72,7 @@ class UserController {
     }
 
     public function deleteUser() {
+        Auth::session(); // Ensure the user is connected
         $userModel = new Utilisateur();
         $userId = $_SESSION['user_id'];
 
