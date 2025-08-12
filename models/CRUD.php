@@ -132,11 +132,7 @@ abstract class CRUD extends \PDO {
         $count = $stmt->rowCount();
 
 
-        if($count == 1){
-            return $stmt->fetch();
-        }else{
-            return false;
-        }
+        return $count === 0;
     }
 }
 

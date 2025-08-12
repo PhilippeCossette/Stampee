@@ -1,8 +1,5 @@
 {{ include("layouts/header.php", { title: "Page du Profile - Stampee" }) }}
 
-<!-- {% for item in session %}
-  {{ item }}
-{% endfor %} -->
 <section class="profile">
   <header class="profile-header">
     <h1>Details du Compte</h1>
@@ -11,6 +8,9 @@
       {{ error }}
     </span>
     {% endif %}
+    {% if success %}
+  <div class="alert alert-success">{{ success }}</div>
+{% endif %}
     <div class="profile-details">
       <img src="{{ asset }}/img/user.png" alt="" />
       <div>
