@@ -114,12 +114,38 @@ abstract class CRUD extends \PDO {
 
     }
 
-    final public function unique($field, $value){
+    final public function uniqueUpdate($field, $value, $excludeId = null){
         $sql = "SELECT * FROM $this->table WHERE $field = :$field";
+
+        if($excludeId !== null){
+            $sql .= " AND $this->primaryKey != :excludeId";
+        }
+
         $stmt = $this->prepare($sql);
         $stmt->bindValue("$field", $value);
+
+        if($excludeId !== null){
+            $stmt->bindValue(":excludeId", $excludeId);
+        }
+
         $stmt->execute();
         $count = $stmt->rowCount();
+
+
+        return $count === 0;
+    }
+
+    final public function unique($field, $value){
+        $sql = "SELECT * FROM $this->table WHERE $field = :$field";
+
+
+        $stmt = $this->prepare($sql);
+        $stmt->bindValue("$field", $value);
+
+        $stmt->execute();
+        $count = $stmt->rowCount();
+
+
         if($count == 1){
             return $stmt->fetch();
         }else{

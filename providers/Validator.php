@@ -78,6 +78,22 @@ class Validator {
         return $this;
     }
 
+    public function uniqueUpdate($model, $excludeId = null){
+        // Cant validate if the value is empty
+        if (empty($this->value)) {
+            return $this;
+        }
+
+        // Get the relative model class name
+        $model = 'App\\Models\\'.$model;
+        $model = new $model;
+        $unique = $model->uniqueUpdate($this->key, $this->value, $excludeId);
+        if(!$unique){
+            $this->errors[$this->key]="$this->name doit être unique.";
+        }
+        return $this;
+    }
+
     // Check if there are any validation errors
     public function isSuccess(){
         if(empty($this->errors)) // Return true if no errors
