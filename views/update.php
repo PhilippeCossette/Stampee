@@ -9,7 +9,7 @@
     <div></div>
     <div>
       <input
-        type="text"
+        type="text"     
         name="nom_utilisateur"
         id="nom_utilisateur"
         value="{{ inputs.nom_utilisateur }}"
