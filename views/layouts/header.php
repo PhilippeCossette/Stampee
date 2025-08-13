@@ -29,8 +29,11 @@
             <div class="desktop-dropdown hideContent">
               <a href="#" class="nav-link">Explorer les enchères</a>
               <a href="#" class="nav-link">Catégories</a>
+               {% if guest %}
+               {% else %} 
               <a href="#" class="nav-link">Mes enchères</a>
               <a href="#" class="nav-link">Ajouter une enchère</a>
+               {% endif %}
               <a href="#" class="nav-link">Offres récentes</a>
             </div>
           </div>
@@ -93,8 +96,11 @@
             <div class="desktop-dropdown hideContent">
               <a href="#" class="nav-link">Explorer les enchères</a>
               <a href="#" class="nav-link">Catégories</a>
+               {% if guest %}
+               {% else %} 
               <a href="#" class="nav-link">Mes enchères</a>
               <a href="#" class="nav-link">Ajouter une enchère</a>
+               {% endif %}
               <a href="#" class="nav-link">Offres récentes</a>
             </div>
           </div>
