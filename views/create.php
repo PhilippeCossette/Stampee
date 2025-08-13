@@ -1,6 +1,7 @@
 {{ include("layouts/header.php", { title: "Page d'inscription - Stampee" }) }}
 <div class="wrapper-centered">
-    <form class="form" action="{{ base }}/create" method="post">
+    <!-- enctype="multipart/form-data" permert l'upload d'image -->
+    <form class="form" action="{{ base }}/create" method="post" enctype="multipart/form-data">
         <header class="form-header">
             <p class="form-header-undertitle">Entrez les informations du timbre</p>
             <h1 class="form-header-title">Ajoutez Votre Timbre</h1>
@@ -112,6 +113,15 @@
             {% if errors.certifie is defined %}
             <span class="error">{{ errors.certifie }}</span>
             {% endif %}
+        </div>
+
+        <div>
+            <label for="image_principale">Image principale (obligatoire) :</label>
+            <input type="file" id="image_principale" name="image_principale" accept="image/*" required>
+        </div>
+        <div>
+            <label for="images">Autres images (facultatif) :</label>
+            <input type="file" id="images" name="images[]" multiple accept="image/*">
         </div>
 
         <button class="main-button" type="submit">Cree Timbre</button>
