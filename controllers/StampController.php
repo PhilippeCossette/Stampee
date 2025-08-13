@@ -6,6 +6,7 @@ use App\Models\Timbres;
 use App\Models\Condition;
 use App\Models\Couleur;
 use App\Models\Pays;
+use App\Models\ImagesTimbre;
 
 use App\Providers\View;
 use App\Providers\Auth;
@@ -41,7 +42,7 @@ class StampController
         $validator = new Validator();
         // Validate required fields
         $validator->field('titre', $data['titre'])->required()->min(2)->max(100);
-        $validator->field('annee', $data['annee'])->required()->number()->min(1000)->max(2100);
+        $validator->field('annee', $data['annee'])->required()->number();
         $validator->field('id_pays', $data['id_pays'])->required()->number();
         $validator->field('id_couleur', $data['id_couleur'])->required()->number();
         $validator->field('id_condition', $data['id_condition'])->required()->number();
@@ -63,7 +64,7 @@ class StampController
                 'id_couleur' => $data['id_couleur'],
                 'id_condition' => $data['id_condition'],
                 'tirage' => $data['tirage'],
-                'dimension' => $data[$dimension],
+                'dimension' => $dimension,
                 'certifie' => $data['certifie'] === 'Oui' ? 1 : 0
             ];
 
@@ -74,6 +75,55 @@ class StampController
             }
 
             $targetDir = __DIR__ . '/../public/uploads/';
+
+            // Handle main image upload
+            if (isset($files['image_principale']) && $files['image_principale']['name'] != '') {
+                $file = $files['image_principale'];
+                // Create a unique file name
+                $fileName = uniqid() . '_' . basename($file['name']);
+                $targetFile = $targetDir . $fileName;
+                move_uploaded_file($file['tmp_name'], $targetFile);
+
+                $imageModel = new ImagesTimbre();
+                $imageModel->insert([
+                    'id_timbre' => $timbre_id,
+                    'url_image' => $fileName,
+                    'principale' => 1
+                ]);
+            } else {
+                return View::render('error', ['message' => 'L\'image principale est obligatoire']);
+            }
+
+
+            // Handle additional images upload
+            if (isset($files['images'])) {
+                $images = $files['images'];
+                foreach ($images['name'] as $i => $name) {
+                    if ($name == '') continue;
+
+                    $fileName = uniqid() . '_' . basename($name);
+                    $targetFile = $targetDir . $fileName;
+                    move_uploaded_file($images['tmp_name'][$i], $targetFile);
+
+                    $imageModel = new ImagesTimbre();
+                    $imageModel->insert([
+                        'id_timbre' => $timbre_id,
+                        'url_image' => $fileName,
+                        'principale' => 0
+                    ]);
+                }
+            }
+            // return View::render('success', ['message' => 'Timbre ajouté avec succès.']);
+            return View::redirect(''); // redirect to list page
+        } else {
+            $errors = $validator->getErrors();
+            return View::render('create', [
+                'errors' => $errors,
+                'inputs' => $data,
+                'pays' => (new Pays())->select('pays'),
+                'couleurs' => (new Couleur())->select('couleur'),
+                'conditions' => (new Condition())->select('condition')
+            ]);
         }
     }
 }
