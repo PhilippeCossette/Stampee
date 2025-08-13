@@ -42,6 +42,7 @@ class StampController
         $validator = new Validator();
         // Validate required fields
         $validator->field('titre', $data['titre'])->required()->min(2)->max(100);
+        $validator->field('description', $data['description'])->required()->min(2)->max(200);
         $validator->field('annee', $data['annee'])->required()->number();
         $validator->field('id_pays', $data['id_pays'])->required()->number();
         $validator->field('id_couleur', $data['id_couleur'])->required()->number();
@@ -57,15 +58,20 @@ class StampController
 
             $dimension = $data['width'] . 'x' . $data['height']; // Combine width and height for dimension  
 
+            $loggedinUserId = $_SESSION['user_id'];
+
+
             $timbreData = [
                 'titre' => $data['titre'],
+                'description' => $data['description'],
                 'annee' => $data['annee'],
                 'id_pays' => $data['id_pays'],
                 'id_couleur' => $data['id_couleur'],
                 'id_condition' => $data['id_condition'],
                 'tirage' => $data['tirage'],
                 'dimension' => $dimension,
-                'certifie' => $data['certifie'] === 'Oui' ? 1 : 0
+                'certifie' => $data['certifie'] === 'Oui' ? 1 : 0,
+                'id_proprietaire' => $loggedinUserId
             ];
 
             $timbre_id = $timbreModel->insert($timbreData);
