@@ -3,6 +3,7 @@ use App\Routes\Route;
 
 use App\Controllers\HomeController;
 use App\Controllers\AuthController; 
+use App\Controllers\StampController;    
 use App\Controllers\UserController;
 use App\Models\Utilisateur;
 
