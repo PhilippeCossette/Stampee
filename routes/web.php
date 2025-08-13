@@ -24,6 +24,8 @@ Route::get('/user/delete', 'UserController@deleteUser');
 Route::get('/user/update', 'UserController@updateIndex');
 Route::post('/user/update', 'UserController@updateUser');
 
+Route::get('/create', 'StampController@createIndex');
+
 
 
 
