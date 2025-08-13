@@ -1,27 +1,27 @@
 .nav-mobile-menu {
-    display: none;
-    position: fixed;
-    padding: 20px;
-    top: 0;
-    right: 0;
-    background-color: #fff;
-    width: 200px;
-    height: 100vh;
+  display: none;
+  position: fixed;
+  padding: 20px;
+  top: 0;
+  right: 0;
+  background-color: #fff;
+  width: 200px;
+  height: 100vh;
+  z-index: 2;
 }
 
 .nav-mobile-menu.active {
-    display: block;
+  display: block;
 }
 
 .nav-mobile-menu a {
-    font-family: inter;
-    display: block;
-    padding: 15px;
-    text-decoration: none;
-    color: var(--main-blue);
+  font-family: inter;
+  display: block;
+  padding: 15px;
+  text-decoration: none;
+  color: var(--main-blue);
 }
 
-
 .nav-mobile-menu a:hover {
-    background-color: #f1f1f1;
+  background-color: #f1f1f1;
 }

@@ -1,20 +1,24 @@
-let dropdown = document.querySelector("[data-dropdown='true']");
-let dropdownContainer = document.querySelector(".desktop-dropdown");
+let dropdowns = document.querySelectorAll("[data-dropdown='true']");
+let dropdownContainers = document.querySelectorAll(".desktop-dropdown");
 const hamburgerMenu = document.querySelector(".nav-mobile_menu");
 const mobileMenu = document.getElementById("mobile-menu");
 const closeMenu = document.getElementById("close-menu");
 
-function openDropdown() {
-  dropdownContainer.classList.remove("hideContent");
+function openDropdown(container) {
+  container.classList.remove("hideContent");
 }
 
-function closeDropdown() {
-  dropdownContainer.classList.add("hideContent");
+function closeDropdown(container) {
+  container.classList.add("hideContent");
 }
 
 function initNav() {
-  dropdown.addEventListener("mouseenter", openDropdown);
-  dropdownContainer.addEventListener("mouseleave", closeDropdown);
+  dropdowns.forEach((dropdown, index) => {
+    const container = dropdownContainers[index];
+
+    dropdown.addEventListener("mouseenter", () => openDropdown(container));
+    container.addEventListener("mouseleave", () => closeDropdown(container));
+  });
 
   hamburgerMenu.addEventListener("click", function () {
     mobileMenu.classList.toggle("active");

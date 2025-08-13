@@ -29,8 +29,11 @@
             <div class="desktop-dropdown hideContent">
               <a href="#" class="nav-link">Explorer les enchères</a>
               <a href="#" class="nav-link">Catégories</a>
+               {% if guest %}
+               {% else %} 
               <a href="#" class="nav-link">Mes enchères</a>
               <a href="#" class="nav-link">Ajouter une enchère</a>
+               {% endif %}
               <a href="#" class="nav-link">Offres récentes</a>
             </div>
           </div>
@@ -82,7 +85,25 @@
       </nav>
       <div class="nav-mobile-menu" id="mobile-menu">
         <button id="close-menu" class="close-btn">&times;</button>
-        <a href="#" class="nav-link">Enchères</a>
+        <div class="desktop-dropdown-wrapper">
+            <a href="#" class="nav-link" data-dropdown="true">
+              Enchères
+              <img
+                src="{{ asset }}/img/down-arrow.webp"
+                alt="menu déroulant icône"
+              />
+            </a>
+            <div class="desktop-dropdown hideContent">
+              <a href="#" class="nav-link">Explorer les enchères</a>
+              <a href="#" class="nav-link">Catégories</a>
+               {% if guest %}
+               {% else %} 
+              <a href="#" class="nav-link">Mes enchères</a>
+              <a href="#" class="nav-link">Ajouter une enchère</a>
+               {% endif %}
+              <a href="#" class="nav-link">Offres récentes</a>
+            </div>
+          </div>
         {% if guest %}
         <a href="{{ base }}/register" class="nav-link">Devenir membre</a>
         {% else %} {% endif %}
