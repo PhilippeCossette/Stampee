@@ -6,9 +6,10 @@
   max-width: 500px;
   margin: auto;
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-  padding: 2.5em;
+  padding: 2em;
   border-radius: 0.25em;
   border: 1px solid var(--light-grey-accent);
+  font-family: inter;
 }
 
 .form-header-title {
@@ -22,7 +23,8 @@
   color: var(--grey-accent);
 }
 
-.form-input {
+.form-input,
+.form-small-input {
   width: 100%;
   padding: 1em 0.75em;
   box-sizing: border-box;
@@ -38,4 +40,25 @@
   color: var(--main-blue);
   cursor: pointer;
   text-decoration: underline;
+}
+
+.form div {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 0.5em;
+}
+
+.form-small-input {
+  max-width: 200px;
+}
+
+.form textarea {
+  resize: none;
+  overflow: auto;
+  font-family: inter;
+}
+
+.form label {
+  font-size: 0.6em;
 }
