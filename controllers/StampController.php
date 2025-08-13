@@ -16,9 +16,19 @@ class StampController {
 
         // Fetch All external Tables
         $condition = new Condition();
-        $conditions = $condition->select("nom_conditions");  
+        $conditions = $condition->select("condition");  
 
+        $couleur = new Couleur();
+        $couleurs = $couleur->select("couleur");  
 
+        $pays = new Pays();
+        $pays = $pays->select("pays");  
+
+        return View::render('create', [
+        'conditions' => $conditions,
+        'couleurs' => $couleurs,
+        'pays' => $pays
+    ]);
     } 
 
 
