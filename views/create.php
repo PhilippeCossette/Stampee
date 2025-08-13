@@ -45,6 +45,9 @@
                 </option>
                 {% endfor %}
             </select>
+            {% if errors.id_pays is defined %}
+            <span class="error">{{ errors.id_pays }}</span>
+            {% endif %}
         </div>
         <div>
             <select id="id_couleur" name="id_couleur" require>
@@ -55,6 +58,9 @@
                 </option>
                 {% endfor %}
             </select>
+            {% if errors.id_couleur is defined %}
+            <span class="error">{{ errors.id_couleur }}</span>
+            {% endif %}
         </div>
         <div>
             <select id="id_condition" name="id_condition" require>
@@ -65,6 +71,9 @@
                 </option>
                 {% endfor %}
             </select>
+            {% if errors.id_condition is defined %}
+            <span class="error">{{ errors.id_condition }}</span>
+            {% endif %}
         </div>
         <div>
             <label for="tirage">Tirage :</label>
@@ -84,8 +93,14 @@
         <div>
             <label for="width">Width (mm):</label>
             <input type="number" id="width" name="width" min="1" step="0.1" required>
+            {% if errors.width is defined %}
+            <span class="error">{{ errors.width }}</span>
+            {% endif %}
             <label for="height">Height (mm):</label>
             <input type="number" id="height" name="height" min="1" step="0.1" required>
+            {% if errors.height is defined %}
+            <span class="error">{{ errors.height }}</span>
+            {% endif %}
         </div>
 
         <div>
@@ -94,6 +109,9 @@
                 <option value="Oui" {% if(inputs.certifie == 'Oui') %} selected {% endif %}>Oui</option>
                 <option value="Non" {% if(inputs.certifie == 'Non') %} selected {% endif %}>Non</option>
             </select>
+            {% if errors.certifie is defined %}
+            <span class="error">{{ errors.certifie }}</span>
+            {% endif %}
         </div>
 
         <button class="main-button" type="submit">Cree Timbre</button>
