@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Models;
 
 use App\Models\CRUD;
@@ -7,12 +8,14 @@ use App\Providers\View;
 use App\Providers\Validator;
 use App\Providers\Auth;
 
-class Utilisateur extends CRUD{
+class Utilisateur extends CRUD
+{
     protected $table = 'utilisateur';
     protected $primaryKey = 'id';
     protected $fillable = ['nom_utilisateur', 'email', 'mot_de_passe'];
 
-    public function checkUser($username, $password) {
+    public function checkUser($username, $password)
+    {
         $user = $this->unique('nom_utilisateur', $username);
         if ($user) {
             if (password_verify($password, $user['mot_de_passe'])) {
@@ -30,7 +33,4 @@ class Utilisateur extends CRUD{
             return false; // User not found
         }
     }
-
-
-
 }
