@@ -1,5 +1,5 @@
 {{ include("layouts/header.php", { title: "Page d'inscription - Stampee" }) }}
-<div class="wrapper-centered">
+<div class="wrapper-centered margin-block">
     <!-- enctype="multipart/form-data" permert l'upload d'image -->
     <form class="form" action="{{ base }}/create" method="post" enctype="multipart/form-data">
         <header class="form-header">
@@ -27,6 +27,7 @@
         <div>
             <label for="annee">Année :</label>
             <input
+                class="form-small-input"
                 type="number"
                 id="annee"
                 name="annee"
@@ -40,48 +41,51 @@
             <span class="error">{{ errors.annee }}</span>
             {% endif %}
         </div>
-        <div>
-            <select id="id_pays" name="id_pays" require>
-                <option value="">Select Pays</option>
-                {% for pays in pays %}
-                <option value="{{ pays.id_pays }}" {% if(inputs.id_pays == pays.id_pays) %} selected {% endif %}>
-                    {{ pays.pays }}
-                </option>
-                {% endfor %}
-            </select>
-            {% if errors.id_pays is defined %}
-            <span class="error">{{ errors.id_pays }}</span>
-            {% endif %}
-        </div>
-        <div>
-            <select id="id_couleur" name="id_couleur" require>
-                <option value="">Select Couleur</option>
-                {% for coul in couleurs %}
-                <option value="{{ coul.id_couleur }}" {% if(inputs.id_couleur == coul.id_couleur) %} selected {% endif %}>
-                    {{ coul.couleur }}
-                </option>
-                {% endfor %}
-            </select>
-            {% if errors.id_couleur is defined %}
-            <span class="error">{{ errors.id_couleur }}</span>
-            {% endif %}
-        </div>
-        <div>
-            <select id="id_condition" name="id_condition" require>
-                <option value="">Select Condition</option>
-                {% for cond in conditions %}
-                <option value="{{ cond.id_condition }}" {% if(inputs.id_condition == cond.id_condition) %} selected {% endif %}>
-                    {{ cond.condition }}
-                </option>
-                {% endfor %}
-            </select>
-            {% if errors.id_condition is defined %}
-            <span class="error">{{ errors.id_condition }}</span>
-            {% endif %}
+        <div class="form-selectWrapper">
+            <div>
+                <select class="form-small-input" id="id_pays" name="id_pays" require>
+                    <option value="">Select Pays</option>
+                    {% for pays in pays %}
+                    <option value="{{ pays.id_pays }}" {% if(inputs.id_pays == pays.id_pays) %} selected {% endif %}>
+                        {{ pays.pays }}
+                    </option>
+                    {% endfor %}
+                </select>
+                {% if errors.id_pays is defined %}
+                <span class="error">{{ errors.id_pays }}</span>
+                {% endif %}
+            </div>
+            <div>
+                <select class="form-small-input" id="id_couleur" name="id_couleur" require>
+                    <option value="">Select Couleur</option>
+                    {% for coul in couleurs %}
+                    <option value="{{ coul.id_couleur }}" {% if(inputs.id_couleur == coul.id_couleur) %} selected {% endif %}>
+                        {{ coul.couleur }}
+                    </option>
+                    {% endfor %}
+                </select>
+                {% if errors.id_couleur is defined %}
+                <span class="error">{{ errors.id_couleur }}</span>
+                {% endif %}
+            </div>
+            <div>
+                <select class="form-small-input" id="id_condition" name="id_condition" require>
+                    <option value="">Select Condition</option>
+                    {% for cond in conditions %}
+                    <option value="{{ cond.id_condition }}" {% if(inputs.id_condition == cond.id_condition) %} selected {% endif %}>
+                        {{ cond.condition }}
+                    </option>
+                    {% endfor %}
+                </select>
+                {% if errors.id_condition is defined %}
+                <span class="error">{{ errors.id_condition }}</span>
+                {% endif %}
+            </div>
         </div>
         <div>
             <label for="tirage">Tirage :</label>
             <input
+                class="form-small-input"
                 type="number"
                 id="tirage"
                 name="tirage"
@@ -96,12 +100,12 @@
 
         <div>
             <label for="width">Width (mm):</label>
-            <input type="number" id="width" name="width" min="1" step="0.1" required>
+            <input class="form-small-input" type="number" id="width" name="width" min="1" step="0.1" required>
             {% if errors.width is defined %}
             <span class="error">{{ errors.width }}</span>
             {% endif %}
             <label for="height">Height (mm):</label>
-            <input type="number" id="height" name="height" min="1" step="0.1" required>
+            <input class="form-small-input" type="number" id="height" name="height" min="1" step="0.1" required>
             {% if errors.height is defined %}
             <span class="error">{{ errors.height }}</span>
             {% endif %}
@@ -109,7 +113,7 @@
 
         <div>
             <label for="certifie">Certifié ?</label>
-            <select name="certifie">
+            <select class="form-small-input" name="certifie">
                 <option value="" {% if inputs.certifie is not defined or inputs.certifie == '' %} selected {% endif %}>Select</option>
                 <option value="Oui" {% if(inputs.certifie == 'Oui') %} selected {% endif %}>Oui</option>
                 <option value="Non" {% if(inputs.certifie == 'Non') %} selected {% endif %}>Non</option>
@@ -128,7 +132,7 @@
             <input type="file" id="images" name="images[]" multiple accept="image/*">
         </div>
 
-        <button class="main-button" type="submit">Cree Timbre</button>
+        <button class="main-button" type="submit">Créer un timbre </button>
     </form>
 </div>
 
