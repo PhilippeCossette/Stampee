@@ -1,0 +1,26 @@
+<?php
+
+namespace App\Controllers;
+
+use App\Models\Condition; 
+use App\Models\Couleur; 
+use App\Models\Pays; 
+
+use App\Providers\View;
+use App\Providers\Auth;
+use App\Providers\Validator;
+
+class StampController {
+    public function createIndex(){
+        Auth::session(); // Ensure the user is authenticated
+
+        // Fetch All external Tables
+        $condition = new Condition();
+        $conditions = $condition->select("nom_conditions");  
+
+
+    } 
+
+
+
+}
