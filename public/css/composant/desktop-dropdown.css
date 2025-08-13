@@ -17,3 +17,11 @@
 [data-dropdown="true"] {
   position: relative;
 }
+
+@media screen and (max-width: 900px) {
+  .desktop-dropdown {
+    background-color: white;
+    right: 100%;
+    top: 0;
+  }
+}
