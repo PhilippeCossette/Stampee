@@ -7,7 +7,9 @@ use App\Providers\Validator;
 use App\Providers\View;
 use App\Providers\Auth; 
 
+// This controller handles user profile management
 class UserController {
+        // Render the user profile page
     public function profileIndex() {
         Auth::session(); // Ensure the user is authenticated
         return View::render('profile');
@@ -22,6 +24,7 @@ class UserController {
         return View::render('update', ['inputs' => $userData]);
     }
 
+    // Handle user profile update   
     public function updateUser() {
         Auth::session(); // Ensure the user is authenticated
         $userId = $_SESSION['user_id'];
@@ -71,6 +74,7 @@ class UserController {
 
     }
 
+    // Handle user deletion
     public function deleteUser() {
         Auth::session(); // Ensure the user is connected
         $userModel = new Utilisateur();

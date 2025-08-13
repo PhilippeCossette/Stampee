@@ -9,14 +9,18 @@ use App\Providers\Validator;
 
 class AuthController {
 
+    // Render the registration page
     public function registerIndex() {
         return View::render('register');
     }
 
+    // Render the login page
     public function loginIndex() {
         return View::render('login');
     }
 
+
+    // Handle user registration
     public function registerAccount() {
 
         $nom = $_POST['nom_utilisateur'];
@@ -59,6 +63,7 @@ class AuthController {
     }
     }
 
+    // Handle user login
     public function login($data){
         $validator = new Validator();
         $nom = $_POST['nom_utilisateur'];
@@ -80,6 +85,7 @@ class AuthController {
         }
     }
 
+    // Handle user logout   
     public function logout(){
         session_destroy(); // End session
         return View::redirect(''); // Redirect to login
