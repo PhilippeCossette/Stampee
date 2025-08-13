@@ -2,7 +2,6 @@
 <main>
   {% if session.success is defined %}
   <div class="alert alert-success">{{ session.success }}</div>
-  {% set session.success = null %}
   {% endif %}
   <section
     class="banner noMarginInline"
