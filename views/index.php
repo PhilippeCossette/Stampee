@@ -1,11 +1,14 @@
 {{ include("layouts/header.php", { title: "Page d'accueil - Stampee" }) }}
 <main>
+  {% if session.success is defined %}
+  <div class="alert alert-success">{{ session.success }}</div>
+  {% set session.success = null %}
+  {% endif %}
   <section
     class="banner noMarginInline"
     style="background-image: linear-gradient(rgba(0, 0, 0, 0.6), #00000080), url('{{
       asset
-    }}/img/banner-stamps.webp'); background-size: cover; background-position: center;"
-  >
+    }}/img/banner-stamps.webp'); background-size: cover; background-position: center;">
     <h1 class="banner-title">
       Des enchères de timbres sans effort, en un clin d'œil !
     </h1>
@@ -31,66 +34,50 @@
     <div class="popularAuction grid">
       <article class="auctionShowcase-card">
         <header class="auctionShowcase-card-header">
-          <small class="auctionShowcase-card-header-undertitle"
-            >Coups de Coeur</small
-          >
+          <small class="auctionShowcase-card-header-undertitle">Coups de Coeur</small>
           <h2 class="auctionShowcase-card-header-title">MINT Postage Stamp</h2>
         </header>
-        <picture class="auctionShowcase-card-imgContainer"
-          ><img
+        <picture class="auctionShowcase-card-imgContainer"><img
             class="auctionShowcase-card-img"
             src="./assets/img/showcaseIMG/auctionShowcase-1.webp"
-            alt="Image of an auction card displaying stamps"
-        /></picture>
+            alt="Image of an auction card displaying stamps" /></picture>
         <button class="button secondary-button">Plus D'info</button>
       </article>
       <article class="auctionShowcase-card">
         <header class="auctionShowcase-card-header">
-          <small class="auctionShowcase-card-header-undertitle"
-            >Coups de Coeur</small
-          >
+          <small class="auctionShowcase-card-header-undertitle">Coups de Coeur</small>
           <h2 class="auctionShowcase-card-header-title">250 pcs LOT Stamps</h2>
         </header>
-        <picture class="auctionShowcase-card-imgContainer"
-          ><img
+        <picture class="auctionShowcase-card-imgContainer"><img
             class="auctionShowcase-card-img"
             src="./assets/img/showcaseIMG/auctionShowcase-2.webp"
-            alt="Image of an auction card displaying stamps"
-        /></picture>
+            alt="Image of an auction card displaying stamps" /></picture>
         <button class="button secondary-button">Plus D'info</button>
       </article>
       <article class="auctionShowcase-card">
         <header class="auctionShowcase-card-header">
-          <small class="auctionShowcase-card-header-undertitle"
-            >Coups de Coeur</small
-          >
+          <small class="auctionShowcase-card-header-undertitle">Coups de Coeur</small>
           <h2 class="auctionShowcase-card-header-title">
             50 to 80 YEAR Stamps
           </h2>
         </header>
-        <picture class="auctionShowcase-card-imgContainer"
-          ><img
+        <picture class="auctionShowcase-card-imgContainer"><img
             class="auctionShowcase-card-img"
             src="./assets/img/showcaseIMG/auctionShowcase-3.webp"
-            alt="Image of an auction card displaying stamps"
-        /></picture>
+            alt="Image of an auction card displaying stamps" /></picture>
         <button class="button secondary-button">Plus D'info</button>
       </article>
       <article class="auctionShowcase-card">
         <header class="auctionShowcase-card-header">
-          <small class="auctionShowcase-card-header-undertitle"
-            >Coups de Coeur</small
-          >
+          <small class="auctionShowcase-card-header-undertitle">Coups de Coeur</small>
           <h2 class="auctionShowcase-card-header-title">
             Egypt lot of 100 stamps
           </h2>
         </header>
-        <picture class="auctionShowcase-card-imgContainer"
-          ><img
+        <picture class="auctionShowcase-card-imgContainer"><img
             class="auctionShowcase-card-img"
             src="./assets/img/showcaseIMG/auctionShowcase-4.webp"
-            alt="Image of an auction card displaying stamps"
-        /></picture>
+            alt="Image of an auction card displaying stamps" /></picture>
         <button class="button secondary-button">Plus D'info</button>
       </article>
     </div>
@@ -107,12 +94,10 @@
             100 Different Worldwide Stamps
           </h2>
         </header>
-        <picture class="auctionShowcase-card-imgContainer"
-          ><img
+        <picture class="auctionShowcase-card-imgContainer"><img
             class="auctionShowcase-card-img"
             src="./assets/img/showcaseIMG/auctionShowcase-5.webp"
-            alt="Image of an auction card displaying stamps"
-        /></picture>
+            alt="Image of an auction card displaying stamps" /></picture>
         <button class="button secondary-button">Plus D'info</button>
       </article>
       <article class="auctionShowcase-card">
@@ -121,12 +106,10 @@
             LOT OF 50 VINTAGE STAMPS
           </h2>
         </header>
-        <picture class="auctionShowcase-card-imgContainer"
-          ><img
+        <picture class="auctionShowcase-card-imgContainer"><img
             class="auctionShowcase-card-img"
             src="./assets/img/showcaseIMG/auctionShowcase-6.webp"
-            alt="Image of an auction card displaying stamps"
-        /></picture>
+            alt="Image of an auction card displaying stamps" /></picture>
         <button class="button secondary-button">Plus D'info</button>
       </article>
       <article class="auctionShowcase-card">
@@ -135,12 +118,10 @@
             LOT OF 50 VINTAGE STAMPS
           </h2>
         </header>
-        <picture class="auctionShowcase-card-imgContainer"
-          ><img
+        <picture class="auctionShowcase-card-imgContainer"><img
             class="auctionShowcase-card-img"
             src="./assets/img/showcaseIMG/auctionShowcase-6.webp"
-            alt="Image of an auction card displaying stamps"
-        /></picture>
+            alt="Image of an auction card displaying stamps" /></picture>
         <button class="button secondary-button">Plus D'info</button>
       </article>
       <article class="auctionShowcase-card">
@@ -149,12 +130,10 @@
             LOT OF 50 VINTAGE STAMPS
           </h2>
         </header>
-        <picture class="auctionShowcase-card-imgContainer"
-          ><img
+        <picture class="auctionShowcase-card-imgContainer"><img
             class="auctionShowcase-card-img"
             src="./assets/img/showcaseIMG/auctionShowcase-6.webp"
-            alt="Image of an auction card displaying stamps"
-        /></picture>
+            alt="Image of an auction card displaying stamps" /></picture>
         <button class="button secondary-button">Plus D'info</button>
       </article>
       <article class="auctionShowcase-card">
@@ -163,12 +142,10 @@
             MALDIVES Collection Stamps
           </h2>
         </header>
-        <picture class="auctionShowcase-card-imgContainer"
-          ><img
+        <picture class="auctionShowcase-card-imgContainer"><img
             class="auctionShowcase-card-img"
             src="./assets/img/showcaseIMG/auctionShowcase-7.webp"
-            alt="Image of an auction card displaying stamps"
-        /></picture>
+            alt="Image of an auction card displaying stamps" /></picture>
         <button class="button secondary-button">Plus D'info</button>
       </article>
       <article class="auctionShowcase-card">
@@ -177,12 +154,10 @@
             COMPLETE US COMMEM STAMPS
           </h2>
         </header>
-        <picture class="auctionShowcase-card-imgContainer"
-          ><img
+        <picture class="auctionShowcase-card-imgContainer"><img
             class="auctionShowcase-card-img"
             src="./assets/img/showcaseIMG/auctionShowcase-8.webp"
-            alt="Image of an auction card displaying stamps"
-        /></picture>
+            alt="Image of an auction card displaying stamps" /></picture>
         <button class="button secondary-button">Plus D'info</button>
       </article>
     </div>
@@ -211,9 +186,7 @@
             postal au monde, mis en vente cette semaine. Une pièce
             incontournable pour les collectionneurs !
           </p>
-          <a href="#"
-            ><img src="./assets/img/right-up.webp" alt="icon redirect"
-          /></a>
+          <a href="#"><img src="./assets/img/right-up.webp" alt="icon redirect" /></a>
         </div>
       </article>
       <article class="news-card">
@@ -229,9 +202,7 @@
             un montant record. Retrouvez les détails des enchères et les pièces
             phares de cette collection.
           </p>
-          <a href="#"
-            ><img src="./assets/img/right-up.webp" alt="icon redirect"
-          /></a>
+          <a href="#"><img src="./assets/img/right-up.webp" alt="icon redirect" /></a>
         </div>
       </article>
       <article class="news-card">
@@ -247,9 +218,7 @@
             l'honneur cette semaine. Ces timbres célèbrent des thèmes actuels,
             allant de l'art aux avancées technologiques.
           </p>
-          <a href="#"
-            ><img src="./assets/img/right-up.webp" alt="icon redirect"
-          /></a>
+          <a href="#"><img src="./assets/img/right-up.webp" alt="icon redirect" /></a>
         </div>
       </article>
     </div>

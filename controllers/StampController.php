@@ -82,7 +82,7 @@ class StampController
 
             $targetDir = __DIR__ . '/../public/uploads/';
 
-            // Handle main image upload
+            // Handle main image upload reference : https://www.php.net/manual/en/features.file-upload.php
             if (isset($files['image_principale']) && $files['image_principale']['name'] != '') {
                 $file = $files['image_principale'];
                 // Create a unique file name
@@ -119,8 +119,8 @@ class StampController
                     ]);
                 }
             }
-            // return View::render('success', ['message' => 'Timbre ajouté avec succès.']);
-            return View::redirect(''); // redirect to list page
+            $_SESSION['success'] = 'Timbre créé avec succès ! En attente d\'approbation.';
+            return View::redirect(''); // redirect to list page to change here !!!!!!!!!!
         } else {
             $errors = $validator->getErrors();
             return View::render('create', [

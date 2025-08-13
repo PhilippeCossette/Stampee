@@ -20,6 +20,9 @@
         </div>
         <div>
             <textarea class="form-input" name="description" id="description" placeholder="Description"></textarea>
+            {% if errors.description is defined %}
+            <span class="error">{{ errors.description }}</span>
+            {% endif %}
         </div>
         <div>
             <label for="annee">Année :</label>
@@ -107,6 +110,7 @@
         <div>
             <label for="certifie">Certifié ?</label>
             <select name="certifie">
+                <option value="" {% if inputs.certifie is not defined or inputs.certifie == '' %} selected {% endif %}>Select</option>
                 <option value="Oui" {% if(inputs.certifie == 'Oui') %} selected {% endif %}>Oui</option>
                 <option value="Non" {% if(inputs.certifie == 'Non') %} selected {% endif %}>Non</option>
             </select>
