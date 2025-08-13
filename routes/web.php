@@ -1,9 +1,10 @@
 <?php
+
 use App\Routes\Route;
 
 use App\Controllers\HomeController;
-use App\Controllers\AuthController; 
-use App\Controllers\StampController;    
+use App\Controllers\AuthController;
+use App\Controllers\StampController;
 use App\Controllers\UserController;
 use App\Models\Utilisateur;
 
@@ -26,10 +27,10 @@ Route::get('/user/update', 'UserController@updateIndex');
 Route::post('/user/update', 'UserController@updateUser');
 
 Route::get('/create', 'StampController@createIndex');
+Route::post('/create', 'StampController@storeStamp');
 
 
 
 
 
 Route::dispatch();
-?>

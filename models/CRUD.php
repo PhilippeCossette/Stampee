@@ -10,7 +10,7 @@ abstract class CRUD extends \PDO {
         if($field == null){
             $field = $this->primaryKey;
         }
-        $sql= "SELECT * FROM $this->table ORDER BY $field $order";
+        $sql = "SELECT * FROM `$this->table` ORDER BY `$field` $order";
         if($stmt = $this->query($sql)){
             return $stmt->fetchAll();
         }else{
