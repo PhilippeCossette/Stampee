@@ -1,8 +1,5 @@
 {{ include("layouts/header.php", { title: "Page d'accueil - Stampee" }) }}
 <main>
-  {% if session.success is defined %}
-  <div class="alert alert-success">{{ session.success }}</div>
-  {% endif %}
   <section
     class="banner noMarginInline"
     style="background-image: linear-gradient(rgba(0, 0, 0, 0.6), #00000080), url('{{
