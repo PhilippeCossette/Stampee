@@ -278,12 +278,14 @@ class StampController
         $targetDir = __DIR__ . '/../public/uploads/';
 
         $imageModel = new ImagesTimbre();
+        $oldMainImage = $imageModel->selectMainByTimbre($timbre_id);
 
         // Replace main image
         if (isset($files['image_principale']) && $files['image_principale']['name'] != '') {
             // Delete old main image if exists
             if (isset($timbre['image_principale'])) {
-                @unlink($targetDir . $timbre['image_principale']);
+                @unlink($targetDir . $timbre['image_principale']); // Delete old main image
+                $imageModel->delete($oldMainImage['id']); // Remove from DB
             }
             // Upload new main image
             $file = $files['image_principale'];
