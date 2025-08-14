@@ -17,13 +17,12 @@ class UserController
         return View::render('profile');
     }
 
-    public function updateIndex($data = [])
+    public function updateIndex()
     {
         Auth::session(); // Ensure the user is authenticated    
-        $userId = $_SESSION['user_id'];
 
         $userModel = new Utilisateur();
-        $userData = $userModel->selectId($userId);
+        $userData = $userModel->selectId($_SESSION['user_id']);
         return View::render('update', ['inputs' => $userData]);
     }
 
