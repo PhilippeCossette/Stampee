@@ -50,27 +50,14 @@ class UserController
             return View::render('update', ['errors' => $errors, 'inputs' => $_POST]);
         }
 
-        $data = [
-            'nom_utilisateur' => $nom,
-            'email' => $email
-        ];
-
-        if (!empty($motDePasse)) {
-            $data["mot_de_passe"] = password_hash($motDePasse, PASSWORD_DEFAULT);
-        } else {
-            unset($motDePasse); // Do not update password if not provided   
-        }
-
         $userModel = new Utilisateur();
-        $update = $userModel->update($data, $userId);
-
-        if ($update) {
-            $_SESSION['nom_utilisateur'] = $data['nom_utilisateur'];
-            $_SESSION['email'] = $data['email'];
-            return View::redirect('profile', ['success' => 'Profile mis à jour avec succès.']);
-        } else {
-            return View::render('error', ['message' => 'Erreur lors de la mise à jour du profil.']);
+        if ($userModel->updateUserData($userId, $nom, $email, $motDePasse)) {
+            $_SESSION['nom_utilisateur'] = $nom;
+            $_SESSION['email'] = $email;
+            return View::redirect('profile', ['success' => 'Profil mis à jour avec succès.']);
         }
+
+        return View::render('error', ['message' => 'Erreur lors de la mise à jour du profil.']);
     }
 
     // Handle user deletion
