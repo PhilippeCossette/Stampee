@@ -150,22 +150,32 @@ class StampController
         return View::redirect('');
     }
 
-    public function updateStampIndex($id)
+    public function updateStampIndex($queryParams) // Gets from Url ?id=5 exemple
     {
         Auth::session();
 
+        $timbre_id = $queryParams['id'] ?? null;
+        if (!$timbre_id) {
+            return View::render('error', ['message' => 'ID du timbre manquant']);
+        }
+
         $timbreModel = new Timbres();
-        $timbre = $timbreModel->selectId($id);
+        $timbre = $timbreModel->selectId($queryParams['id']);
 
         if (!$timbre || $timbre['id_proprietaire'] != $_SESSION['user_id']) {
             return View::render('error', ['message' => 'Timbre introuvable ou accès refusé.']);
         }
 
-        $conditions = (new Condition())->select("condition");
-        $couleurs = (new Couleur())->select("couleur");
-        $pays = (new Pays())->select("pays");
+        $condition = new Condition();
+        $conditions = $condition->select("condition");
 
-        $images = (new ImagesTimbre())->selectByTimbre($id);
+        $couleur = new Couleur();
+        $couleurs = $couleur->select("couleur");
+
+        $pays = new Pays();
+        $pays = $pays->select("pays");
+
+        $images = (new ImagesTimbre())->selectByTimbre($queryParams['id']);
 
         return View::render('stampUpdate', [
             'timbre' => $timbre,
