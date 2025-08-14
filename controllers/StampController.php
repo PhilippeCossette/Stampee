@@ -185,4 +185,146 @@ class StampController
             'images' => $images
         ]);
     }
+    public function updateStamp($data, $queryParams)
+    {
+        $timbre_id = $queryParams['id'] ?? null;
+        if (!$timbre_id) {
+            return View::render('error', ['message' => 'ID du timbre manquant']);
+        }
+
+        $timbreModel = new Timbres();
+        $timbre = $timbreModel->selectId($timbre_id);
+
+        if (!$timbre) {
+            return View::render('error', ['message' => 'Timbre non trouvé']);
+        }
+
+        // Only owner can update
+        if ($timbre['id_proprietaire'] != $_SESSION['user_id']) {
+            return View::render('error', ['message' => 'Vous n’êtes pas autorisé à modifier ce timbre']);
+        }
+
+        $files = $_FILES;
+        $validator = new Validator();
+
+        // Validate fields (same as storeStamp)
+        $validator->field('titre', $data['titre'])->required()->min(2)->max(100);
+        $validator->field('description', $data['description'])->required()->min(2)->max(200);
+        $validator->field('annee', $data['annee'])->required()->number();
+        $validator->field('id_pays', $data['id_pays'])->required()->number();
+        $validator->field('id_couleur', $data['id_couleur'])->required()->number();
+        $validator->field('id_condition', $data['id_condition'])->required()->number();
+        $validator->field('tirage', $data['tirage'])->required()->number()->min(1);
+        $validator->field('width', $data['width'])->required()->number()->min(1);
+        $validator->field('height', $data['height'])->required()->number()->min(1);
+        $validator->field('certifie', $data['certifie'])->required();
+
+        // Validate main image if uploaded
+        if (isset($files['image_principale']) && $files['image_principale']['name'] != '') {
+            $validator->file('image_principale', $files['image_principale'])
+                ->maxSizeFile(2 * 1024 * 1024)
+                ->allowedTypesFile(['image/jpeg', 'image/png'])
+                ->maxDimensionsFile(2000, 2000);
+        }
+
+        // Validate additional images
+        if (isset($files['images'])) {
+            foreach ($files['images']['name'] as $i => $name) {
+                if ($name == '') continue;
+
+                $fileArray = [
+                    'name' => $files['images']['name'][$i],
+                    'tmp_name' => $files['images']['tmp_name'][$i],
+                    'size' => $files['images']['size'][$i],
+                    'type' => $files['images']['type'][$i],
+                    'error' => $files['images']['error'][$i]
+                ];
+
+                $validator->file("images[$i]", $fileArray)
+                    ->maxSizeFile(2 * 1024 * 1024)
+                    ->allowedTypesFile(['image/jpeg', 'image/png'])
+                    ->maxDimensionsFile(2000, 2000);
+            }
+        }
+
+        if (!$validator->isSuccess()) {
+            $errors = $validator->getErrors();
+            return View::render('update', [
+                'errors' => $errors,
+                'inputs' => $data,
+                'timbre' => $timbre,
+                'pays' => (new Pays())->select('pays'),
+                'couleurs' => (new Couleur())->select('couleur'),
+                'conditions' => (new Condition())->select('condition')
+            ]);
+        }
+
+        // Update stamp data
+        $dimension = $data['width'] . 'x' . $data['height'];
+        $updateData = [
+            'titre' => $data['titre'],
+            'description' => $data['description'],
+            'annee' => $data['annee'],
+            'id_pays' => $data['id_pays'],
+            'id_couleur' => $data['id_couleur'],
+            'id_condition' => $data['id_condition'],
+            'tirage' => $data['tirage'],
+            'dimension' => $dimension,
+            'certifie' => $data['certifie'] === 'Oui' ? 1 : 0
+        ];
+
+        $timbreModel->update($updateData, $timbre_id);
+
+        $targetDir = __DIR__ . '/../public/uploads/';
+
+        // Replace main image if uploaded
+        if (isset($files['image_principale']) && $files['image_principale']['name'] != '') {
+            // Delete old main image
+            if ($timbre['image_principale'] ?? false) {
+                @unlink($targetDir . $timbre['image_principale']);
+            }
+
+            $file = $files['image_principale'];
+            $fileName = uniqid() . '_' . basename($file['name']);
+            move_uploaded_file($file['tmp_name'], $targetDir . $fileName);
+
+            // Update or insert main image
+            $imageModel = new ImagesTimbre();
+            $imageModel->insert([
+                'id_timbre' => $timbre_id,
+                'url_image' => $fileName,
+                'principale' => 1
+            ]);
+        }
+
+        // Replace additional images if uploaded
+        if (isset($files['images'])) {
+            $imageModel = new ImagesTimbre();
+
+            // Optionally: delete old additional images
+            $oldImages = $imageModel->selectId($timbre_id);
+            foreach ($oldImages as $img) {
+                if ($img['principale'] == 0) {
+                    @unlink($targetDir . $img['url_image']);
+                    $imageModel->delete($img['id']);
+                }
+            }
+
+            foreach ($files['images']['name'] as $i => $name) {
+                if ($name == '') continue;
+
+                $fileName = uniqid() . '_' . basename($name);
+                move_uploaded_file($files['images']['tmp_name'][$i], $targetDir . $fileName);
+
+                $imageModel->insert([
+                    'id_timbre' => $timbre_id,
+                    'url_image' => $fileName,
+                    'principale' => 0
+                ]);
+            }
+        }
+
+        $_SESSION['success'] = 'Timbre mis à jour avec succès !';
+        return View::redirect('profile');
+    }
 }

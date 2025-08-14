@@ -1,4 +1,4 @@
-{{ include("layouts/header.php", { title: "Page d'inscription - Stampee" }) }}
+{{ include("layouts/header.php", { title: "Ajoutez votre Timbre - Stampee" }) }}
 <div class="wrapper-centered margin-block">
     <!-- enctype="multipart/form-data" permert l'upload d'image -->
     <form class="form" action="{{ base }}/create" method="post" enctype="multipart/form-data">

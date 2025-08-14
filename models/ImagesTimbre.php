@@ -18,4 +18,20 @@ class ImagesTimbre extends CRUD
         $stmt->execute();
         return $stmt->fetchAll();
     }
+
+    public function selectMainByTimbre($id_timbre)
+    {
+        $stmt = $this->prepare("SELECT * FROM {$this->table} WHERE id_timbre = :id_timbre AND principale = 1 LIMIT 1");
+        $stmt->bindValue(':id_timbre', $id_timbre);
+        $stmt->execute();
+        return $stmt->fetch();
+    }
+
+    public function selectAdditionalByTimbre($id_timbre)
+    {
+        $stmt = $this->prepare("SELECT * FROM {$this->table} WHERE id_timbre = :id_timbre AND principale = 0");
+        $stmt->bindValue(':id_timbre', $id_timbre);
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
 }
