@@ -123,7 +123,7 @@
         </div>
 
         <div>
-            <label for="image_principale">Image principale :</label>
+            <label for="image_principale">Remplacez l'image principale :</label>
             {% if timbre.image_principale is defined %}
             <div>
                 <img src="{{ base }}/uploads/{{ timbre.image_principale }}" alt="Image principale" width="200">
@@ -136,16 +136,7 @@
         </div>
 
         <div>
-            <label for="images">Autres images :</label>
-            {% if timbre.images is defined %}
-            <div class="additional-images">
-                {% for img in timbre.images %}
-                {% if img.principale == 0 %}
-                <img src="{{ base }}/uploads/{{ img.url_image }}" width="150">
-                {% endif %}
-                {% endfor %}
-            </div>
-            {% endif %}
+            <label for="images">Ajoutez d'Autres images :</label>
             <input type="file" id="images" name="images[]" multiple accept="image/*">
             {% for key, error in errors %}
             {% if key starts with 'images[' %}

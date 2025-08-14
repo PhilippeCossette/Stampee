@@ -160,7 +160,7 @@ class StampController
         }
 
         $timbreModel = new Timbres();
-        $timbre = $timbreModel->selectId($queryParams['id']);
+        $timbre = $timbreModel->selectId($timbre_id);
 
         if (!$timbre || $timbre['id_proprietaire'] != $_SESSION['user_id']) {
             return View::render('error', ['message' => 'Timbre introuvable ou accès refusé.']);
@@ -200,7 +200,7 @@ class StampController
         }
 
         // Only owner can update
-        if ($timbre['id_proprietaire'] != $_SESSION['user_id']) {
+        if (!$timbre || $timbre['id_proprietaire'] != $_SESSION['user_id']) {
             return View::render('error', ['message' => 'Vous n’êtes pas autorisé à modifier ce timbre']);
         }
 
@@ -277,10 +277,11 @@ class StampController
 
         $targetDir = __DIR__ . '/../public/uploads/';
 
-        // Replace main image if uploaded
+        $imageModel = new ImagesTimbre();
+
+        // Replace main image
         if (isset($files['image_principale']) && $files['image_principale']['name'] != '') {
-            // Delete old main image
-            if ($timbre['image_principale'] ?? false) {
+            if (isset($timbre['image_principale'])) {
                 @unlink($targetDir . $timbre['image_principale']);
             }
 
@@ -288,8 +289,6 @@ class StampController
             $fileName = uniqid() . '_' . basename($file['name']);
             move_uploaded_file($file['tmp_name'], $targetDir . $fileName);
 
-            // Update or insert main image
-            $imageModel = new ImagesTimbre();
             $imageModel->insert([
                 'id_timbre' => $timbre_id,
                 'url_image' => $fileName,
@@ -297,22 +296,10 @@ class StampController
             ]);
         }
 
-        // Replace additional images if uploaded
+        // Additional images
         if (isset($files['images'])) {
-            $imageModel = new ImagesTimbre();
-
-            // Optionally: delete old additional images
-            $oldImages = $imageModel->selectId($timbre_id);
-            foreach ($oldImages as $img) {
-                if ($img['principale'] == 0) {
-                    @unlink($targetDir . $img['url_image']);
-                    $imageModel->delete($img['id']);
-                }
-            }
-
             foreach ($files['images']['name'] as $i => $name) {
                 if ($name == '') continue;
-
                 $fileName = uniqid() . '_' . basename($name);
                 move_uploaded_file($files['images']['tmp_name'][$i], $targetDir . $fileName);
 
