@@ -249,7 +249,7 @@ class StampController
 
         if (!$validator->isSuccess()) {
             $errors = $validator->getErrors();
-            return View::render('update', [
+            return View::render('stampUpdate', [
                 'errors' => $errors,
                 'inputs' => $data,
                 'timbre' => $timbre,
@@ -283,8 +283,8 @@ class StampController
         // Replace main image
         if (isset($files['image_principale']) && $files['image_principale']['name'] != '') {
             // Delete old main image if exists
-            if (isset($timbre['image_principale'])) {
-                @unlink($targetDir . $timbre['image_principale']); // Delete old main image
+            if ($oldMainImage) {
+                @unlink($targetDir . $oldMainImage['url_image']); // Delete old main image
                 $imageModel->delete($oldMainImage['id']); // Remove from DB
             }
             // Upload new main image
