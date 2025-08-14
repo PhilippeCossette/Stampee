@@ -34,6 +34,17 @@ class Utilisateur extends CRUD
         }
     }
 
-    
+    public function updateUserData($id, $nom, $email, $motDePasse = null)
+    {
+        $data = [
+            'nom_utilisateur' => $nom,
+            'email' => $email
+        ];
 
+        if (!empty($motDePasse)) {
+            $data['mot_de_passe'] = password_hash($motDePasse, PASSWORD_DEFAULT);
+        }
+
+        return $this->update($data, $id);
+    }
 }
