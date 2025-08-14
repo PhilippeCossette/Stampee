@@ -149,4 +149,30 @@ class StampController
         $_SESSION['success'] = 'Timbre créé avec succès ! En attente d\'approbation.';
         return View::redirect('');
     }
+
+    public function updateStampIndex($id)
+    {
+        Auth::session();
+
+        $timbreModel = new Timbres();
+        $timbre = $timbreModel->selectId($id);
+
+        if (!$timbre || $timbre['id_proprietaire'] != $_SESSION['user_id']) {
+            return View::render('error', ['message' => 'Timbre introuvable ou accès refusé.']);
+        }
+
+        $conditions = (new Condition())->select("condition");
+        $couleurs = (new Couleur())->select("couleur");
+        $pays = (new Pays())->select("pays");
+
+        $images = (new ImagesTimbre())->selectByTimbre($id);
+
+        return View::render('stampUpdate', [
+            'timbre' => $timbre,
+            'conditions' => $conditions,
+            'couleurs' => $couleurs,
+            'pays' => $pays,
+            'images' => $images
+        ]);
+    }
 }
