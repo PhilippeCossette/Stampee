@@ -47,4 +47,9 @@ class Utilisateur extends CRUD
 
         return $this->update($data, $id);
     }
+
+    public function deleteUserAccount($id)
+    {
+        return $this->delete($id);
+    }
 }

@@ -65,9 +65,8 @@ class UserController
     {
         Auth::session(); // Ensure the user is connected
         $userModel = new Utilisateur();
-        $userId = $_SESSION['user_id'];
 
-        if ($userModel->delete($userId)) {
+        if ($userModel->deleteUserAccount($_SESSION['user_id'])) {
             session_unset();
             session_destroy();
             return View::redirect('', ['success' => 'Compte supprimé avec succès.']);
