@@ -14,6 +14,20 @@ class Utilisateur extends CRUD
     protected $primaryKey = 'id';
     protected $fillable = ['nom_utilisateur', 'email', 'mot_de_passe'];
 
+
+    public function createUser($nom, $email, $motDePasse)
+    {
+        $hashedPassword = password_hash($motDePasse, PASSWORD_DEFAULT);
+
+        $data = [
+            'nom_utilisateur' => $nom,
+            'email' => $email,
+            'mot_de_passe' => $hashedPassword
+        ];
+
+        return $this->insert($data);
+    }
+
     public function checkUser($username, $password)
     {
         $user = $this->unique('nom_utilisateur', $username);
@@ -32,5 +46,24 @@ class Utilisateur extends CRUD
         } else {
             return false; // User not found
         }
+    }
+
+    public function updateUserData($id, $nom, $email, $motDePasse = null)
+    {
+        $data = [
+            'nom_utilisateur' => $nom,
+            'email' => $email
+        ];
+
+        if (!empty($motDePasse)) {
+            $data['mot_de_passe'] = password_hash($motDePasse, PASSWORD_DEFAULT);
+        }
+
+        return $this->update($data, $id);
+    }
+
+    public function deleteUserAccount($id)
+    {
+        return $this->delete($id);
     }
 }

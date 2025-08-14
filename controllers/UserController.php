@@ -17,13 +17,12 @@ class UserController
         return View::render('profile');
     }
 
-    public function updateIndex($data = [])
+    public function updateIndex()
     {
         Auth::session(); // Ensure the user is authenticated    
-        $userId = $_SESSION['user_id'];
 
         $userModel = new Utilisateur();
-        $userData = $userModel->selectId($userId);
+        $userData = $userModel->selectId($_SESSION['user_id']);
         return View::render('update', ['inputs' => $userData]);
     }
 
@@ -51,27 +50,14 @@ class UserController
             return View::render('update', ['errors' => $errors, 'inputs' => $_POST]);
         }
 
-        $data = [
-            'nom_utilisateur' => $nom,
-            'email' => $email
-        ];
-
-        if (!empty($motDePasse)) {
-            $data["mot_de_passe"] = password_hash($motDePasse, PASSWORD_DEFAULT);
-        } else {
-            unset($motDePasse); // Do not update password if not provided   
-        }
-
         $userModel = new Utilisateur();
-        $update = $userModel->update($data, $userId);
-
-        if ($update) {
-            $_SESSION['nom_utilisateur'] = $data['nom_utilisateur'];
-            $_SESSION['email'] = $data['email'];
-            return View::redirect('profile', ['success' => 'Profile mis à jour avec succès.']);
-        } else {
-            return View::render('error', ['message' => 'Erreur lors de la mise à jour du profil.']);
+        if ($userModel->updateUserData($userId, $nom, $email, $motDePasse)) {
+            $_SESSION['nom_utilisateur'] = $nom;
+            $_SESSION['email'] = $email;
+            return View::redirect('profile', ['success' => 'Profil mis à jour avec succès.']);
         }
+
+        return View::render('error', ['message' => 'Erreur lors de la mise à jour du profil.']);
     }
 
     // Handle user deletion
@@ -79,9 +65,8 @@ class UserController
     {
         Auth::session(); // Ensure the user is connected
         $userModel = new Utilisateur();
-        $userId = $_SESSION['user_id'];
 
-        if ($userModel->delete($userId)) {
+        if ($userModel->deleteUserAccount($_SESSION['user_id'])) {
             session_unset();
             session_destroy();
             return View::redirect('', ['success' => 'Compte supprimé avec succès.']);
