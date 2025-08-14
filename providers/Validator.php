@@ -116,7 +116,7 @@ class Validator
     //Validate if the file is uploaded becuase it is required
     public function requiredFile()
     {
-        if (!isset($this->currentValuep['tmp_name']) || !is_uploaded_file($this->currentValue['tmp_name'])) {
+        if (!isset($this->currentValue['tmp_name']) || !is_uploaded_file($this->currentValue['tmp_name'])) {
             $this->errors[$this->currentField] = "$this->currentField est obligatoire.";
         }
         return $this;
@@ -151,7 +151,7 @@ class Validator
             }
         }
         return $this;
-
+    }
 
 
 

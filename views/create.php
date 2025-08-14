@@ -126,10 +126,18 @@
         <div>
             <label for="image_principale">Image principale (obligatoire) :</label>
             <input type="file" id="image_principale" name="image_principale" accept="image/*" required>
+            {% if errors.image_principale is defined %}
+            <p class="error">{{ errors.image_principale }}</p>
+            {% endif %}
         </div>
         <div>
             <label for="images">Autres images (facultatif) :</label>
             <input type="file" id="images" name="images[]" multiple accept="image/*">
+            {% for key, error in errors %}
+            {% if key starts with 'images[' %}
+            <p class="error">{{ error }}</p>
+            {% endif %}
+            {% endfor %}
         </div>
 
         <button class="main-button" type="submit">Créer un timbre </button>
