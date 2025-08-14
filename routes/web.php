@@ -29,8 +29,8 @@ Route::post('/user/update', 'UserController@updateUser');
 Route::get('/create', 'StampController@createIndex');
 Route::post('/create', 'StampController@storeStamp');
 
-
-
+Route::get('/stamp/update', 'StampController@updateStampIndex');
+Route::post('/stamp/update', 'StampController@updateStamp');
 
 
 Route::dispatch();

@@ -9,4 +9,29 @@ class ImagesTimbre extends CRUD
     protected $table = 'images_timbre';
     protected $primaryKey = 'id';
     protected $fillable = ['id_timbre', 'url_image', 'principale'];
+
+    public function selectByTimbre($timbreId)
+    {
+        $sql = "SELECT * FROM $this->table WHERE id_timbre = :id_timbre";
+        $stmt = $this->prepare($sql);
+        $stmt->bindValue(":id_timbre", $timbreId);
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+
+    public function selectMainByTimbre($id_timbre)
+    {
+        $stmt = $this->prepare("SELECT * FROM {$this->table} WHERE id_timbre = :id_timbre AND principale = 1 LIMIT 1");
+        $stmt->bindValue(':id_timbre', $id_timbre);
+        $stmt->execute();
+        return $stmt->fetch();
+    }
+
+    public function selectAdditionalByTimbre($id_timbre)
+    {
+        $stmt = $this->prepare("SELECT * FROM {$this->table} WHERE id_timbre = :id_timbre AND principale = 0");
+        $stmt->bindValue(':id_timbre', $id_timbre);
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
 }
