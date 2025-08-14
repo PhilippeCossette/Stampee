@@ -281,10 +281,11 @@ class StampController
 
         // Replace main image
         if (isset($files['image_principale']) && $files['image_principale']['name'] != '') {
+            // Delete old main image if exists
             if (isset($timbre['image_principale'])) {
                 @unlink($targetDir . $timbre['image_principale']);
             }
-
+            // Upload new main image
             $file = $files['image_principale'];
             $fileName = uniqid() . '_' . basename($file['name']);
             move_uploaded_file($file['tmp_name'], $targetDir . $fileName);
