@@ -13,10 +13,12 @@ use App\Providers\View;
 use App\Providers\Auth;
 use App\Providers\Validator;
 
-class AuctionController {
-    public function auctionList() {
+class AuctionController
+{
+    public function auctionList()
+    {
         $enchereModel = new Encheres();
-        $encheres = $enchereModel->getAllEncheresWithStamps();
+        $encheres = $enchereModel->getAllAuctionWithMainIMG();
 
         return View::render('auctionlist', ['encheres' => $encheres]);
     }
