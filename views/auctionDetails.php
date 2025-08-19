@@ -4,16 +4,16 @@
     {% if auction.certifie == 1 %}
     <img class="auction-card-certified" src="{{asset}}img/certified.png" alt="">
     {% endif %}
-    <div class="auction-card_img-container">
-      <img src="assets/img/stamps-1.webp" alt="photo timbre" />
-      <img src="assets/img/stamps-2.webp" alt="photo timbre" />
-      <img src="assets/img/stamps-3.webp" alt="photo timbre" />
-      <img src="assets/img/stamps-4.webp" alt="photo timbre" />
+    <script>
+      const images = {{images is defined ? images | json_encode() | raw : '[]'}};
+    </script>
+    <div class="image-slider">
+      <div id="slider-container">
+  <button id="prev-btn">&#8592;</button>
+  <img id="slider-img" src="" alt="Image du timbre" style="max-width:100%;height:auto;">
+  <button id="next-btn">&#8594;</button>
     </div>
-    <img
-      src="assets/img/stamps-lot.webp"
-      class="auction-card-main-img"
-      alt="lot de timbres" />
+    </div>
   </div>
   <div class="auction-card_right-section">
     <div class="auction-card_header">
