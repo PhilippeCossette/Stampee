@@ -9,10 +9,10 @@
     </script>
     <div class="image-slider">
       <div id="slider-container">
-  <button id="prev-btn">&#8592;</button>
-  <img id="slider-img" src="" alt="Image du timbre" style="max-width:100%;height:auto;">
-  <button id="next-btn">&#8594;</button>
-    </div>
+        <button id="prev-btn">&#8592;</button>
+        <img id="slider-img" src="" alt="Image du timbre" style="max-width:100%;height:auto;">
+        <button id="next-btn">&#8594;</button>
+      </div>
     </div>
   </div>
   <div class="auction-card_right-section">
