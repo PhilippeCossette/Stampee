@@ -55,10 +55,13 @@ class AuctionController
 
         $auction = $enchereModel->getAuctionById($id);
 
+        $imagesModel = new ImagesTimbre();
+        $images = $imagesModel->selectByTimbre($auction['timbre_id']);
+
         if (!$auction) {
             return View::render('error', ['message' => 'Impossible de trouver l\'enchère']);
         }
 
-        return View::render('auctionDetails', ['auction' => $auction]);
+        return View::render('auctionDetails', ['auction' => $auction, 'images' => $images]);
     }
 }
