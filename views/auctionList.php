@@ -1,15 +1,15 @@
-{{ include("layouts/header.php", { title: "Page du Profile - Stampee" }) }}
+{{ include("layouts/header.php", { title: "Liste Enchere - Stampee" }) }}
 
-<h1>Liste des enchères</h1>
 
 <section class="auction-list">
+    <h1 class="auction-list-title">Liste des enchères</h1>
     <div class="filter-options">
     </div>
     <div class="auction-list-grid grid">
         {% for enchere in encheres %}
         <a href="{{base}}/auction?id={{enchere.enchere_id}}" class="auctionShowcase-card">
             <header class="auctionShowcase-card-header">
-                <h2 class="auctionShowcase-card-header-title">{{ enchere.titre }}</h2>
+                <h2 class="auctionShowcase-card-header-title" title="{{ enchere.titre }}">{{ enchere.titre|slice(0, 20) ~ (enchere.titre|length > 20 ? '…' : '') }}</h2>
                 <small class="auctionShowcase-card-small">{{ enchere.condition_nom }}</small>
                 {% if enchere.certifie == 1 %}
                 <img class="auctionShowcase-card-certified" src="{{asset}}img/certified.png" alt="">
