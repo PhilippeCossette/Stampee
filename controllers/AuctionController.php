@@ -20,6 +20,6 @@ class AuctionController
         $enchereModel = new Encheres();
         $encheres = $enchereModel->getAllAuctionWithMainIMG();
 
-        return View::render('auctionlist', ['encheres' => $encheres]);
+        return View::render('auctionList', ['encheres' => $encheres]);
     }
 }
