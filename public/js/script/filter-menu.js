@@ -4,7 +4,6 @@ export function filterMenu() {
   const filterMenu = document.querySelector(".filter-options-form");
 
   if (!openBtn || !closeBtn || !filterMenu) return;
-  console.log(openBtn, closeBtn, filterMenu);
   openBtn.addEventListener("click", () => {
     filterMenu.classList.toggle("hideContent");
   });
