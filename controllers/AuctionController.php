@@ -18,6 +18,7 @@ class AuctionController
     public function auctionList()
     {
         $enchereModel = new Encheres();
+        $enchereModel->updateStatus();
 
         $filters = [
             'color' => $_POST['color'] ?? null,

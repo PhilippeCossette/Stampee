@@ -131,4 +131,13 @@ class Encheres extends CRUD
             'pays' => $pays
         ];
     }
+
+    public function updateStatus()
+    {
+        $sql = "UPDATE enchere
+                SET status = 0
+                WHERE fin < NOW() AND status = 1";
+        $stmt = $this->prepare($sql);
+        $stmt->execute();
+    }
 }
