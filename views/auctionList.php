@@ -4,8 +4,8 @@
 <section class="auction-list">
     <h1 class="auction-list-title">Liste des enchères</h1>
     <div class="filter-options">
-        <button class="filter-button-open" data-dropdown='true'><img src="{{ asset }}img/filter.png" alt="filter icon"></button>
-        <form method="POST" action="{{ base }}/auctionlist" class="filter-options-form">
+        <button class="filter-button-open"><img src="{{ asset }}img/filter.png" alt="filter icon"></button>
+        <form method="POST" action="{{ base }}/auctionlist" class="filter-options-form hideContent">
             <button class="filter-button-close">&times;</button>
             <input type="text" name="search" placeholder="Rechercher..." value="{{ filters.search }}">
             <select class="form-input" name="color">
