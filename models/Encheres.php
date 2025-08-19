@@ -33,13 +33,19 @@ class Encheres extends CRUD
             c.couleur AS couleur_nom,
             co.condition AS condition_nom,
 
-            i.url_image AS image_principale
+            i.url_image AS image_principale,
+
+
+            COALESCE(MAX(m.montant), e.prix_depart) AS prix_actuel 
+
         FROM encheres e
         INNER JOIN timbres t ON e.id_timbre = t.id
         LEFT JOIN images_timbre i ON t.id = i.id_timbre AND i.principale = 1
         LEFT JOIN pays p ON t.id_pays = p.id_pays
         LEFT JOIN couleur c ON t.id_couleur = c.id_couleur
         LEFT JOIN `condition` co ON t.id_condition = co.id_condition
+        LEFT JOIN mises m ON e.id = m.id_enchere
+        GROUP BY e.id
         ORDER BY e.debut DESC
         ";
 

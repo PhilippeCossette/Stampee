@@ -4,7 +4,7 @@
 <div class="enchere-card">
     <h2>{{ enchere.titre }}</h2>
     <img src="{{asset}}uploads/{{ enchere.image_principale }}" alt="{{ enchere.titre }}">
-    <p><strong>Prix départ :</strong> {{ enchere.prix_depart }} $</p>
+    <p><strong>Prix départ :</strong> {{ enchere.prix_actuel }} $</p>
     <p><strong>Début :</strong> {{ enchere.debut }}</p>
     <p><strong>Fin :</strong> {{ enchere.fin }}</p>
 </div>
