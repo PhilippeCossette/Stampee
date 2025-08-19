@@ -58,6 +58,9 @@
         {% for enchere in encheres %}
         <a href="{{base}}/auction?id={{enchere.enchere_id}}" class="auctionShowcase-card">
             <header class="auctionShowcase-card-header">
+                {% if enchere.coup_coeur == 1 %}
+                <small class="auctionShowcase-card-header-undertitle">Coups de Coeur</small>
+                {% endif %}
                 <h2 class="auctionShowcase-card-header-title" title="{{ enchere.titre }}">{{ enchere.titre|slice(0, 20) ~ (enchere.titre|length > 20 ? '…' : '') }}</h2>
                 <small class="auctionShowcase-card-small">{{ enchere.condition_nom }}</small>
                 {% if enchere.certifie == 1 %}
@@ -69,8 +72,13 @@
                     src="{{asset}}uploads/{{ enchere.image_principale }}"
                     alt="Image of an auction card displaying stamps" /></picture>
             <p>{{ enchere.prix_actuel }} $</p>
+            {% if enchere.status == 0 %}
+            <p><span class="red-text">Terminé</span></p>
+            <button class="button inactive-button" onclick="window.location.href='{{ base }}/auction?id={{ enchere.enchere_id }}'">Archivées</button>
+            {% else %}
             <p><span class="timer" data-fin="{{ enchere.fin }}"></span></p>
             <button class="button main-button" onclick="window.location.href='{{ base }}/auction?id={{ enchere.enchere_id }}'">Misez</button>
+            {% endif %}
         </a>
         {% endfor %}
     </div>
