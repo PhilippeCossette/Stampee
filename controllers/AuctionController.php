@@ -18,7 +18,7 @@ class AuctionController
     public function auctionList()
     {
         $enchereModel = new Encheres();
-        $encheres = $enchereModel->getAllAuctionWithMainIMG();
+        $encheres = $enchereModel->getAuctionsWithFilters();
 
         return View::render('auctionList', ['encheres' => $encheres]);
     }
