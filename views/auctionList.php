@@ -4,50 +4,49 @@
 <section class="auction-list">
     <h1 class="auction-list-title">Liste des enchères</h1>
     <div class="filter-options">
-        <button class="filter-options-button" data-dropdown='true'><img src="{{ asset }}img/filter.png" alt="filter icon"></button>
-        <div class="filter-options-menu">
-            <form method="POST" action="{{ base }}/auctionlist" class="filter-options">
-                <input type="text" name="search" placeholder="Rechercher..." value="{{ filters.search }}">
-                <select name="color">
-                    <option value="">Toutes les couleurs</option>
-                    {% for color in filterOptions.colors %}
-                    <option value="{{ color.id_couleur }}" {% if filters.color == color.id_couleur %}selected{% endif %}>{{ color.couleur }}</option>
-                    {% endfor %}
-                </select>
-                <select name="pays">
-                    <option value="">Toutes les pays</option>
-                    {% for pays in filterOptions.pays %}
-                    <option value="{{ pays.id_pays }}" {% if filters.pays == pays.id_pays %}selected{% endif %}>{{ pays.pays }}</option>
-                    {% endfor %}
-                </select>
-                <select name="status">
-                    <option value="1" {% if filters.status == 1 %}selected{% endif %}>Actives</option>
-                    <option value="0" {% if filters.status == 0 %}selected{% endif %}>Archivées</option>
-                    <option value="" {% if filters.status is empty %}selected{% endif %}>Toutes</option>
-                </select>
-                <select name="condition">
-                    <option value="">Toutes les conditions</option>
-                    {% for cond in filterOptions.conditions %}
-                    <option value="{{ cond.id_condition }}" {% if filters.condition == cond.id_condition %}selected{% endif %}>{{ cond.condition }}</option>
-                    {% endfor %}
-                </select>
-                <select name="year">
-                    <option value="">Toutes les années</option>
-                    {% for year in filterOptions.years %}
-                    <option value="{{ year }}" {% if filters.year == year %}selected{% endif %}>{{ year }}</option>
-                    {% endfor %}
-                </select>
-                <label>
-                    <input type="checkbox" name="certified" value="1" {% if filters.certified %}checked{% endif %}>
-                    Certifié
-                </label>
-                <label>
-                    <input type="checkbox" name="coup_coeur" value="1" {% if filters.coup_coeur %}checked{% endif %}>
-                    Coup de coeur du Lord
-                </label>
-                <button type="submit" class="button main-button">Filtrer</button>
-            </form>
-        </div>
+        <button class="filter-button-open" data-dropdown='true'><img src="{{ asset }}img/filter.png" alt="filter icon"></button>
+        <form method="POST" action="{{ base }}/auctionlist" class="filter-options-form">
+            <button class="filter-button-close">&times;</button>
+            <input type="text" name="search" placeholder="Rechercher..." value="{{ filters.search }}">
+            <select class="form-input" name="color">
+                <option value="">Toutes les couleurs</option>
+                {% for color in filterOptions.colors %}
+                <option value="{{ color.id_couleur }}" {% if filters.color == color.id_couleur %}selected{% endif %}>{{ color.couleur }}</option>
+                {% endfor %}
+            </select>
+            <select class="form-input" name="pays">
+                <option value="">Toutes les pays</option>
+                {% for pays in filterOptions.pays %}
+                <option value="{{ pays.id_pays }}" {% if filters.pays == pays.id_pays %}selected{% endif %}>{{ pays.pays }}</option>
+                {% endfor %}
+            </select>
+            <select class="form-input" name="status">
+                <option value="1" {% if filters.status == 1 %}selected{% endif %}>Actives</option>
+                <option value="0" {% if filters.status == 0 %}selected{% endif %}>Archivées</option>
+                <option value="" {% if filters.status is empty %}selected{% endif %}>Toutes</option>
+            </select>
+            <select class="form-input" name="condition">
+                <option value="">Toutes les conditions</option>
+                {% for cond in filterOptions.conditions %}
+                <option value="{{ cond.id_condition }}" {% if filters.condition == cond.id_condition %}selected{% endif %}>{{ cond.condition }}</option>
+                {% endfor %}
+            </select>
+            <select class="form-input" name="year">
+                <option value="">Toutes les années</option>
+                {% for year in filterOptions.years %}
+                <option value="{{ year }}" {% if filters.year == year %}selected{% endif %}>{{ year }}</option>
+                {% endfor %}
+            </select>
+            <div class="checkbox">
+                <label for="certified">Certifié</label>
+                <input type="checkbox" id="certified" name="certified" value="1" {% if filters.certified %}checked{% endif %}>
+            </div>
+            <div class="checkbox">
+                <label for="coup_coeur">CDC du Lord</label>
+                <input type="checkbox" id="coup_coeur" name="coup_coeur" value="1" {% if filters.coup_coeur %}checked{% endif %}>
+            </div>
+            <button type="submit" class="button main-button">Filtrer</button>
+        </form>
     </div>
     <div class="auction-list-grid grid">
         {% for enchere in encheres %}
