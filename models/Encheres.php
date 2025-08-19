@@ -91,7 +91,7 @@ class Encheres extends CRUD
             ORDER BY c.couleur ASC
         ");
         $stmt->execute();
-        $colors = $stmt->fetchAll();
+        $colors = $stmt->fetchAll(\PDO::FETCH_ASSOC);
 
         // Conditions
         $stmt = $this->prepare("
@@ -101,7 +101,7 @@ class Encheres extends CRUD
             ORDER BY co.condition ASC
         ");
         $stmt->execute();
-        $conditions = $stmt->fetchAll();
+        $conditions = $stmt->fetchAll(\PDO::FETCH_ASSOC);
 
         // Years
         $stmt = $this->prepare("SELECT DISTINCT annee FROM timbres ORDER BY annee DESC");

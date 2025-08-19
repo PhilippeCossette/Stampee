@@ -20,17 +20,16 @@ class AuctionController
         $enchereModel = new Encheres();
 
         $filters = [
-            'color' => $_GET['color'] ?? null,
-            'condition' => $_GET['condition'] ?? null,
-            'year' => $_GET['year'] ?? null,
-            'certified' => isset($_GET['certified']) ? 1 : null,
-            'search' => $_GET['search'] ?? null
+            'color' => $_POST['color'] ?? null,
+            'condition' => $_POST['condition'] ?? null,
+            'year' => $_POST['year'] ?? null,
+            'certified' => isset($_POST['certified']) ? 1 : null,
+            'search' => $_POST['search'] ?? null
         ];
 
 
         $encheres = $enchereModel->getAuctionsWithFilters($filters);
         $filterOptions = $enchereModel->getFilterOptions();
-
         return View::render('auctionList', [
             'encheres' => $encheres,
             'filters' => $filters,

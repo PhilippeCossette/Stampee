@@ -4,6 +4,37 @@
 <section class="auction-list">
     <h1 class="auction-list-title">Liste des enchères</h1>
     <div class="filter-options">
+        <form method="POST" action="{{ base }}/auctionlist" class="filter-options">
+            <input type="text" name="search" placeholder="Rechercher..." value="{{ filters.search }}">
+
+            <select name="color">
+                <option value="">Toutes les couleurs</option>
+                {% for color in filterOptions.colors %}
+                <option value="{{ color.id_couleur }}" {% if filters.color == color.id_couleur %}selected{% endif %}>{{ color.couleur }}</option>
+                {% endfor %}
+            </select>
+
+            <select name="condition">
+                <option value="">Toutes les conditions</option>
+                {% for cond in filterOptions.conditions %}
+                <option value="{{ cond.id_condition }}" {% if filters.condition == cond.id_condition %}selected{% endif %}>{{ cond.condition }}</option>
+                {% endfor %}
+            </select>
+
+            <select name="year">
+                <option value="">Toutes les années</option>
+                {% for year in filterOptions.years %}
+                <option value="{{ year }}" {% if filters.year == year %}selected{% endif %}>{{ year }}</option>
+                {% endfor %}
+            </select>
+
+            <label>
+                <input type="checkbox" name="certified" value="1" {% if filters.certified %}checked{% endif %}>
+                Certifié
+            </label>
+
+            <button type="submit" class="button main-button">Filtrer</button>
+        </form>
     </div>
     <div class="auction-list-grid grid">
         {% for enchere in encheres %}
