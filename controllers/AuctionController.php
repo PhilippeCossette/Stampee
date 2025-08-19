@@ -41,4 +41,6 @@ class AuctionController
             'filterOptions' => $filterOptions
         ]);
     }
+
+    
 }
