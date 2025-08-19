@@ -35,5 +35,6 @@ Route::post('/stamp/update', 'StampController@updateStamp');
 Route::get('/auctionlist', 'AuctionController@auctionList');
 Route::post('/auctionlist', 'AuctionController@auctionList');
 
+Route::get('/auction', 'AuctionController@showAuction');
 
 Route::dispatch();
