@@ -42,5 +42,7 @@ class AuctionController
         ]);
     }
 
-    
+    public function showAuction() {
+        
+    }
 }

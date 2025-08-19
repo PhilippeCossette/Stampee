@@ -152,4 +152,42 @@ class Encheres extends CRUD
         $stmt = $this->prepare($sql);
         $stmt->execute();
     }
+
+    public function getAuctionById($id)
+    {
+        $sql = "
+        SELECT 
+            e.id AS enchere_id,
+            e.debut,
+            e.fin,
+            e.prix_depart,
+            e.coup_coeur,
+            e.status,
+
+            t.id AS timbre_id,
+            t.nom,
+            t.annee,
+            t.certifie,
+
+            c.condition,
+            col.couleur,
+            p.pays,
+
+            COALESCE(MAX(m.montant), e.prix_depart) AS prix_actuel
+        FROM encheres e
+        INNER JOIN timbres t ON e.id_timbre = t.id
+        LEFT JOIN condition c ON t.id_condition = c.id_condition
+        LEFT JOIN couleur col ON t.id_couleur = col.id_couleur
+        LEFT JOIN pays p ON t.id_pays = p.id_pays
+        LEFT JOIN mises m ON e.id = m.id_enchere
+        WHERE e.id = :id
+        GROUP BY e.id
+        LIMIT 1
+    ";
+
+        $stmt = $this->prepare($sql);
+        $stmt->execute(['id' => $id]);
+
+        return $stmt->fetch();
+    }
 }
