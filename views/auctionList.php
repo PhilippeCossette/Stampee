@@ -21,6 +21,12 @@
                 {% endfor %}
             </select>
 
+            <select name="status">
+                <option value="1" {% if filters.status == 1 %}selected{% endif %}>Actives</option>
+                <option value="0" {% if filters.status == 0 %}selected{% endif %}>Archivées</option>
+                <option value="" {% if filters.status is empty %}selected{% endif %}>Toutes</option>
+            </select>
+
             <select name="condition">
                 <option value="">Toutes les conditions</option>
                 {% for cond in filterOptions.conditions %}
@@ -38,6 +44,11 @@
             <label>
                 <input type="checkbox" name="certified" value="1" {% if filters.certified %}checked{% endif %}>
                 Certifié
+            </label>
+
+            <label>
+                <input type="checkbox" name="coup_coeur" value="1" {% if filters.coup_coeur %}checked{% endif %}>
+                Coup de coeur du Lord
             </label>
 
             <button type="submit" class="button main-button">Filtrer</button>

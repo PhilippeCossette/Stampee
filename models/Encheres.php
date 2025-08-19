@@ -19,6 +19,7 @@ class Encheres extends CRUD
                 e.fin,
                 e.coup_coeur,
                 e.prix_depart,
+                e.status,
 
                 t.id AS timbre_id,
                 t.titre,
@@ -64,6 +65,12 @@ class Encheres extends CRUD
             $params['condition'] = $filters['condition'];
         }
 
+        if (isset($filters['status']) && $filters['status'] !== '') {
+            $sql .= " AND e.status = :status";
+            $params['status'] = $filters['status'];
+        }
+
+
         if (!empty($filters['year'])) {
             $sql .= " AND t.annee = :year";
             $params['year'] = $filters['year'];
@@ -72,6 +79,11 @@ class Encheres extends CRUD
         if (!empty($filters['certified'])) {
             $sql .= " AND t.certifie = :certified";
             $params['certified'] = $filters['certified'];
+        }
+
+        if (!empty($filters['coup_coeur'])) {
+            $sql .= " AND e.coup_coeur = :coup_coeur";
+            $params['coup_coeur'] = $filters['coup_coeur'];
         }
 
         if (!empty($filters['search'])) {
@@ -134,7 +146,7 @@ class Encheres extends CRUD
 
     public function updateStatus()
     {
-        $sql = "UPDATE enchere
+        $sql = "UPDATE encheres
                 SET status = 0
                 WHERE fin < NOW() AND status = 1";
         $stmt = $this->prepare($sql);

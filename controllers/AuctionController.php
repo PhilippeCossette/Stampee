@@ -27,6 +27,8 @@ class AuctionController
             'certified' => isset($_POST['certified']) ? 1 : null,
             'search' => $_POST['search'] ?? null,
             'pays' => $_POST['pays'] ?? null,
+            'coup_coeur' => isset($_POST['coup_coeur']) ? 1 : null,
+            'status' => $_POST['status'] ?? 1 // par défaut, on montre que les actives
         ];
 
 
