@@ -1,64 +1,71 @@
 <?php
+
 namespace App\Models;
 
-abstract class CRUD extends \PDO {
-    final public function __construct() {
+abstract class CRUD extends \PDO
+{
+    final public function __construct()
+    {
         parent::__construct('mysql:host=localhost; dbname=stampee; port=3306; charset=utf8', 'root', '');
     }
 
-    final public function select($field = null, $order='ASC'){
-        if($field == null){
+    final public function select($field = null, $order = 'ASC')
+    {
+        if ($field == null) {
             $field = $this->primaryKey;
         }
         $sql = "SELECT * FROM `$this->table` ORDER BY `$field` $order";
-        if($stmt = $this->query($sql)){
+        if ($stmt = $this->query($sql)) {
             return $stmt->fetchAll();
-        }else{
-            return false;
-        } 
-    }
-
-    final public function selectId($value){
-        $sql= "SELECT * FROM $this->table WHERE $this->primaryKey = :$this->primaryKey";
-        $stmt= $this->prepare($sql);
-        $stmt->bindValue(":$this->primaryKey", $value);
-        $stmt->execute();
-        $count = $stmt->rowCount();
-        if($count==1){
-            return $stmt->fetch();
-        }else{
+        } else {
             return false;
         }
     }
 
-    final public function insert($data){
+    final public function selectId($value)
+    {
+        $sql = "SELECT * FROM $this->table WHERE $this->primaryKey = :$this->primaryKey";
+        $stmt = $this->prepare($sql);
+        $stmt->bindValue(":$this->primaryKey", $value);
+        $stmt->execute();
+        $count = $stmt->rowCount();
+        if ($count == 1) {
+            return $stmt->fetch();
+        } else {
+            return false;
+        }
+    }
 
-        $dataKeys = array_fill_keys($this->fillable,'');
+    final public function insert($data)
+    {
+
+        $dataKeys = array_fill_keys($this->fillable, '');
         $data = array_intersect_key($data, $dataKeys);
 
         $fieldName = implode(', ', array_keys($data));
-        $fieldValue= ":".implode(', :', array_keys($data));
+        $fieldValue = ":" . implode(', :', array_keys($data));
 
         $sql = "INSERT INTO $this->table ($fieldName) VALUES($fieldValue)";
 
         $stmt = $this->prepare($sql);
-        foreach($data as $key=>$value){
+        foreach ($data as $key => $value) {
             $stmt->bindValue(":$key", $value);
         }
-        if($stmt->execute()){
+        if ($stmt->execute()) {
             return $this->lastInsertId();
-        }else{
+        } else {
             return false;
         }
     }
 
-    final public function update($data, $id){
+    final public function update($data, $id)
+    {
 
-        $dataKeys = array_fill_keys($this->fillable,'');
+        $dataKeys = array_fill_keys($this->fillable, '');
         $data = array_intersect_key($data, $dataKeys);
 
         $fieldName = null;
-        foreach($data as $key=>$value){
+        foreach ($data as $key => $value) {
             $fieldName .= "$key = :$key, ";
         }
         $fieldName = rtrim($fieldName, ', ');
@@ -66,65 +73,69 @@ abstract class CRUD extends \PDO {
         $sql = "UPDATE $this->table SET $fieldName WHERE $this->primaryKey = :$this->primaryKey";
         $data[$this->primaryKey] = $id;
         $stmt = $this->prepare($sql);
-        foreach($data as $key=>$value){
+        foreach ($data as $key => $value) {
             $stmt->bindValue(":$key", $value);
         }
-        if($stmt->execute()){
+        if ($stmt->execute()) {
             return true;
-        }else{
+        } else {
             return false;
         }
     }
 
-    final public function joinSelection($joinTable, $joinField, $foreignField, $field = null, $order = 'ASC', $alias = 'city_name') {
-        if ($field == null) {
-            $field = $this->primaryKey;
+    final public function joinSelection($joinTable, $joinField, $foreignField, $selectColumn, $order = 'ASC', $alias = null)
+    {
+        // Use the column name as alias if none provided
+        if ($alias === null) {
+            $alias = $selectColumn;
         }
-    
-        $sql = "SELECT {$this->table}.*, {$joinTable}.name AS {$alias} 
-                FROM {$this->table} 
-                LEFT JOIN {$joinTable} ON {$this->table}.{$foreignField} = {$joinTable}.{$joinField} 
-                ORDER BY {$this->table}.{$field} {$order}";
-    
+
+        // SQL: select distinct options from joined table
+        $sql = "SELECT DISTINCT {$joinTable}.{$joinField}, {$joinTable}.{$selectColumn} AS {$alias}
+            FROM timbres t
+            INNER JOIN {$joinTable} ON t.{$foreignField} = {$joinTable}.{$joinField}
+            ORDER BY {$joinTable}.{$selectColumn} {$order}";
+
         $stmt = $this->prepare($sql);
         $stmt->execute();
-    
+
         $results = $stmt->fetchAll();
         if ($results) {
             return $results;
         } else {
             return false;
-        }        
+        }
     }
 
 
-    final public function delete($id){
-        if($this->selectId($id)){
+    final public function delete($id)
+    {
+        if ($this->selectId($id)) {
             $sql = "DELETE FROM $this->table WHERE $this->primaryKey = :$this->primaryKey";
             $stmt = $this->prepare($sql);
             $stmt->bindValue(":$this->primaryKey", $id);
-            if($stmt->execute()){
+            if ($stmt->execute()) {
                 return true;
-            }else{
+            } else {
                 return false;
             }
-        }else{
+        } else {
             return false;
         }
-
     }
 
-    final public function uniqueUpdate($field, $value, $excludeId = null){
+    final public function uniqueUpdate($field, $value, $excludeId = null)
+    {
         $sql = "SELECT * FROM $this->table WHERE $field = :$field";
 
-        if($excludeId !== null){
+        if ($excludeId !== null) {
             $sql .= " AND $this->primaryKey != :excludeId";
         }
 
         $stmt = $this->prepare($sql);
         $stmt->bindValue("$field", $value);
 
-        if($excludeId !== null){
+        if ($excludeId !== null) {
             $stmt->bindValue(":excludeId", $excludeId);
         }
 
@@ -135,7 +146,8 @@ abstract class CRUD extends \PDO {
         return $count === 0;
     }
 
-    final public function unique($field, $value){
+    final public function unique($field, $value)
+    {
         $sql = "SELECT * FROM $this->table WHERE $field = :$field";
 
 
@@ -146,12 +158,10 @@ abstract class CRUD extends \PDO {
         $count = $stmt->rowCount();
 
 
-        if($count == 1){
+        if ($count == 1) {
             return $stmt->fetch();
-        }else{
+        } else {
             return false;
         }
     }
 }
-
-?>
