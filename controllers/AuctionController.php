@@ -42,7 +42,23 @@ class AuctionController
         ]);
     }
 
-    public function showAuction() {
-        
+    public function showAuction()
+    {
+        $enchereModel = new Encheres();
+        $enchereModel->updateStatus();
+
+        $id = $_GET['id'] ?? null;
+        if (!$id) {
+            View::redirect('/auctionlist');
+            return;
+        }
+
+        $auction = $enchereModel->getAuctionById($id);
+
+        if (!$auction) {
+            return View::render('error', ['message' => 'Impossible de trouver l\'enchère']);
+        }
+
+        return View::render('auctionDetails', ['auction' => $auction]);
     }
 }

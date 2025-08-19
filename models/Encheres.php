@@ -165,9 +165,11 @@ class Encheres extends CRUD
             e.status,
 
             t.id AS timbre_id,
-            t.nom,
+            t.titre,
+            t.description,
             t.annee,
             t.certifie,
+            t.dimension,
 
             c.condition,
             col.couleur,
@@ -176,7 +178,7 @@ class Encheres extends CRUD
             COALESCE(MAX(m.montant), e.prix_depart) AS prix_actuel
         FROM encheres e
         INNER JOIN timbres t ON e.id_timbre = t.id
-        LEFT JOIN condition c ON t.id_condition = c.id_condition
+        LEFT JOIN `condition` c ON t.id_condition = c.id_condition
         LEFT JOIN couleur col ON t.id_couleur = col.id_couleur
         LEFT JOIN pays p ON t.id_pays = p.id_pays
         LEFT JOIN mises m ON e.id = m.id_enchere
