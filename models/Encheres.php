@@ -177,7 +177,9 @@ class Encheres extends CRUD
             col.couleur,
             p.pays,
 
-            COALESCE(MAX(m.montant), e.prix_depart) AS prix_actuel
+            COALESCE(MAX(m.montant), e.prix_depart) AS prix_actuel,
+            COUNT(f.id_enchere) AS favoris_count -- Nombre de fois que l'enchere est en favoris
+
         FROM encheres e
         INNER JOIN timbres t ON e.id_timbre = t.id
         LEFT JOIN utilisateur u ON t.id_proprietaire = u.id
@@ -185,6 +187,7 @@ class Encheres extends CRUD
         LEFT JOIN couleur col ON t.id_couleur = col.id_couleur
         LEFT JOIN pays p ON t.id_pays = p.id_pays
         LEFT JOIN mises m ON e.id = m.id_enchere
+        LEFT JOIN favoris f ON e.id = f.id_enchere
         WHERE e.id = :id
         GROUP BY e.id
         LIMIT 1

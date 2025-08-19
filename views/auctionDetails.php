@@ -47,7 +47,7 @@
       <div class="button secondary-button">Voir toutes les offres</div>
       <div class="button secondary-button">Ajouter aux Favoris</div>
       <p class="auction-card_action-info">
-        Enchère populaire. 15 personnes suivent cette enchère.
+        {{ auction.favoris_count }} personnes suivent cette enchère.
       </p>
     </div>
   </div>
