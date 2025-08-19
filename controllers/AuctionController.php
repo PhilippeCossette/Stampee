@@ -24,12 +24,14 @@ class AuctionController
             'condition' => $_POST['condition'] ?? null,
             'year' => $_POST['year'] ?? null,
             'certified' => isset($_POST['certified']) ? 1 : null,
-            'search' => $_POST['search'] ?? null
+            'search' => $_POST['search'] ?? null,
+            'pays' => $_POST['pays'] ?? null,
         ];
 
 
         $encheres = $enchereModel->getAuctionsWithFilters($filters);
         $filterOptions = $enchereModel->getFilterOptions();
+
         return View::render('auctionList', [
             'encheres' => $encheres,
             'filters' => $filters,

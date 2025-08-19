@@ -54,6 +54,11 @@ class Encheres extends CRUD
             $params['color'] = $filters['color'];
         }
 
+        if (!empty($filters['pays'])) {
+            $sql .= " AND t.id_pays = :pays";
+            $params['pays'] = $filters['pays'];
+        }
+
         if (!empty($filters['condition'])) {
             $sql .= " AND t.id_condition = :condition";
             $params['condition'] = $filters['condition'];
@@ -93,6 +98,16 @@ class Encheres extends CRUD
         $stmt->execute();
         $colors = $stmt->fetchAll(\PDO::FETCH_ASSOC);
 
+        // Pays
+        $stmt = $this->prepare("
+            SELECT DISTINCT p.id_pays, p.pays 
+            FROM timbres t
+            INNER JOIN pays p ON t.id_pays = p.id_pays
+            ORDER BY p.pays ASC
+        ");
+        $stmt->execute();
+        $pays = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+
         // Conditions
         $stmt = $this->prepare("
             SELECT DISTINCT co.id_condition, co.condition 
@@ -112,7 +127,8 @@ class Encheres extends CRUD
         return [
             'colors' => $colors,
             'conditions' => $conditions,
-            'years' => $years
+            'years' => $years,
+            'pays' => $pays
         ];
     }
 }

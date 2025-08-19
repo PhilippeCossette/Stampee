@@ -14,6 +14,13 @@
                 {% endfor %}
             </select>
 
+            <select name="pays">
+                <option value="">Toutes les pays</option>
+                {% for pays in filterOptions.pays %}
+                <option value="{{ pays.id_pays }}" {% if filters.pays == pays.id_pays %}selected{% endif %}>{{ pays.pays }}</option>
+                {% endfor %}
+            </select>
+
             <select name="condition">
                 <option value="">Toutes les conditions</option>
                 {% for cond in filterOptions.conditions %}
