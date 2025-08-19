@@ -32,5 +32,7 @@ Route::post('/create', 'StampController@storeStamp');
 Route::get('/stamp/update', 'StampController@updateStampIndex');
 Route::post('/stamp/update', 'StampController@updateStamp');
 
+Route::get('/auctionlist', 'AuctionController@auctionList');
+
 
 Route::dispatch();
