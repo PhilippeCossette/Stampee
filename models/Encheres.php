@@ -81,4 +81,20 @@ class Encheres extends CRUD
         $stmt->execute($params);
         return $stmt->fetchAll();
     }
+
+    public function getFilterOptions()
+    {
+        $colors = $this->joinSelection('couleur', 'id_couleur', 'id_couleur', 'couleur', 'ASC', 'color_name');
+        $conditions = $this->joinSelection('condition', 'id_condition', 'id_condition', 'condition', 'ASC', 'condition_name');
+
+        $stmt = $this->prepare("SELECT DISTINCT annee FROM timbres ORDER BY annee DESC");
+        $stmt->execute();
+        $years = $stmt->fetchAll(\PDO::FETCH_COLUMN); // Gives [2024, 2025, 2055] instead of [['annee'=>2024],['annee'=>2025],['annee'=>2055]]
+
+        return [
+            'colors' => $colors,
+            'conditions' => $conditions,
+            'years' => $years
+        ];
+    }
 }
