@@ -1,0 +1,8 @@
+.inactive-button {
+  background-color: var(--light-grey-accent);
+}
+
+.inactive-button:hover,
+.inactive-button:focus-within {
+  background-color: var(--grey-accent);
+}
