@@ -1,9 +1,6 @@
 .main-button {
   color: white;
   background-color: var(--main-blue);
-  padding: 0.5em;
-  border-radius: 0.5em;
-  text-align: center;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   transition: all 0.1s linear;
 }
