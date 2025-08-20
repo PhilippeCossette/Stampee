@@ -30,7 +30,7 @@
             {% if guest %}
             {% else %}
             <a href="#" class="nav-link">Mes enchères</a>
-            <a href="{{ base }}/stamp/create" class="nav-link">Ajouter une enchère</a>
+            <a href="{{ base }}/create" class="nav-link">Ajouter une enchère</a>
             {% endif %}
             <a href="#" class="nav-link">Offres récentes</a>
           </div>
@@ -85,7 +85,7 @@
           {% if guest %}
           {% else %}
           <a href="#" class="nav-link">Mes enchères</a>
-          <a href="{{ base }}/stamp/create" class="nav-link">Ajouter une enchère</a>
+          <a href="{{ base }}/create" class="nav-link">Ajouter une enchère</a>
           {% endif %}
           <a href="#" class="nav-link">Offres récentes</a>
         </div>
