@@ -86,73 +86,61 @@
     <div class="currentAuction grid">
       <article class="auctionShowcase-card">
         <header class="auctionShowcase-card-header">
-          <h2 class="auctionShowcase-card-header-title">
-            100 Different Worldwide Stamps
-          </h2>
+          <h2 class="auctionShowcase-card-header-title">MINT Postage Stamp</h2>
         </header>
         <picture class="auctionShowcase-card-imgContainer"><img
             class="auctionShowcase-card-img"
-            src="./assets/img/showcaseIMG/auctionShowcase-5.webp"
+            src="./assets/img/showcaseIMG/auctionShowcase-1.webp"
             alt="Image of an auction card displaying stamps" /></picture>
         <button class="button secondary-button">Plus D'info</button>
       </article>
       <article class="auctionShowcase-card">
         <header class="auctionShowcase-card-header">
-          <h2 class="auctionShowcase-card-header-title">
-            LOT OF 50 VINTAGE STAMPS
-          </h2>
+          <h2 class="auctionShowcase-card-header-title">MINT Postage Stamp</h2>
         </header>
         <picture class="auctionShowcase-card-imgContainer"><img
             class="auctionShowcase-card-img"
-            src="./assets/img/showcaseIMG/auctionShowcase-6.webp"
+            src="./assets/img/showcaseIMG/auctionShowcase-1.webp"
             alt="Image of an auction card displaying stamps" /></picture>
         <button class="button secondary-button">Plus D'info</button>
       </article>
       <article class="auctionShowcase-card">
         <header class="auctionShowcase-card-header">
-          <h2 class="auctionShowcase-card-header-title">
-            LOT OF 50 VINTAGE STAMPS
-          </h2>
+          <h2 class="auctionShowcase-card-header-title">MINT Postage Stamp</h2>
         </header>
         <picture class="auctionShowcase-card-imgContainer"><img
             class="auctionShowcase-card-img"
-            src="./assets/img/showcaseIMG/auctionShowcase-6.webp"
+            src="./assets/img/showcaseIMG/auctionShowcase-1.webp"
             alt="Image of an auction card displaying stamps" /></picture>
         <button class="button secondary-button">Plus D'info</button>
       </article>
       <article class="auctionShowcase-card">
         <header class="auctionShowcase-card-header">
-          <h2 class="auctionShowcase-card-header-title">
-            LOT OF 50 VINTAGE STAMPS
-          </h2>
+          <h2 class="auctionShowcase-card-header-title">MINT Postage Stamp</h2>
         </header>
         <picture class="auctionShowcase-card-imgContainer"><img
             class="auctionShowcase-card-img"
-            src="./assets/img/showcaseIMG/auctionShowcase-6.webp"
+            src="./assets/img/showcaseIMG/auctionShowcase-1.webp"
             alt="Image of an auction card displaying stamps" /></picture>
         <button class="button secondary-button">Plus D'info</button>
       </article>
       <article class="auctionShowcase-card">
         <header class="auctionShowcase-card-header">
-          <h2 class="auctionShowcase-card-header-title">
-            MALDIVES Collection Stamps
-          </h2>
+          <h2 class="auctionShowcase-card-header-title">MINT Postage Stamp</h2>
         </header>
         <picture class="auctionShowcase-card-imgContainer"><img
             class="auctionShowcase-card-img"
-            src="./assets/img/showcaseIMG/auctionShowcase-7.webp"
+            src="./assets/img/showcaseIMG/auctionShowcase-1.webp"
             alt="Image of an auction card displaying stamps" /></picture>
         <button class="button secondary-button">Plus D'info</button>
       </article>
       <article class="auctionShowcase-card">
         <header class="auctionShowcase-card-header">
-          <h2 class="auctionShowcase-card-header-title">
-            COMPLETE US COMMEM STAMPS
-          </h2>
+          <h2 class="auctionShowcase-card-header-title">MINT Postage Stamp</h2>
         </header>
         <picture class="auctionShowcase-card-imgContainer"><img
             class="auctionShowcase-card-img"
-            src="./assets/img/showcaseIMG/auctionShowcase-8.webp"
+            src="./assets/img/showcaseIMG/auctionShowcase-1.webp"
             alt="Image of an auction card displaying stamps" /></picture>
         <button class="button secondary-button">Plus D'info</button>
       </article>
@@ -182,7 +170,7 @@
             postal au monde, mis en vente cette semaine. Une pièce
             incontournable pour les collectionneurs !
           </p>
-          <a href="#"><img src="./assets/img/right-up.webp" alt="icon redirect" /></a>
+          <a href="#"><img src="{{ asset }}/img/right-up.webp" alt="icon redirect" /></a>
         </div>
       </article>
       <article class="news-card">
@@ -198,7 +186,7 @@
             un montant record. Retrouvez les détails des enchères et les pièces
             phares de cette collection.
           </p>
-          <a href="#"><img src="./assets/img/right-up.webp" alt="icon redirect" /></a>
+          <a href="#"><img src="{{ asset }}/img/right-up.webp" alt="icon redirect" /></a>
         </div>
       </article>
       <article class="news-card">
@@ -214,7 +202,7 @@
             l'honneur cette semaine. Ces timbres célèbrent des thèmes actuels,
             allant de l'art aux avancées technologiques.
           </p>
-          <a href="#"><img src="./assets/img/right-up.webp" alt="icon redirect" /></a>
+          <a href="#"><img src="{{ asset }}/img/right-up.webp" alt="icon redirect" /></a>
         </div>
       </article>
     </div>
