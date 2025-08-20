@@ -37,7 +37,7 @@ class Encheres extends CRUD
                 i.url_image AS image_principale,
                 COALESCE(MAX(m.montant), e.prix_depart) AS prix_actuel
 
-            FROM encheres e
+            FROM $this->table e
             INNER JOIN timbres t ON e.id_timbre = t.id
             LEFT JOIN images_timbre i ON t.id = i.id_timbre AND i.principale = 1
             LEFT JOIN pays p ON t.id_pays = p.id_pays
@@ -146,7 +146,7 @@ class Encheres extends CRUD
 
     public function updateStatus()
     {
-        $sql = "UPDATE encheres
+        $sql = "UPDATE $this->table
                 SET status = 0
                 WHERE fin < NOW() AND status = 1";
         $stmt = $this->prepare($sql);
@@ -180,7 +180,7 @@ class Encheres extends CRUD
             COALESCE(MAX(m.montant), e.prix_depart) AS prix_actuel,
             COUNT(f.id_enchere) AS favoris_count -- Nombre de fois que l'enchere est en favoris
 
-        FROM encheres e
+        FROM $this->table e
         INNER JOIN timbres t ON e.id_timbre = t.id
         LEFT JOIN utilisateur u ON t.id_proprietaire = u.id
         LEFT JOIN `condition` c ON t.id_condition = c.id_condition
