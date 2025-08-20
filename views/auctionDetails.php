@@ -12,8 +12,8 @@
         <img id="slider-img" src="" alt="Image du timbre">
       </picture>
       <div class="button-container">
-        <button id="prev-btn">&#8592;</button>
-        <button id="next-btn">&#8594;</button>
+        <button id="prev-btn"><img src="{{asset}}img/next-button.png" alt="" style="transform: rotateY(180deg);"></button>
+        <button id="next-btn"><img src="{{asset}}img/next-button.png" alt=""></button>
       </div>
     </div>
   </div>
