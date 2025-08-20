@@ -8,9 +8,11 @@
       const images = {{images is defined ? images | json_encode() | raw : '[]'}};
     </script>
     <div class="image-slider">
-      <div id="slider-container">
+      <picture>
+        <img id="slider-img" src="" alt="Image du timbre">
+      </picture>
+      <div class="button-container">
         <button id="prev-btn">&#8592;</button>
-        <img id="slider-img" src="" alt="Image du timbre" style="max-width:100%;height:auto;">
         <button id="next-btn">&#8594;</button>
       </div>
     </div>
