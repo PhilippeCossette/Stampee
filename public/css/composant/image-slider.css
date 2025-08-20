@@ -13,7 +13,7 @@
   object-fit: cover;
 }
 
-picture {
+#slider-img > picture {
   max-width: 600px;
   display: block;
   aspect-ratio: 1;

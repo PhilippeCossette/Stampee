@@ -16,7 +16,7 @@
   <header>
     <nav class="nav-desktop">
       <div class="nav-desktop__main">
-        <a href="#" class="nav-desktop_logo"><img src="{{ asset }}/img/logo.webp" alt="logo stampee" /></a>
+        <a href="{{ base }}/" class="nav-desktop_logo"><img src="{{ asset }}/img/logo.webp" alt="logo stampee" /></a>
         <div class="desktop-dropdown-wrapper">
           <a href="#" class="nav-link" data-dropdown="true">
             Enchères
@@ -25,12 +25,12 @@
               alt="menu déroulant icône" />
           </a>
           <div class="desktop-dropdown hideContent">
-            <a href="#" class="nav-link">Explorer les enchères</a>
+            <a href="{{ base }}/auctionlist" class="nav-link">Explorer les enchères</a>
             <a href="#" class="nav-link">Catégories</a>
             {% if guest %}
             {% else %}
             <a href="#" class="nav-link">Mes enchères</a>
-            <a href="#" class="nav-link">Ajouter une enchère</a>
+            <a href="{{ base }}/create" class="nav-link">Ajouter une enchère</a>
             {% endif %}
             <a href="#" class="nav-link">Offres récentes</a>
           </div>
@@ -80,12 +80,12 @@
             alt="menu déroulant icône" />
         </a>
         <div class="desktop-dropdown hideContent">
-          <a href="#" class="nav-link">Explorer les enchères</a>
+          <a href="{{ base }}/auctionlist" class="nav-link">Explorer les enchères</a>
           <a href="#" class="nav-link">Catégories</a>
           {% if guest %}
           {% else %}
           <a href="#" class="nav-link">Mes enchères</a>
-          <a href="#" class="nav-link">Ajouter une enchère</a>
+          <a href="{{ base }}/create" class="nav-link">Ajouter une enchère</a>
           {% endif %}
           <a href="#" class="nav-link">Offres récentes</a>
         </div>
@@ -99,7 +99,7 @@
       {% if guest %}
       <a href="{{ base }}/login" class="nav-link"><strong>Se connecter</strong></a>
       {% else %}
-      <a href="#" class="nav-link nav-link--profile">
+      <a href="{{ base }}/profile" class="nav-link nav-link--profile">
         <small class="nav-link--profile-name">Bonjour, {{ session.nom_utilisateur }}</small>
         <p class="nav-link--profile-button">Voir Profile &#8594;</p>
       </a>

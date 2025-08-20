@@ -38,6 +38,9 @@
 }
 
 .auctionShowcase-card-header-title {
+  white-space: nowrap; /* Prevents text from breaking into multiple lines */
+  overflow: hidden; /* Hides text that overflows the container */
+  text-overflow: ellipsis;
   font-family: inter;
   font-size: clamp(1.2rem, 3.5vw, 1.5rem);
 }
