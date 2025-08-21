@@ -21,14 +21,14 @@ class AuctionController
         $enchereModel->updateStatus();
 
         $filters = [
-            'color' => $_POST['color'] ?? null,
-            'condition' => $_POST['condition'] ?? null,
-            'year' => $_POST['year'] ?? null,
-            'certified' => isset($_POST['certified']) ? 1 : null,
-            'search' => $_POST['search'] ?? null,
-            'pays' => $_POST['pays'] ?? null,
-            'coup_coeur' => isset($_POST['coup_coeur']) ? 1 : null,
-            'status' => $_POST['status'] ?? 1 // par défaut, on montre que les actives
+            'color' => $_GET['color'] ?? null,
+            'condition' => $_GET['condition'] ?? null,
+            'year' => $_GET['year'] ?? null,
+            'certified' => isset($_GET['certified']) ? 1 : null,
+            'search' => $_GET['search'] ?? null,
+            'pays' => $_GET['pays'] ?? null,
+            'coup_coeur' => isset($_GET['coup_coeur']) ? 1 : null,
+            'status' => $_GET['status'] ?? 1 // par défaut, on montre que les actives
         ];
 
 
