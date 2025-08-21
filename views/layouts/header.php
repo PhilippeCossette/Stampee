@@ -53,7 +53,7 @@
       <div class="nav-desktop__secondary">
         <a href="#" class="nav-link">À propos de Lord Reginald Stampee III</a>
         <a href="#" class="nav-link">Langues</a>
-        <form method="POST" action="{{ base }}/auctionlist" class="search">
+        <form method="GET" action="{{ base }}/auctionlist" class="search">
           <input
             type="text"
             aria-label="search"
@@ -72,6 +72,17 @@
     </nav>
     <div class="nav-mobile-menu" id="mobile-menu">
       <button id="close-menu" class="close-btn">&times;</button>
+      <form method="GET" action="{{ base }}/auctionlist" class="search-mobile">
+        <input
+          type="text"
+          aria-label="search"
+          class="search_bar-mobile"
+          name="search"
+          placeholder="Recherche..." />
+        <button type="submit" class="search_button">
+          <img src="{{ asset }}/img/search.webp" alt="search icon" />
+        </button>
+      </form>
       <div class="desktop-dropdown-wrapper">
         <a href="#" class="nav-link" data-dropdown="true">
           Enchères
