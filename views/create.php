@@ -140,7 +140,7 @@
             {% endfor %}
         </div>
 
-        <button class="main-button" type="submit">Créer un timbre </button>
+        <button class="button main-button" type="submit">Créer un timbre </button>
     </form>
 </div>
 
