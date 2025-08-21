@@ -13,8 +13,7 @@
         aria-label="Nom d'utilisateur"
         name="nom_utilisateur"
         placeholder="Nom d'utilisateur"
-        required
-      />
+        required />
       {% if errors.nom_utilisateur is defined %}
       <span class="error">{{ errors.nom_utilisateur }}</span>
       {% endif %}
@@ -28,8 +27,7 @@
         aria-label="Mot de passe"
         name="mot_de_passe"
         placeholder="Mot de Passe"
-        required
-      />
+        required />
       {% if errors.mot_de_passe is defined %}
       <span class="error">{{ errors.mot_de_passe }}</span>
       {% endif %}
@@ -37,9 +35,8 @@
     {% if errors.message is defined %}
     <span class="error">{{ errors.message }}</span>
     {% endif %}
-    <button class="main-button" type="submit">Se Connecter</button>
-    <small class="form-small"
-      >Vous n’avez pas de compte ?
+    <button class="button main-button" type="submit">Se Connecter</button>
+    <small class="form-small">Vous n’avez pas de compte ?
       <a href="{{ base }}/register" class="form-text-button">S'inscrire</a>
     </small>
   </form>

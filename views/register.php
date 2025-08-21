@@ -45,7 +45,7 @@
       {% endif %}
     </div>
 
-    <button class="main-button" type="submit">S'inscrire</button>
+    <button class="button main-button" type="submit">S'inscrire</button>
   </form>
 </div>
 
