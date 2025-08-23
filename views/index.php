@@ -22,7 +22,7 @@
       de la philatélie, sans stress ni complication.
     </p>
   </section>
-  <section class="auctionShowcase">
+  <section class="auctionShowcase max-1200">
     <header class="header-secondary">
       <h2 class="header-secondary-title">Coups de Coeur</h2>
       <a class="button main-button" href="">Voir Tout</a>
@@ -78,7 +78,7 @@
       </article>
     </div>
   </section>
-  <section class="auctionShowcase">
+  <section class="auctionShowcase max-1200">
     <header class="header-secondary">
       <h2 class="header-secondary-title">Enchères en Cours</h2>
       <a class="button main-button" href="">Voir Tout</a>
