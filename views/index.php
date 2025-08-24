@@ -28,54 +28,23 @@
       <a class="button main-button" href="">Voir Tout</a>
     </header>
     <div class="popularAuction grid">
+
+      {% for enchere in encheres_CP %}
       <article class="auctionShowcase-card">
         <header class="auctionShowcase-card-header">
+          {% if enchere.coup_coeur %}
           <small class="auctionShowcase-card-header-undertitle">Coups de Coeur</small>
-          <h2 class="auctionShowcase-card-header-title">MINT Postage Stamp</h2>
+          {% endif %}
+          <h2 class="auctionShowcase-card-header-title">{{ enchere.titre }}</h2>
         </header>
         <picture class="auctionShowcase-card-imgContainer"><img
             class="auctionShowcase-card-img"
-            src="./assets/img/showcaseIMG/auctionShowcase-1.webp"
+            src="{{asset}}uploads/{{ enchere.url_image }}"
             alt="Image of an auction card displaying stamps" /></picture>
-        <button class="button secondary-button">Plus D'info</button>
+        <button class="button secondary-button" onclick="window.location.href='{{ base }}/auction?id={{ enchere.enchere_id }}'">Plus D'info</button>
       </article>
-      <article class="auctionShowcase-card">
-        <header class="auctionShowcase-card-header">
-          <small class="auctionShowcase-card-header-undertitle">Coups de Coeur</small>
-          <h2 class="auctionShowcase-card-header-title">250 pcs LOT Stamps</h2>
-        </header>
-        <picture class="auctionShowcase-card-imgContainer"><img
-            class="auctionShowcase-card-img"
-            src="./assets/img/showcaseIMG/auctionShowcase-2.webp"
-            alt="Image of an auction card displaying stamps" /></picture>
-        <button class="button secondary-button">Plus D'info</button>
-      </article>
-      <article class="auctionShowcase-card">
-        <header class="auctionShowcase-card-header">
-          <small class="auctionShowcase-card-header-undertitle">Coups de Coeur</small>
-          <h2 class="auctionShowcase-card-header-title">
-            50 to 80 YEAR Stamps
-          </h2>
-        </header>
-        <picture class="auctionShowcase-card-imgContainer"><img
-            class="auctionShowcase-card-img"
-            src="./assets/img/showcaseIMG/auctionShowcase-3.webp"
-            alt="Image of an auction card displaying stamps" /></picture>
-        <button class="button secondary-button">Plus D'info</button>
-      </article>
-      <article class="auctionShowcase-card">
-        <header class="auctionShowcase-card-header">
-          <small class="auctionShowcase-card-header-undertitle">Coups de Coeur</small>
-          <h2 class="auctionShowcase-card-header-title">
-            Egypt lot of 100 stamps
-          </h2>
-        </header>
-        <picture class="auctionShowcase-card-imgContainer"><img
-            class="auctionShowcase-card-img"
-            src="./assets/img/showcaseIMG/auctionShowcase-4.webp"
-            alt="Image of an auction card displaying stamps" /></picture>
-        <button class="button secondary-button">Plus D'info</button>
-      </article>
+      {% endfor %}
+
     </div>
   </section>
   <section class="auctionShowcase max-1200">
@@ -84,66 +53,23 @@
       <a class="button main-button" href="">Voir Tout</a>
     </header>
     <div class="currentAuction grid">
+
+      {% for enchere in encheres %}
       <article class="auctionShowcase-card">
         <header class="auctionShowcase-card-header">
-          <h2 class="auctionShowcase-card-header-title">MINT Postage Stamp</h2>
+          {% if enchere.coup_coeur %}
+          <small class="auctionShowcase-card-header-undertitle">Coups de Coeur</small>
+          {% endif %}
+          <h2 class="auctionShowcase-card-header-title">{{ enchere.titre }}</h2>
         </header>
         <picture class="auctionShowcase-card-imgContainer"><img
             class="auctionShowcase-card-img"
-            src="./assets/img/showcaseIMG/auctionShowcase-1.webp"
+            src="{{asset}}uploads/{{ enchere.url_image }}"
             alt="Image of an auction card displaying stamps" /></picture>
-        <button class="button secondary-button">Plus D'info</button>
+        <button class="button secondary-button" onclick="window.location.href='{{ base }}/auction?id={{ enchere.enchere_id }}'">Plus D'info</button>
       </article>
-      <article class="auctionShowcase-card">
-        <header class="auctionShowcase-card-header">
-          <h2 class="auctionShowcase-card-header-title">MINT Postage Stamp</h2>
-        </header>
-        <picture class="auctionShowcase-card-imgContainer"><img
-            class="auctionShowcase-card-img"
-            src="./assets/img/showcaseIMG/auctionShowcase-1.webp"
-            alt="Image of an auction card displaying stamps" /></picture>
-        <button class="button secondary-button">Plus D'info</button>
-      </article>
-      <article class="auctionShowcase-card">
-        <header class="auctionShowcase-card-header">
-          <h2 class="auctionShowcase-card-header-title">MINT Postage Stamp</h2>
-        </header>
-        <picture class="auctionShowcase-card-imgContainer"><img
-            class="auctionShowcase-card-img"
-            src="./assets/img/showcaseIMG/auctionShowcase-1.webp"
-            alt="Image of an auction card displaying stamps" /></picture>
-        <button class="button secondary-button">Plus D'info</button>
-      </article>
-      <article class="auctionShowcase-card">
-        <header class="auctionShowcase-card-header">
-          <h2 class="auctionShowcase-card-header-title">MINT Postage Stamp</h2>
-        </header>
-        <picture class="auctionShowcase-card-imgContainer"><img
-            class="auctionShowcase-card-img"
-            src="./assets/img/showcaseIMG/auctionShowcase-1.webp"
-            alt="Image of an auction card displaying stamps" /></picture>
-        <button class="button secondary-button">Plus D'info</button>
-      </article>
-      <article class="auctionShowcase-card">
-        <header class="auctionShowcase-card-header">
-          <h2 class="auctionShowcase-card-header-title">MINT Postage Stamp</h2>
-        </header>
-        <picture class="auctionShowcase-card-imgContainer"><img
-            class="auctionShowcase-card-img"
-            src="./assets/img/showcaseIMG/auctionShowcase-1.webp"
-            alt="Image of an auction card displaying stamps" /></picture>
-        <button class="button secondary-button">Plus D'info</button>
-      </article>
-      <article class="auctionShowcase-card">
-        <header class="auctionShowcase-card-header">
-          <h2 class="auctionShowcase-card-header-title">MINT Postage Stamp</h2>
-        </header>
-        <picture class="auctionShowcase-card-imgContainer"><img
-            class="auctionShowcase-card-img"
-            src="./assets/img/showcaseIMG/auctionShowcase-1.webp"
-            alt="Image of an auction card displaying stamps" /></picture>
-        <button class="button secondary-button">Plus D'info</button>
-      </article>
+      {% endfor %}
+
     </div>
   </section>
   <section class="news grid">

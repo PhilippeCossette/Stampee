@@ -1,3 +1,7 @@
+.auctionShowcase {
+  padding-inline: var(--medium-spacing);
+}
+
 .auctionShowcase-card {
   --spacing: 10px;
 
@@ -38,9 +42,10 @@
 }
 
 .auctionShowcase-card-header-title {
-  white-space: nowrap; /* Prevents text from breaking into multiple lines */
-  overflow: hidden; /* Hides text that overflows the container */
-  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1; /* number of lines to show */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
   font-family: inter;
   font-size: clamp(1.2rem, 3.5vw, 1.5rem);
 }

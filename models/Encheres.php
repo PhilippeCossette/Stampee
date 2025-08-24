@@ -29,17 +29,20 @@ class Encheres extends CRUD
                 t.certifie,
                 t.dimension,
                 t.tirage,
-                t.id_proprietaire
+                t.id_proprietaire,
+
+                i.url_image
 
             FROM $this->table e
             INNER JOIN timbres t ON e.id_timbre = t.id
+            LEFT JOIN images_timbre i ON t.id = i.id_timbre AND i.principale = 1
         ";
 
         if ($conditionColumn && $conditionValue) {
             $sql .= " WHERE $conditionColumn = :conditionValue";
         }
 
-        $sql .= " ORDER BY e.fin ASC LIMIT :limit";
+        $sql .= " ORDER BY RAND() LIMIT :limit";
 
         $stmt = $this->prepare($sql);
         $stmt->bindValue(':limit', (int)$limit, \PDO::PARAM_INT);
