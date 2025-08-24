@@ -4,11 +4,54 @@ namespace App\Models;
 
 use App\Models\CRUD;
 
+
 class Encheres extends CRUD
 {
     protected $table = 'encheres';
     protected $primaryKey = 'id';
     protected $fillable = ['id_timbre', 'prix_depart'];
+
+    public function getLimitedAuctions($limit, $conditionColumn = null, $conditionValue = null)
+    {
+        $sql = "
+            SELECT 
+                e.id AS enchere_id,
+                e.debut,
+                e.fin,
+                e.coup_coeur,
+                e.prix_depart,
+                e.status,
+
+                t.id AS timbre_id,
+                t.titre,
+                t.description,
+                t.annee,
+                t.certifie,
+                t.dimension,
+                t.tirage,
+                t.id_proprietaire,
+
+                i.url_image
+
+            FROM $this->table e
+            INNER JOIN timbres t ON e.id_timbre = t.id
+            LEFT JOIN images_timbre i ON t.id = i.id_timbre AND i.principale = 1
+        ";
+
+        if ($conditionColumn && $conditionValue) {
+            $sql .= " WHERE $conditionColumn = :conditionValue";
+        }
+
+        $sql .= " ORDER BY RAND() LIMIT :limit";
+
+        $stmt = $this->prepare($sql);
+        $stmt->bindValue(':limit', (int)$limit, \PDO::PARAM_INT);
+        if ($conditionColumn && $conditionValue) {
+            $stmt->bindValue(':conditionValue', $conditionValue);
+        }
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
 
     public function getAuctionsWithFilters($filters = [])
     {

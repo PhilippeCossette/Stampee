@@ -45,3 +45,8 @@ img {
 .red-text {
   color: red;
 }
+
+.max-1200 {
+  max-width: 1200px;
+  margin-inline: auto;
+}
