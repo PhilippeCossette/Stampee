@@ -15,7 +15,7 @@
     </script>
     <div class="image-slider">
       <picture>
-        <img id="slider-img" src="" alt="Image du timbre">
+        <img id="slider-img" data-zoom="true" src="" alt="Image du timbre">
       </picture>
       <div class="button-container">
         <button id="prev-btn"><img src="{{asset}}img/next-button.png" alt="" style="transform: rotateY(180deg);"></button>

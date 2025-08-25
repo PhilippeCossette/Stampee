@@ -20,3 +20,4 @@ document.addEventListener("DOMContentLoaded", () => {
   updateTimers();
   setInterval(updateTimers, 1000);
 });
+
