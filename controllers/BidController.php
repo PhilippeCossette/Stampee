@@ -16,9 +16,10 @@ class BidController
     {
         Auth::session();
 
+        $idUser = $_SESSION['user_id'];
         $idEnchere = $_GET['id_enchere'] ?? null;
         if (!$idEnchere) {
-            View::redirect('/auctionlist');
+            View::redirect('auctionlist');
             return;
         }
 
