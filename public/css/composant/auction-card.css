@@ -4,6 +4,7 @@
   gap: 40px;
   margin-inline: var(--medium-spacing);
   margin-block: var(--huge-spacing);
+  position: relative;
 }
 
 .auction-card_right-section {
