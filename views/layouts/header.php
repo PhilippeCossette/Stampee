@@ -20,9 +20,7 @@
         <div class="desktop-dropdown-wrapper">
           <a href="#" class="nav-link" data-dropdown="true">
             Enchères
-            <img
-              src="{{ asset }}/img/down-arrow.webp"
-              alt="menu déroulant icône" />
+            <i class="fa-solid fa-caret-down"></i>
           </a>
           <div class="desktop-dropdown hideContent">
             <a href="{{ base }}/auctionlist" class="nav-link">Explorer les enchères</a>
@@ -45,7 +43,7 @@
         {% else %}
         <a href="{{ base }}/profile" class="nav-link nav-link--profile">
           <small class="nav-link--profile-name">Bonjour, {{ session.nom_utilisateur }}</small>
-          <p class="nav-link--profile-button">Voir Profile &#8594;</p>
+          <p class="nav-link--profile-button">Voir Profile <i class="fa-solid fa-angle-right"></i></p>
         </a>
         <a href="{{ base }}/logout" class="nav-link-button"><img src="{{ asset }}/img/logout.png" alt="" /></a>
         {% endif %}
@@ -86,9 +84,7 @@
       <div class="desktop-dropdown-wrapper">
         <a href="#" class="nav-link" data-dropdown="true">
           Enchères
-          <img
-            src="{{ asset }}/img/down-arrow.webp"
-            alt="menu déroulant icône" />
+          <i class="fa-solid fa-caret-down"></i>
         </a>
         <div class="desktop-dropdown hideContent">
           <a href="{{ base }}/auctionlist" class="nav-link">Explorer les enchères</a>
@@ -112,7 +108,7 @@
       {% else %}
       <a href="{{ base }}/profile" class="nav-link nav-link--profile">
         <small class="nav-link--profile-name">Bonjour, {{ session.nom_utilisateur }}</small>
-        <p class="nav-link--profile-button">Voir Profile &#8594;</p>
+        <p class="nav-link--profile-button">Voir Profile <i class="fa-solid fa-angle-right"></i></p>
       </a>
       <a href="{{ base }}/logout" class="nav-link-button"><img src="{{ asset }}/img/logout-mobile.png" alt="" /></a>
       {% endif %}
