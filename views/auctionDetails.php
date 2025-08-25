@@ -11,7 +11,7 @@
     <img class="auction-card-certified" src="{{asset}}img/certified.png" alt="">
     {% endif %}
     <script>
-      const images = {{ (images is defined ? images : []) | json_encode | raw }};
+      const images = {{(images is defined ? images : []) | json_encode | raw}};
     </script>
     <div class="image-slider">
       <picture>
@@ -57,7 +57,11 @@
         {{ auction.isFavori ? 'Favori ajouté' : 'Ajouter aux favoris' }}
       </button>
       <p class="auction-card_action-info">
+        {% if auction.favoris_count > 1 %}
         {{ auction.favoris_count }} personnes suivent cette enchère.
+        {% else %}
+        {{ auction.favoris_count }} personne suit cette enchère.
+        {% endif %}
       </p>
     </div>
   </div>
