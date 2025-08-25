@@ -38,15 +38,28 @@ class BidController
         $idEnchere = $_POST['id_enchere'];
         $montant = $_POST['montant'];
 
+        // Refetch to keep the idEnchere
+        $enchereModel = new Encheres();
+        $auction = $enchereModel->getAuctionById($idEnchere);
+
+        $validator = new Validator();
+        $validator->field('montant', $montant)
+            ->required()
+            ->number()
+            ->min(1);
+
+
         $misesModel = new Mises();
         $result = $misesModel->placeBid($idEnchere, $idUser, $montant);
 
         if ($result['success']) {
-            //redirect to auction page with message
+            //redirect to auction page
             return View::redirect('auction?id=' . $idEnchere);
         } else {
             //return error message to view
-            return View::redirect('auction?id=' . $idEnchere);
+            return View::render('error', [
+                'message' => $result['message']
+            ]);
         }
     }
 }

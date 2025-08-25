@@ -18,7 +18,7 @@ class Mises extends CRUD
                 WHERE id = :id AND status = 1
         ";
         $stmt = $this->prepare($sql);
-        $stmt->bindValue(':id', $idEnchere, \PDO::PARAM_INT);
+        $stmt->bindValue(':id', $idEnchere, PDO::PARAM_INT);
         $stmt->execute();
         $enchere = $stmt->fetch();
 
@@ -35,7 +35,7 @@ class Mises extends CRUD
                 WHERE id_enchere = :id
         ";
         $stmt = $this->prepare($sql);
-        $stmt->bindValue(':id', $idEnchere, \PDO::PARAM_INT);
+        $stmt->bindValue(':id', $idEnchere, PDO::PARAM_INT);
         $stmt->execute();
         $row = $stmt->fetch();
         $min = $row['max_mise'] ? $row['max_mise'] : $enchere['prix_depart'];
@@ -53,9 +53,9 @@ class Mises extends CRUD
             VALUES (:enchere, :user, :montant, NOW())
             ";
         $stmt = $this->prepare($sql);
-        $stmt->bindValue(':enchere', $idEnchere, \PDO::PARAM_INT);
-        $stmt->bindValue(':user', $idUser, \PDO::PARAM_INT);
-        $stmt->bindValue(':montant', $montant, \PDO::PARAM_STR);
+        $stmt->bindValue(':enchere', $idEnchere, PDO::PARAM_INT);
+        $stmt->bindValue(':user', $idUser, PDO::PARAM_INT);
+        $stmt->bindValue(':montant', $montant, PDO::PARAM_STR);
 
         if ($stmt->execute()) {
             return [
@@ -68,5 +68,35 @@ class Mises extends CRUD
             'success' => false,
             'message' => "Database error: could not place bid."
         ];
+    }
+
+    public function getCurrentPrice($idEnchere)
+    {
+        $sql = "
+        SELECT MAX(montant) as max_mise 
+        FROM mises 
+        WHERE id_enchere = :id
+        ";
+        $stmt = $this->prepare($sql);
+        $stmt->bindValue(':id', $idEnchere, PDO::PARAM_INT);
+        $stmt->execute();
+        $row = $stmt->fetch();
+
+        if ($row && $row['max_mise']) {
+            return $row['max_mise']; // highest bid
+        }
+
+        // No bid yet, fetch starting price
+        $sql = "
+        SELECT prix_depart 
+        FROM encheres 
+        WHERE id = :id
+        ";
+        $stmt = $this->prepare($sql);
+        $stmt->bindValue(':id', $idEnchere, PDO::PARAM_INT);
+        $stmt->execute();
+        $enchere = $stmt->fetch();
+
+        return $enchere['prix_depart'] ?? 0;
     }
 }
