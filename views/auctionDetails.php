@@ -1,4 +1,7 @@
 {{ include("layouts/header.php", { title: "Details Enchere - Stampee" }) }}
+{% if success is defined and success %}
+<p class="success">{{ success }}</p>
+{% endif %}
 <section class="auction-card">
   <div class="auction-card_left-section">
     {% if auction.certifie == 1 %}
@@ -44,7 +47,7 @@
       {% elseif auction.status == 0 %}
       <div class="button inactive-button">Archivée</div>
       {% else %}
-      <div class="button main-button">Enchérir</div>
+      <div class="button main-button" onclick="window.location.href='{{ base }}/bid?id_enchere={{ auction.enchere_id }}'">Enchérir</div>
       {% endif %}
       <div class="button secondary-button">Voir toutes les offres</div>
       <div class="button secondary-button">Ajouter aux Favoris</div>
