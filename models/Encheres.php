@@ -241,4 +241,20 @@ class Encheres extends CRUD
 
         return $stmt->fetch();
     }
+
+    public function isFavori($idUser, $idEnchere)
+    {
+        $sql = "
+        SELECT COUNT(*) 
+        FROM favoris 
+        WHERE id_utilisateur = :user AND id_enchere = :enchere
+        ";
+        $stmt = $this->prepare($sql);
+        $stmt->bindValue(':user', $idUser, \PDO::PARAM_INT);
+        $stmt->bindValue(':enchere', $idEnchere, \PDO::PARAM_INT);
+        $stmt->execute();
+        $result = $stmt->fetch(\PDO::FETCH_ASSOC);
+
+        return $result['count'] > 0;
+    }
 }

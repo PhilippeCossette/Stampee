@@ -61,6 +61,10 @@ class AuctionController
         $success = $_SESSION['success'] ?? null;
         unset($_SESSION['success']); // clear after reading
 
+        // Check if auction is already favorite for current user
+        $userId = $_SESSION['user_id'];
+        $auction['isFavori'] = $enchereModel->isFavori($userId, $auction['id']);
+
         if (!$auction) {
             return View::render('error', ['message' => 'Impossible de trouver l\'enchère']);
         }
