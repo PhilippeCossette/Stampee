@@ -1,0 +1,10 @@
+.fav-btn {
+  border: solid 1px var(--main-blue);
+  color: var(--main-blue);
+  font-weight: 900;
+}
+
+.favorited {
+    background-color: var(--main-blue);
+    color: white;
+}

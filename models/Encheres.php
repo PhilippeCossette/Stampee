@@ -255,6 +255,6 @@ class Encheres extends CRUD
         $stmt->execute();
         $result = $stmt->fetch(\PDO::FETCH_ASSOC);
 
-        return $result['count'] > 0;
+        return $result['COUNT(*)'] > 0;
     }
 }

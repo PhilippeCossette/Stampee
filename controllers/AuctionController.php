@@ -63,7 +63,7 @@ class AuctionController
 
         // Check if auction is already favorite for current user
         $userId = $_SESSION['user_id'];
-        $auction['isFavori'] = $enchereModel->isFavori($userId, $auction['id']);
+        $auction['isFavori'] = $enchereModel->isFavori($userId, $auction['enchere_id']);
 
         if (!$auction) {
             return View::render('error', ['message' => 'Impossible de trouver l\'enchère']);

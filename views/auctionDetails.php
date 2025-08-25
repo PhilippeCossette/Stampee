@@ -1,17 +1,17 @@
 {{ include("layouts/header.php", { title: "Details Enchere - Stampee" }) }}
-  {% if success is defined and success %}
-  <div class="success-msg">
-    <i class="fa fa-check"></i>
-    {{ success }}
-  </div>
-  {% endif %}
+{% if success is defined and success %}
+<div class="success-msg">
+  <i class="fa fa-check"></i>
+  {{ success }}
+</div>
+{% endif %}
 <section class="auction-card">
   <div class="auction-card_left-section">
     {% if auction.certifie == 1 %}
     <img class="auction-card-certified" src="{{asset}}img/certified.png" alt="">
     {% endif %}
     <script>
-      const images = {{images is defined ? images | json_encode() | raw : '[]'}};
+      const images = {{ (images is defined ? images : []) | json_encode | raw }};
     </script>
     <div class="image-slider">
       <picture>
@@ -53,7 +53,9 @@
       <div class="button main-button" onclick="window.location.href='{{ base }}/bid?id_enchere={{ auction.enchere_id }}'">Enchérir</div>
       {% endif %}
       <div class="button secondary-button">Voir toutes les offres</div>
-      <div class="button secondary-button">Ajouter aux Favoris</div>
+      <button class="fav-btn button {{ auction.isFavori ? 'favorited' : '' }}" data-id="{{ auction.enchere_id }}">
+        {{ auction.isFavori ? 'Favori ajouté' : 'Ajouter aux favoris' }}
+      </button>
       <p class="auction-card_action-info">
         {{ auction.favoris_count }} personnes suivent cette enchère.
       </p>
