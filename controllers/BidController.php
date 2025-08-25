@@ -66,7 +66,7 @@ class BidController
         $result = $misesModel->placeBid($idEnchere, $idUser, $montant);
 
         if ($result['success']) {
-            $_SESSION['success'] = "Votre enchère a été placée avec succès !";
+            $_SESSION['success'] = "Votre mise a été placée avec succès !";
             //redirect to auction page
             return View::redirect('auction?id=' . $idEnchere);
         } else {
