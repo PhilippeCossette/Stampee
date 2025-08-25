@@ -44,7 +44,7 @@
       {% elseif auction.status == 0 %}
       <div class="button inactive-button">Archivée</div>
       {% else %}
-      <div class="button main-button">Enchérir</div>
+      <div class="button main-button" onclick="window.location.href='{{ base }}/bid?id_enchere={{ auction.enchere_id }}'">Enchérir</div>
       {% endif %}
       <div class="button secondary-button">Voir toutes les offres</div>
       <div class="button secondary-button">Ajouter aux Favoris</div>

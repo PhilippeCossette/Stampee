@@ -37,4 +37,6 @@ Route::post('/auctionlist', 'AuctionController@auctionList');
 
 Route::get('/auction', 'AuctionController@showAuction');
 
+Route::get('/bid', 'BidController@showBid');
+
 Route::dispatch();
