@@ -15,15 +15,47 @@
         <p><strong>Email:</strong> {{ session.email }}</p>
       </div>
       <div>
-        <a class="button secondary-button" href="{{ base }}/user/update"
-          >Modifier Compte</a
-        >
+        <a class="button secondary-button" href="{{ base }}/user/update">Modifier Compte</a>
         <a class="button red-button" id="delete-btn">Supprimer Compte</a>
       </div>
     </div>
   </header>
   <article class="my-auctions"></article>
-  <article class="favorite-auctions"></article>
+  <article class="favorite-auctions">
+    <header class="favorite-auctions-header">
+      <p>Mes enchères favorites</p>
+      <a href="">Voir Tout</a>
+    </header>
+    <div class="grid">
+      {% for favoris in favoris %}
+      <a href="{{base}}/auction?id={{favoris.enchere_id}}" class="auctionShowcase-card">
+        <header class="auctionShowcase-card-header">
+          {% if favoris.coup_coeur == 1 %}
+          <small class="auctionShowcase-card-header-undertitle">Coups de Coeur</small>
+          {% endif %}
+          <h2 class="auctionShowcase-card-header-title" title="{{ favoris.titre }}">{{ favoris.titre|slice(0, 20) ~ (favoris.titre|length > 20 ? '…' : '') }}</h2>
+          <small class="auctionShowcase-card-small">{{ favoris.condition_nom }}</small>
+          {% if favoris.certifie == 1 %}
+          <img class="auctionShowcase-card-certified" src="{{asset}}img/certified.png" alt="">
+          {% endif %}
+        </header>
+        <picture class="auctionShowcase-card-imgContainer"><img
+            class="auctionShowcase-card-img"
+            src="{{asset}}uploads/{{ favoris.image_principale }}"
+            alt="Image of an auction card displaying stamps" /></picture>
+        <p>{{ favoris.prix_actuel }} $</p>
+        <p>
+          <span class="timer" data-fin="{{ favoris.fin }}"></span>
+        </p>
+        {% if favoris.status == 0 %}
+        <button class="button inactive-button" onclick="window.location.href='{{ base }}/auction?id={{ favoris.enchere_id }}'">Archivées</button>
+        {% else %}
+        <button class="button main-button" onclick="window.location.href='{{ base }}/auction?id={{ enchere.enchere_id }}'">Misez</button>
+        {% endif %}
+      </a>
+      {% endfor %}
+    </div>
+  </article>
   <article class="offer-history"></article>
 </section>
 

@@ -53,7 +53,7 @@ class Favoris extends CRUD
 
             COALESCE(MAX(m.montant), e.prix_depart) AS prix_actuel
             
-        FROM enchere e
+        FROM encheres e
         INNER JOIN timbres t ON e.id_timbre = t.id
         INNER JOIN {$this->table} f ON e.id = f.id_enchere
         LEFT JOIN images_timbre i ON t.id = i.id_timbre AND i.principale = 1
@@ -61,9 +61,9 @@ class Favoris extends CRUD
         WHERE f.id_utilisateur = :userId
         GROUP BY e.id
     ";
-    if ($limit) {
-        $sql .= " LIMIT :limit";
-    }
+        if ($limit) {
+            $sql .= " LIMIT :limit";
+        }
 
         $stmt = $this->prepare($sql);
         $stmt->bindValue(':userId', $userId, \PDO::PARAM_INT);
@@ -71,7 +71,6 @@ class Favoris extends CRUD
             $stmt->bindValue(':limit', $limit, \PDO::PARAM_INT);
         }
         $stmt->execute();
-        return $stmt->fetchAll();   
-
+        return $stmt->fetchAll();
     }
 }
