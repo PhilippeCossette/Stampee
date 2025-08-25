@@ -14,7 +14,6 @@ class BidController
 {
     public function showBid()
     {
-        unset($_SESSION['errors'], $_SESSION['inputs']);
         Auth::session();
 
         $idEnchere = $_GET['id_enchere'] ?? null;
@@ -26,8 +25,14 @@ class BidController
         $enchereModel = new Encheres();
         $auction = $enchereModel->getAuctionById($idEnchere);
 
+        $errors = $_SESSION['errors'] ?? null;
+        $inputs = $_SESSION['inputs'] ?? null;
+        unset($_SESSION['errors'], $_SESSION['inputs']);
+
         return View::render('bid', [
-            'auction' => $auction
+            'auction' => $auction,
+            'errors' => $errors,
+            'inputs' => $inputs
         ]);
     }
 
