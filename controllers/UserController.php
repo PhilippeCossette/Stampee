@@ -26,6 +26,19 @@ class UserController
         return View::render('profile', ['favoris' => $favoris]);
     }
 
+    public function profileFavorites()
+    {
+        Auth::session(); // Ensure the user is authenticated
+
+        $enchereModel = new Encheres();
+        $enchereModel->updateStatus();
+
+        $favorisModel = new Favoris();
+        $favoris = $favorisModel->getFavByUserId($_SESSION['user_id']);
+
+        return View::render('myFavorites', ['favoris' => $favoris]);
+    }
+
     public function updateIndex()
     {
         Auth::session(); // Ensure the user is authenticated    
