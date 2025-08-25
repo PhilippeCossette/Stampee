@@ -66,11 +66,12 @@
                     src="{{asset}}uploads/{{ enchere.image_principale }}"
                     alt="Image of an auction card displaying stamps" /></picture>
             <p>{{ enchere.prix_actuel }} $</p>
+            <p>
+                <span class="timer" data-fin="{{ enchere.fin }}"></span>
+            </p>
             {% if enchere.status == 0 %}
-            <p><span class="red-text">Terminé</span></p>
             <button class="button inactive-button" onclick="window.location.href='{{ base }}/auction?id={{ enchere.enchere_id }}'">Archivées</button>
             {% else %}
-            <p><span class="timer" data-fin="{{ enchere.fin }}"></span></p>
             <button class="button main-button" onclick="window.location.href='{{ base }}/auction?id={{ enchere.enchere_id }}'">Misez</button>
             {% endif %}
         </a>
