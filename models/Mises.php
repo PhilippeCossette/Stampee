@@ -18,11 +18,11 @@ class Mises extends CRUD
                 WHERE id = :id AND status = 1
         ";
         $stmt = $this->prepare($sql);
-        $stmt->bindValue(':id', $idEnchere, PDO::PARAM_INT);
+        $stmt->bindValue(':id', $idEnchere, \PDO::PARAM_INT);
         $stmt->execute();
         $enchere = $stmt->fetch();
 
-        if (!$enchere || new DateTime() > new DateTime($enchere['fin'])) {
+        if (!$enchere || new \DateTime() > new \DateTime($enchere['fin'])) {
             return [
                 'success' => false,
                 'message' => "Auction is not active."
@@ -35,7 +35,7 @@ class Mises extends CRUD
                 WHERE id_enchere = :id
         ";
         $stmt = $this->prepare($sql);
-        $stmt->bindValue(':id', $idEnchere, PDO::PARAM_INT);
+        $stmt->bindValue(':id', $idEnchere, \PDO::PARAM_INT);
         $stmt->execute();
         $row = $stmt->fetch();
         $min = $row['max_mise'] ? $row['max_mise'] : $enchere['prix_depart'];
@@ -49,13 +49,13 @@ class Mises extends CRUD
 
         // Insérer la mise
         $sql = "
-                INSERT INTO mises (id_enchere, id_utilisateur, montant, date_mise)
+                INSERT INTO mises (id_enchere, id_utilisateur, montant, date_heure)
             VALUES (:enchere, :user, :montant, NOW())
             ";
         $stmt = $this->prepare($sql);
-        $stmt->bindValue(':enchere', $idEnchere, PDO::PARAM_INT);
-        $stmt->bindValue(':user', $idUser, PDO::PARAM_INT);
-        $stmt->bindValue(':montant', $montant, PDO::PARAM_STR);
+        $stmt->bindValue(':enchere', $idEnchere, \PDO::PARAM_INT);
+        $stmt->bindValue(':user', $idUser, \PDO::PARAM_INT);
+        $stmt->bindValue(':montant', $montant, \PDO::PARAM_STR);
 
         if ($stmt->execute()) {
             return [

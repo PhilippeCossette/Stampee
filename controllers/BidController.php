@@ -34,7 +34,7 @@ class BidController
     {
         Auth::session();
 
-        $idUser = $_SESSION['user']['id'];
+        $idUser = $_SESSION['user_id'];
         $idEnchere = $_POST['id_enchere'];
         $montant = $_POST['montant'];
 
@@ -43,16 +43,10 @@ class BidController
 
         if ($result['success']) {
             //redirect to auction page with message
-            return View::render('auctionDetails', [
-                'success' => true,
-                'message' => $result['message']
-            ]);
+            return View::redirect('auction?id=' . $idEnchere);
         } else {
             //return error message to view
-            return View::render('auctionDetails', [
-                'success' => false,
-                'message' => $result['message']
-            ]);
+            return View::redirect('auction?id=' . $idEnchere);
         }
     }
 }
