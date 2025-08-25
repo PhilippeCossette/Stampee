@@ -14,6 +14,7 @@ class BidController
 {
     public function showBid()
     {
+        unset($_SESSION['errors'], $_SESSION['inputs']);
         Auth::session();
 
         $idEnchere = $_GET['id_enchere'] ?? null;
@@ -42,14 +43,21 @@ class BidController
         $enchereModel = new Encheres();
         $auction = $enchereModel->getAuctionById($idEnchere);
 
+        $misesModel = new Mises();
+        $currentHighest = $misesModel->getCurrentPrice($idEnchere);
+
         $validator = new Validator();
         $validator->field('montant', $montant)
             ->required()
             ->number()
-            ->min(1);
+            ->min($currentHighest);
 
+        if (!$validator->isSuccess()) {
+            $_SESSION['errors'] = $validator->getErrors();
+            $_SESSION['inputs'] = $_POST;
+            return View::redirect('bid?id_enchere=' . $idEnchere);
+        }
 
-        $misesModel = new Mises();
         $result = $misesModel->placeBid($idEnchere, $idUser, $montant);
 
         if ($result['success']) {
