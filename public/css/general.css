@@ -51,4 +51,6 @@ img {
   margin-inline: auto;
 }
 
-
+.inlineP-huge {
+  padding-inline: var(--huge-spacing);
+}

@@ -1,5 +1,5 @@
 {{ include("layouts/header.php", { title: "Mes favoris - Stampee" }) }}
-<section class="max-1200">
+<section class="max-1200 inlineP-huge">
     <article class="profile-section">
         <header class="profile-section-header">
             <h2 class="profile-section-header-title">Mes enchères favorites</h2>

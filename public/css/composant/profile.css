@@ -26,9 +26,6 @@
   flex-grow: 1;
 }
 
-.profile-section {
-  padding-inline: var(--huge-spacing);
-}
 
 .profile-section-header {
   display: flex;
