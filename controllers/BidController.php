@@ -29,10 +29,14 @@ class BidController
         $inputs = $_SESSION['inputs'] ?? null;
         unset($_SESSION['errors'], $_SESSION['inputs']);
 
+        $misesModel = new Mises();
+        $highestBidder = $misesModel->isHighestBidder($idEnchere, $idUser);
+
         return View::render('bid', [
             'auction' => $auction,
             'errors' => $errors,
-            'inputs' => $inputs
+            'inputs' => $inputs,
+            'highestBidder' => $highestBidder
         ]);
     }
 
