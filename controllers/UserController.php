@@ -21,7 +21,7 @@ class UserController
         $enchereModel->updateStatus();
 
         $favorisModel = new Favoris();
-        $favoris = $favorisModel->getFavByUserId($_SESSION['user_id']);
+        $favoris = $favorisModel->getFavByUserId($_SESSION['user_id'], 4);
 
         return View::render('profile', ['favoris' => $favoris]);
     }
