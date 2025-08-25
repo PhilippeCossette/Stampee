@@ -3,7 +3,7 @@
 <article class="profile-section">
     <header class="profile-section-header">
         <h2 class="profile-section-header-title">Mes enchères favorites</h2>
-        <a class="profile-section-header-link" href="">Voir Tout <i class="fa-solid fa-angle-right"></i></a>
+        <a class="profile-section-header-link" href="">Mon Profile <i class="fa-solid fa-angle-right"></i></a>
     </header>
     <div class="grid">
         {% if favoris is not empty %}
