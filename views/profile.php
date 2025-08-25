@@ -24,9 +24,12 @@
   <article class="favorite-auctions">
     <header class="favorite-auctions-header">
       <p>Mes enchères favorites</p>
+      {% if favoris|length > 4 %}
       <a href="">Voir Tout</a>
+      {% endif %}
     </header>
     <div class="grid">
+      {% if favoris is not empty %}
       {% for favoris in favoris %}
       <a href="{{base}}/auction?id={{favoris.enchere_id}}" class="auctionShowcase-card">
         <header class="auctionShowcase-card-header">
@@ -54,6 +57,9 @@
         {% endif %}
       </a>
       {% endfor %}
+      {% else %}
+      <p class="empty-message">Aucune enchère favorite trouvée.</p>
+      {% endif %}
     </div>
   </article>
   <article class="offer-history"></article>
