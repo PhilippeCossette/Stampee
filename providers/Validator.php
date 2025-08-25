@@ -154,6 +154,16 @@ class Validator
     }
 
 
+    public function higherThan($minValue)
+    {
+        if (!empty($this->value) && is_numeric($this->value) && $this->value <= $minValue) {
+            $this->errors[$this->key] = "$this->name doit être supérieur à $minValue.";
+        }
+        return $this;
+    }
+
+
+
 
 
     // Check if there are any validation errors

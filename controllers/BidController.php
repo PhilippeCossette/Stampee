@@ -50,7 +50,7 @@ class BidController
         $validator->field('montant', $montant)
             ->required()
             ->number()
-            ->min($currentHighest);
+            ->higherThan($currentHighest);
 
         if (!$validator->isSuccess()) {
             $_SESSION['errors'] = $validator->getErrors();
