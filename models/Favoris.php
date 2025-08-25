@@ -23,7 +23,8 @@ class Favoris extends CRUD
         return $stmt->execute();
     }
 
-    public function addFavorite($idUser, $idEnchere){
+    public function addFavorite($idUser, $idEnchere)
+    {
         $sql = "
         INSERT INTO {$this->table} (id_utilisateur, id_enchere)
         VALUES (:id_utilisateur, :id_enchere)
@@ -32,5 +33,45 @@ class Favoris extends CRUD
         $stmt->bindValue(':id_utilisateur', $idUser, \PDO::PARAM_INT);
         $stmt->bindValue(':id_enchere', $idEnchere, \PDO::PARAM_INT);
         return $stmt->execute();
+    }
+
+    public function getFavByUserId($userId, $limit = null)
+    {
+        $sql = "
+        SELECT 
+            e.id AS enchere_id,
+            e.fin,
+            e.prix_depart,
+            e.coup_coeur,
+            e.status,
+
+            t.id AS timbre_id,
+            t.titre,
+
+            t.certifie,
+            i.url_image AS image_principale,
+
+            COALESCE(MAX(m.montant), e.prix_depart) AS prix_actuel
+            
+        FROM enchere e
+        INNER JOIN timbres t ON e.id_timbre = t.id
+        INNER JOIN {$this->table} f ON e.id = f.id_enchere
+        LEFT JOIN images_timbre i ON t.id = i.id_timbre AND i.principale = 1
+        LEFT JOIN mises m ON e.id = m.id_enchere
+        WHERE f.id_utilisateur = :userId
+        GROUP BY e.id
+    ";
+    if ($limit) {
+        $sql .= " LIMIT :limit";
+    }
+
+        $stmt = $this->prepare($sql);
+        $stmt->bindValue(':userId', $userId, \PDO::PARAM_INT);
+        if ($limit) {
+            $stmt->bindValue(':limit', $limit, \PDO::PARAM_INT);
+        }
+        $stmt->execute();
+        return $stmt->fetchAll();   
+
     }
 }
