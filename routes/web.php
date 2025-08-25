@@ -40,4 +40,7 @@ Route::get('/auction', 'AuctionController@showAuction');
 Route::get('/bid', 'BidController@showBid');
 Route::post('/bid/store', 'BidController@storeBid');
 
+Route::post('/favorites/add', 'FavoritesController@addFavorite');
+Route::post('/favorites/remove', 'FavoritesController@removeFavorite');
+
 Route::dispatch();
