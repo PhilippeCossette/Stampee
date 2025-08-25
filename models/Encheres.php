@@ -221,8 +221,8 @@ class Encheres extends CRUD
             p.pays,
 
             COALESCE(MAX(m.montant), e.prix_depart) AS prix_actuel,
-            COUNT(f.id_enchere) AS favoris_count -- Nombre de fois que l'enchere est en favoris
-
+            COUNT(DISTINCT f.id_utilisateur) AS favoris_count -- Nombre unique de personnes ayant mis en favoris
+            
         FROM $this->table e
         INNER JOIN timbres t ON e.id_timbre = t.id
         LEFT JOIN utilisateur u ON t.id_proprietaire = u.id

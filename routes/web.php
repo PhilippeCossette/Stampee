@@ -6,6 +6,9 @@ use App\Controllers\HomeController;
 use App\Controllers\AuthController;
 use App\Controllers\StampController;
 use App\Controllers\UserController;
+use App\Controllers\AuctionController;
+use App\Controllers\BidController;
+use App\Controllers\FavoriteController;
 use App\Models\Utilisateur;
 
 Route::get('/', 'HomeController@index');
@@ -40,7 +43,7 @@ Route::get('/auction', 'AuctionController@showAuction');
 Route::get('/bid', 'BidController@showBid');
 Route::post('/bid/store', 'BidController@storeBid');
 
-Route::post('/favorites/add', 'FavoritesController@addFavorite');
-Route::post('/favorites/remove', 'FavoritesController@removeFavorite');
+Route::post('/favorites/add', 'FavoriteController@addFavorite');
+Route::post('/favorites/remove', 'FavoriteController@removeFavorite');
 
 Route::dispatch();
