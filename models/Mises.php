@@ -99,4 +99,21 @@ class Mises extends CRUD
 
         return $enchere['prix_depart'] ?? 0;
     }
+
+    public function isHighestBidder($idEnchere, $idUser)
+    {
+        $sql = "
+        SELECT id_utilisateur 
+        FROM mises 
+        WHERE id_enchere = :id 
+        ORDER BY montant DESC 
+        LIMIT 1
+        ";
+        $stmt = $this->prepare($sql);
+        $stmt->bindValue(':id', $idEnchere, \PDO::PARAM_INT);
+        $stmt->execute();
+        $row = $stmt->fetch();
+
+        return $row && $row['id_utilisateur'] == $idUser;
+    }
 }
