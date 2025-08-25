@@ -52,4 +52,5 @@ class FavoriteController
 
         echo json_encode(['success' => $success]);
     }
+
 }

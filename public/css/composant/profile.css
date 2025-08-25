@@ -26,6 +26,37 @@
   flex-grow: 1;
 }
 
+
+.profile-section-header {
+  display: flex;
+  gap: 1em;
+  align-items: center;
+  margin-bottom: 1em;
+  border-bottom: 1px solid var(--light-grey-accent);
+}
+
+.profile-section-header-title {
+  font-family: inter;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--main-blue);
+}
+
+.profile-section-header-link {
+  font-family: inter;
+  font-size: 14px;
+  font-weight: 400;
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+
+  transition: all 0.2s linear;
+}
+
+.profile-section-header-link:hover {
+  text-decoration: underline;
+}
+
 @media screen and (max-width: 700px) {
   .profile-details {
     flex-direction: column;

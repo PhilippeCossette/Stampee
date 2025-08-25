@@ -2,7 +2,9 @@
 
 namespace App\Controllers;
 
+use App\Models\Favoris;
 use App\Models\Utilisateur;
+use App\Models\Encheres;
 use App\Providers\Validator;
 use App\Providers\View;
 use App\Providers\Auth;
@@ -14,7 +16,27 @@ class UserController
     public function profileIndex()
     {
         Auth::session(); // Ensure the user is authenticated
-        return View::render('profile');
+
+        $enchereModel = new Encheres();
+        $enchereModel->updateStatus();
+
+        $favorisModel = new Favoris();
+        $favoris = $favorisModel->getFavByUserId($_SESSION['user_id'], 4);
+
+        return View::render('profile', ['favoris' => $favoris]);
+    }
+
+    public function profileFavorites()
+    {
+        Auth::session(); // Ensure the user is authenticated
+
+        $enchereModel = new Encheres();
+        $enchereModel->updateStatus();
+
+        $favorisModel = new Favoris();
+        $favoris = $favorisModel->getFavByUserId($_SESSION['user_id']);
+
+        return View::render('myFavorites', ['favoris' => $favoris]);
     }
 
     public function updateIndex()
