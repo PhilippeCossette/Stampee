@@ -1,59 +1,88 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+@import url("//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css");
 
 body {
-    font-size: clamp(16px, 1.8vw, 18px); /* Scales between 16px and 18px */
-    font-weight: 500;
-    line-height: 1.6;
-    color: black;
+  font-size: clamp(16px, 1.8vw, 18px); /* Scales between 16px and 18px */
+  font-weight: 500;
+  line-height: 1.6;
+  color: black;
 }
 
 h1 {
-    font-size: clamp(2.5rem, 5vw, 3.815rem); /* Scales between 2.5rem and 3.815rem */
-    font-family: "Playfair Display", serif;
-    font-weight: 800;
+  font-size: clamp(
+    2.5rem,
+    5vw,
+    3.815rem
+  ); /* Scales between 2.5rem and 3.815rem */
+  font-family: "Playfair Display", serif;
+  font-weight: 800;
 }
 
 h2 {
-    font-size: clamp(2rem, 4.5vw, 3.052rem); /* Scales between 2rem and 3.052rem */
+  font-size: clamp(
+    2rem,
+    4.5vw,
+    3.052rem
+  ); /* Scales between 2rem and 3.052rem */
 }
 
 h3 {
-    font-size: clamp(1.8rem, 4vw, 2.441rem); /* Scales between 1.8rem and 2.441rem */
+  font-size: clamp(
+    1.8rem,
+    4vw,
+    2.441rem
+  ); /* Scales between 1.8rem and 2.441rem */
 }
 
 h4 {
-    font-size: clamp(1.5rem, 3.5vw, 1.953rem); /* Scales between 1.5rem and 1.953rem */
+  font-size: clamp(
+    1.5rem,
+    3.5vw,
+    1.953rem
+  ); /* Scales between 1.5rem and 1.953rem */
 }
 
 h5 {
-    font-size: clamp(1.2rem, 3vw, 1.563rem); /* Scales between 1.2rem and 1.563rem */
+  font-size: clamp(
+    1.2rem,
+    3vw,
+    1.563rem
+  ); /* Scales between 1.2rem and 1.563rem */
 }
 
 h6 {
-    font-size: clamp(1rem, 2.5vw, 1.25rem); /* Scales between 1rem and 1.25rem */
+  font-size: clamp(1rem, 2.5vw, 1.25rem); /* Scales between 1rem and 1.25rem */
 }
 
-h2, h3, h4, h5, h6 {
-    font-family: "Cormorant Garamond", serif;
-    font-weight: 700;
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Cormorant Garamond", serif;
+  font-weight: 700;
 }
 
 p {
-    font-size: clamp(0.9rem, 1.8vw, 1rem); /* Scales between 0.9rem and 1rem */
-    font-family: "Inter", sans-serif;
+  font-size: clamp(0.9rem, 1.8vw, 1rem); /* Scales between 0.9rem and 1rem */
+  font-family: "Inter", sans-serif;
 }
 
 .biggerParagraph {
-    font-size: clamp(0.9em, 1.8vw, 1.4rem); /* Scales between 0.9rem and 1rem */
-    font-family: "Inter", sans-serif;
+  font-size: clamp(0.9em, 1.8vw, 1.4rem); /* Scales between 0.9rem and 1rem */
+  font-family: "Inter", sans-serif;
 }
 
 small {
-    font-size: clamp(0.8rem, 1.2vw, 0.9rem); /* Scales between 0.7rem and 0.8rem */
+  font-size: clamp(
+    0.8rem,
+    1.2vw,
+    0.9rem
+  ); /* Scales between 0.7rem and 0.8rem */
 }
 
 nav a {
-    font-size: clamp(18px, 2.5vw, 24px); /* Scales between 18px and 24px */
+  font-size: clamp(18px, 2.5vw, 24px); /* Scales between 18px and 24px */
 }
