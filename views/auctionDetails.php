@@ -1,6 +1,9 @@
 {{ include("layouts/header.php", { title: "Details Enchere - Stampee" }) }}
   {% if success is defined and success %}
-  <p class="success">{{ success }}</p>
+  <div class="success-msg">
+    <i class="fa fa-check"></i>
+    {{ success }}
+  </div>
   {% endif %}
 <section class="auction-card">
   <div class="auction-card_left-section">
