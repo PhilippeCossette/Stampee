@@ -12,6 +12,24 @@ use App\Providers\Validator;
 
 class BidController
 {
+    public function showBid()
+    {
+        Auth::session();
+
+        $idEnchere = $_GET['id_enchere'] ?? null;
+        if (!$idEnchere) {
+            View::redirect('/auctionlist');
+            return;
+        }
+
+        $enchereModel = new Encheres();
+        $auction = $enchereModel->getAuctionById($idEnchere);
+
+        return View::render('bid', [
+            'auction' => $auction
+        ]);
+    }
+
     public function storeBid()
     {
         Auth::session();
