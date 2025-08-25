@@ -1,4 +1,7 @@
 {{ include("layouts/header.php", { title: "Details Enchere - Stampee" }) }}
+{% if success is defined and success %}
+<p class="success">{{ success }}</p>
+{% endif %}
 <section class="auction-card">
   <div class="auction-card_left-section">
     {% if auction.certifie == 1 %}

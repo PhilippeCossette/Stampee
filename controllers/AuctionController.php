@@ -58,10 +58,13 @@ class AuctionController
         $imagesModel = new ImagesTimbre();
         $images = $imagesModel->selectByTimbre($auction['timbre_id']);
 
+        $success = $_SESSION['success'] ?? null;
+        unset($_SESSION['success']); // clear after reading
+
         if (!$auction) {
             return View::render('error', ['message' => 'Impossible de trouver l\'enchère']);
         }
 
-        return View::render('auctionDetails', ['auction' => $auction, 'images' => $images]);
+        return View::render('auctionDetails', ['auction' => $auction, 'images' => $images, 'success' => $success]);
     }
 }
