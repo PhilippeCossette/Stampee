@@ -40,6 +40,8 @@ Route::post('/auctionlist', 'AuctionController@auctionList');
 
 Route::get('/auction', 'AuctionController@showAuction');
 
+Route::get('/auction/bids', 'BidController@showAuctionBids');
+
 Route::get('/bid', 'BidController@showBid');
 Route::post('/bid/store', 'BidController@storeBid');
 
@@ -49,4 +51,6 @@ Route::post('/favorites/remove', 'FavoriteController@removeFavorite');
 
 Route::get('/profile/favorites', 'UserController@profileFavorites');
 Route::get('/profile/myAuctions', 'UserController@profileFavorites');
+Route::get('/profile/myBids', 'BidController@showMyBidLog');
+
 Route::dispatch();

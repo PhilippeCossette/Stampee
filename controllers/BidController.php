@@ -41,6 +41,42 @@ class BidController
         ]);
     }
 
+    public function showMyBidLog()
+    {
+        Auth::session();
+
+        $enchereModel = new Encheres();
+        $enchereModel->updateStatus();
+
+
+
+        $misesModel = new Mises();
+        $mesMises = $misesModel->getMyBidLog($_SESSION['user_id']);
+
+        return View::render('myBidLog', ['mesMises' => $mesMises]);
+    }
+
+    public function showAuctionBids()
+    {
+
+        $idEnchere = $_GET['id'] ?? null;
+        if (!$idEnchere) {
+            View::redirect('auctionlist');
+            return;
+        }
+
+        $enchereModel = new Encheres();
+        $enchereModel->updateStatus();
+
+        $misesModel = new Mises();
+        $bids = $misesModel->getBidLogbyID($idEnchere);
+
+        return View::render('auctionBids', [
+            'bids' => $bids,
+            'enchere_id' => $idEnchere
+        ]);
+    }
+
     public function storeBid()
     {
         Auth::session();

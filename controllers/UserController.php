@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Models\Favoris;
 use App\Models\Utilisateur;
 use App\Models\Encheres;
+use App\Models\Mises;
 use App\Providers\Validator;
 use App\Providers\View;
 use App\Providers\Auth;
@@ -26,7 +27,10 @@ class UserController
         $enchereModel = new Encheres();
         $mesEncheres = $enchereModel->getMyAuction($_SESSION['user_id'], 4);
 
-        return View::render('profile', ['favoris' => $favoris, 'mesEncheres' => $mesEncheres]);
+        $misesModel = new Mises();
+        $mesMises = $misesModel->getMyBidLog($_SESSION['user_id'], 10);
+
+        return View::render('profile', ['favoris' => $favoris, 'mesEncheres' => $mesEncheres, 'mesMises' => $mesMises]);
     }
 
     public function profileFavorites()
