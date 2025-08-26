@@ -121,33 +121,35 @@ class Mises extends CRUD
     {
         $sql = "
         SELECT 
-        e.id AS enchere_id,
-        e.fin,
-        e.status,
-        e.prix_depart,
+            e.id AS enchere_id,
+            e.fin,
+            e.status,
+            e.prix_depart,
 
-        t.id AS timbre_id,
-        t.titre,
+            t.id AS timbre_id,
+            t.titre,
 
-        m.montant,
-        m.date_heure,
-        MAX(m2.montant) AS highest_bid
+            m.montant,
+            m.date_heure,
 
+            h.highest_bid
         FROM encheres e
         INNER JOIN timbres t ON e.id_timbre = t.id
-
-        -- my bids
-        INNER JOIN mises m ON e.id = m.id_enchere AND m.id_utilisateur = :userId
-
-        -- all bids (to get highest)
-        LEFT JOIN mises m2 ON e.id = m2.id_enchere
-
-        GROUP BY e.id, m.id
-        ORDER BY m.date_heure DESC;
+            -- latest bid per auction by this user
+        INNER JOIN mises m 
+        ON e.id = m.id_enchere
+        AND m.id_utilisateur = :userId
+            -- highest bid per auction
+        INNER JOIN (
+            SELECT id_enchere, MAX(montant) AS highest_bid
+            FROM mises
+            GROUP BY id_enchere
+            ) h ON e.id = h.id_enchere
+        ORDER BY m.date_heure DESC
         ";
 
         if ($limit) {
-            $sql .= " LIMIT " . $limit;
+            $sql .= " LIMIT " . (int)$limit;
         }
 
         $stmt = $this->prepare($sql);
