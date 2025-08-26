@@ -158,7 +158,8 @@
           </span>
           {% if comment.utilisateur_id == session.user_id %}
           <form method="POST" action="{{ base }}/comment/delete" onsubmit="return confirm('Voulez-vous vraiment supprimer ce commentaire ?');">
-            <input type="hidden" name="comment_id" value="{{ comment.id }}">
+            <input type="hidden" name="auction_id" value="{{ auction.enchere_id }}">
+            <input type="hidden" name="comment_id" value="{{ comment.commentaire_id }}">
             <button type="submit" class="delete-comment-btn" title="Supprimer">
               <i class="fa-solid fa-trash"></i>
             </button>

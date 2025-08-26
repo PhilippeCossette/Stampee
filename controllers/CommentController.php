@@ -29,4 +29,27 @@ class CommentController
 
         View::redirect("auction?id={$enchereId}");
     }
+
+    public function deleteComment()
+    {
+        $enchereId = $_POST['auction_id'] ?? null;
+        $commentId = $_POST['comment_id'] ?? null;
+        $userId = $_SESSION['user_id'] ?? null;
+
+        if (!$commentId || !$userId) {
+            View::redirect('auctionlist');
+            return;
+        }
+        $commentaireModel = new Commentaire();
+        $comment = $commentaireModel->getCommentById($commentId);
+
+        if (!$comment || $comment['id_utilisateur'] !== $userId) {
+            View::redirect('auctionlist');
+            return;
+        }
+
+        $commentaireModel->deleteComment($commentId);
+
+        View::redirect("auction?id={$enchereId}");
+    }
 }
