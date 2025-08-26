@@ -50,6 +50,7 @@ class Commentaire extends CRUD
         return $stmt->execute();
     }
 
+    // Function to get a comment by its ID
     public function getCommentById($id){
         $sql = "
         SELECT * 
@@ -60,5 +61,15 @@ class Commentaire extends CRUD
         $stmt->bindValue(':id', $id, PDO::PARAM_INT);
         $stmt->execute();
         return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public function deleteComment($id){
+        $sql = "
+        DELETE FROM commentaire 
+        WHERE id = :id
+        ";
+        $stmt = $this->prepare($sql);
+        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+        return $stmt->execute();
     }
 }
