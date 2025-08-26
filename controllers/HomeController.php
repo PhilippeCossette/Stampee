@@ -15,7 +15,7 @@ class HomeController
     {
         $enchereModel = new Encheres();
         $encheres_CP = $enchereModel->getLimitedAuctions(4, 'e.coup_coeur', 1);
-        $encheres = $enchereModel->getLimitedAuctions(4);
+        $encheres = $enchereModel->getLimitedAuctions(4, 'status', 1);
         return View::render('index', [
             'encheres_CP' => $encheres_CP,
             'encheres' => $encheres
