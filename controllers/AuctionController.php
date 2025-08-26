@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Models\Timbres;
 use App\Models\Condition;
+use App\Models\Mises;
 use App\Models\Couleur;
 use App\Models\Pays;
 use App\Models\ImagesTimbre;
@@ -47,6 +48,7 @@ class AuctionController
         $enchereModel = new Encheres();
         $enchereModel->updateStatus();
 
+
         $id = $_GET['id'] ?? null;
         if (!$id) {
             View::redirect('/auctionlist');
@@ -54,6 +56,9 @@ class AuctionController
         }
 
         $auction = $enchereModel->getAuctionById($id);
+
+        $miseModel = new Mises();
+        $EnchereBids = $miseModel->getBidsByAuctionId($id, 5);
 
         $imagesModel = new ImagesTimbre();
         $images = $imagesModel->selectByTimbre($auction['timbre_id']);
@@ -71,6 +76,6 @@ class AuctionController
             return View::render('error', ['message' => 'Impossible de trouver l\'enchère']);
         }
 
-        return View::render('auctionDetails', ['auction' => $auction, 'images' => $images, 'success' => $success]);
+        return View::render('auctionDetails', ['auction' => $auction, 'images' => $images, 'success' => $success, 'bids' => $EnchereBids]);
     }
 }

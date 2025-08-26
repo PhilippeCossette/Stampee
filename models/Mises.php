@@ -159,7 +159,7 @@ class Mises extends CRUD
         return $stmt->fetchAll();
     }
 
-    public function getBidLogbyID($enchere_id)
+    public function getBidLogbyID($enchere_id, $limit = null)
     {
         $sql = "
         SELECT 
@@ -188,6 +188,10 @@ class Mises extends CRUD
         GROUP BY m.id
         ORDER BY m.date_heure DESC
         ";
+
+        if ($limit) {
+            $sql .= " LIMIT " . $limit;
+        }
 
         $stmt = $this->prepare($sql);
         $stmt->bindValue(':enchere_id', $enchere_id, \PDO::PARAM_INT);
