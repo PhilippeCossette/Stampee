@@ -91,7 +91,48 @@
       {% endif %}
     </div>
   </article>
-  <article class="offer-history"></article>
+  <article class="profile-section">
+    <header class="profile-section-header">
+      <h2 class="profile-section-header-title">Mes Mises</h2>
+      <a class="profile-section-header-link" href="{{ base }}/profile/myBids">Voir Tout <i class="fa-solid fa-angle-right"></i></a>
+    </header>
+    {% if mesMises is not empty %}
+    <table>
+      <thead>
+        <tr>
+          <th>Enchère</th>
+          <th>Montant de la mise</th>
+          <th>Date de la mise</th>
+          <th>Statut</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for mise in mesMises %}
+        <tr>
+          <td><a href="{{ base }}/auction?id={{ mise.enchere_id }}">{{ mise.titre }}</a></td>
+          <td>{{ mise.montant }} $</td>
+          <td>{{ mise.date_mise|date("d/m/Y H:i") }}</td>
+          <td>
+            {% if mise.status == 'active' %}
+            <span class="status-indicator active">En cours</span>
+            {% elseif mise.status == 'ended' %}
+            {% if mise.is_highest_bidder %}
+            <span class="status-indicator won">Gagnée</span>
+            {% else %}
+            <span class="status-indicator lost">Perdue</span>
+            {% endif %}
+            {% else %}
+            <span class="status-indicator unknown">Inconnu</span>
+            {% endif %}
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% else %}
+    <p class="empty-message">Aucune mise trouvée.</p>
+    {% endif %}
+  </article>
 </section>
 
 {{ include("layouts/footer.php") }}
