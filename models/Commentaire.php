@@ -28,7 +28,7 @@ class Commentaire extends CRUD
                 ORDER BY c.date_heure ASC
         ";
 
-        $stmt = $this->db->prepare($sql);
+        $stmt = $this->prepare($sql);
         $stmt->bindValue(':enchere_id', $id, \PDO::PARAM_INT);
         $stmt->execute();
 
@@ -42,12 +42,11 @@ class Commentaire extends CRUD
                 VALUES (:contenu,:id_utilisateur, :id_enchere)
                 ";
 
-        $stmt = $this->db->prepare($sql);
+        $stmt = $this->prepare($sql);
         $stmt->bindValue(':contenu', $contenu, \PDO::PARAM_STR);
         $stmt->bindValue(':id_utilisateur', $userId, \PDO::PARAM_INT);
         $stmt->bindValue(':id_enchere', $enchereId, \PDO::PARAM_INT);
 
         return $stmt->execute();
-
     }
 }

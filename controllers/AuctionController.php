@@ -8,6 +8,7 @@ use App\Models\Mises;
 use App\Models\Couleur;
 use App\Models\Pays;
 use App\Models\ImagesTimbre;
+use App\Models\Commentaire;
 use App\Models\Encheres;
 
 use App\Providers\View;
@@ -60,6 +61,9 @@ class AuctionController
         $miseModel = new Mises();
         $EnchereBids = $miseModel->getBidLogbyID($id, 5);
 
+        $commentaireModel = new Commentaire();
+        $comments = $commentaireModel->showCommentaire($id);
+
         $imagesModel = new ImagesTimbre();
         $images = $imagesModel->selectByTimbre($auction['timbre_id']);
 
@@ -76,6 +80,6 @@ class AuctionController
             return View::render('error', ['message' => 'Impossible de trouver l\'enchère']);
         }
 
-        return View::render('auctionDetails', ['auction' => $auction, 'images' => $images, 'success' => $success, 'bids' => $EnchereBids]);
+        return View::render('auctionDetails', ['auction' => $auction, 'images' => $images, 'success' => $success, 'bids' => $EnchereBids, 'comments' => $comments]);
     }
 }
