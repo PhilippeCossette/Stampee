@@ -1,4 +1,4 @@
-{{ include("layouts/header.php", { title: "Page de connexion - Stampee" }) }}
+{{ include("layouts/header.php", { title: "Misez - Stampee" }) }}
 {% if highestBidder %}
 <div class="warning-msg">
     <i class="fa fa-warning"></i>

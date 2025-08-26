@@ -1,4 +1,4 @@
-{{ include("layouts/header.php", { title: "Mes favoris - Stampee" }) }}
+{{ include("layouts/header.php", { title: "Mes mises - Stampee" }) }}
 <section class="max-1200 inlineP-huge">
     <article class="profile-section">
         <header class="profile-section-header">

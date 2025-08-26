@@ -1,4 +1,4 @@
-{{ include("layouts/header.php", { title: "Page du Profile - Stampee" }) }}
+{{ include("layouts/header.php", { title: "Mon Profile - Stampee" }) }}
 
 <section class="profile">
   <header class="profile-header">
