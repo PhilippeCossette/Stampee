@@ -58,9 +58,9 @@ class Commentaire extends CRUD
         WHERE id = :id
         ";
         $stmt = $this->prepare($sql);
-        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+        $stmt->bindValue(':id', $id, \PDO::PARAM_INT);
         $stmt->execute();
-        return $stmt->fetch(PDO::FETCH_ASSOC);
+        return $stmt->fetch(\PDO::FETCH_ASSOC);
     }
 
     public function deleteComment($id){
@@ -69,7 +69,7 @@ class Commentaire extends CRUD
         WHERE id = :id
         ";
         $stmt = $this->prepare($sql);
-        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+        $stmt->bindValue(':id', $id, \PDO::PARAM_INT);
         return $stmt->execute();
     }
 }
