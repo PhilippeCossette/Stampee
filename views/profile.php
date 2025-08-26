@@ -23,7 +23,7 @@
   <article class="profile-section">
     <header class="profile-section-header">
       <h2 class="profile-section-header-title">Mes enchères</h2>
-      <a class="profile-section-header-link" href="{{ base }}/profile/myAuction">Voir Tout <i class="fa-solid fa-angle-right"></i></a>
+      <a class="profile-section-header-link" href="{{ base }}/profile/myAuctions">Voir Tout <i class="fa-solid fa-angle-right"></i></a>
     </header>
     <div class="grid">
       {% if mesEncheres is not empty %}

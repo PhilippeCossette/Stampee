@@ -42,6 +42,19 @@ class UserController
         return View::render('myFavorites', ['favoris' => $favoris]);
     }
 
+    public function profileMyAuctions()
+    {
+        Auth::session(); // Ensure the user is authenticated
+
+        $enchereModel = new Encheres();
+        $enchereModel->updateStatus();
+
+        $enchereModel = new Encheres();
+        $mesEncheres = $enchereModel->getMyAuction($_SESSION['user_id']);
+
+        return View::render('myAuctions', ['mesEncheres' => $mesEncheres]);
+    }
+
     public function updateIndex()
     {
         Auth::session(); // Ensure the user is authenticated    
