@@ -53,7 +53,7 @@
       <a class="button main-button" href="">Voir Tout</a>
     </header>
     <div class="currentAuction grid">
-
+      {% if encheres is not empty %}
       {% for enchere in encheres %}
       <article class="auctionShowcase-card">
         <header class="auctionShowcase-card-header">
@@ -69,6 +69,9 @@
         <button class="button secondary-button" onclick="window.location.href='{{ base }}/auction?id={{ enchere.enchere_id }}'">Plus D'info</button>
       </article>
       {% endfor %}
+      {% else %}
+      <p>Aucune enchère en cours trouvée.</p>
+      {% endif %}
 
     </div>
   </section>
