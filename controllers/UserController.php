@@ -23,7 +23,10 @@ class UserController
         $favorisModel = new Favoris();
         $favoris = $favorisModel->getFavByUserId($_SESSION['user_id'], 4);
 
-        return View::render('profile', ['favoris' => $favoris]);
+        $enchereModel = new Encheres();
+        $mesEncheres = $enchereModel->getMyAuction($_SESSION['user_id'], 4);
+
+        return View::render('profile', ['favoris' => $favoris, 'mesEncheres' => $mesEncheres]);
     }
 
     public function profileFavorites()
