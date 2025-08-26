@@ -7,7 +7,7 @@
   background-color: #fff;
   width: 200px;
   height: 100vh;
-  z-index: 2;
+  z-index: 9;
 }
 
 .nav-mobile-menu.active {
