@@ -58,7 +58,7 @@ class AuctionController
         $auction = $enchereModel->getAuctionById($id);
 
         $miseModel = new Mises();
-        $EnchereBids = $miseModel->getBidsByAuctionId($id, 5);
+        $EnchereBids = $miseModel->getBidLogbyID($id, 5);
 
         $imagesModel = new ImagesTimbre();
         $images = $imagesModel->selectByTimbre($auction['timbre_id']);

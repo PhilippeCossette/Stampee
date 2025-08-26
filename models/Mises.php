@@ -182,7 +182,7 @@ class Mises extends CRUD
         FROM encheres e
         INNER JOIN timbres t ON e.id_timbre = t.id
         INNER JOIN mises m ON e.id = m.id_enchere
-        INNER JOIN utilisateurs u ON m.id_utilisateur = u.id
+        INNER JOIN utilisateur u ON m.id_utilisateur = u.id
         LEFT JOIN mises m2 ON e.id = m2.id_enchere
         WHERE e.id = :enchere_id
         GROUP BY m.id
