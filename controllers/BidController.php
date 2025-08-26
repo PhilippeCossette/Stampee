@@ -41,6 +41,21 @@ class BidController
         ]);
     }
 
+    public function showMyBidLog()
+    {
+        Auth::session();
+
+        $enchereModel = new Encheres();
+        $enchereModel->updateStatus();
+
+
+
+        $misesModel = new Mises();
+        $mesMises = $misesModel->getMyBidLog($_SESSION['user_id']);
+
+        return View::render('myBidLog', ['mesMises' => $mesMises]);
+    }
+
     public function storeBid()
     {
         Auth::session();
