@@ -1,0 +1,21 @@
+.status-indicator {
+  --bg-color: rgb(168, 168, 168);
+
+  background-color: var(--bg-color);
+  display: inline-block;
+  padding: 0.2em 0.5em;
+  border-radius: 0.5em;
+  font-size: 0.9em;
+}
+
+.status-indicator.active {
+  --bg-color: #367ee3;
+}
+
+.status-indicator.won {
+  --bg-color: #198a24;
+}
+
+.status-indicator.lost {
+  --bg-color: #ab1d2b;
+}
