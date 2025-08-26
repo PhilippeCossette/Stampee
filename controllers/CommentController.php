@@ -19,7 +19,10 @@ class CommentController
         $enchereId = $_POST['id_enchere'] ?? null;
         $contenu = trim($_POST['comment'] ?? '');
 
-        if (!$userId || !$enchereId || empty($contenu)) {
+        $validator = new Validator();
+        $validator->field('comment', $contenu, 'Commentaire')->required()->min(2)->max(500);
+
+        if (!$userId || !$enchereId || !$validator->isValid()) {
             View::redirect('auctionlist');
             return;
         }

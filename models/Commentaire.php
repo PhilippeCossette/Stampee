@@ -25,7 +25,7 @@ class Commentaire extends CRUD
                 FROM {$this->table} c
                 INNER JOIN utilisateur u ON c.id_utilisateur = u.id
                 WHERE c.id_enchere = :enchere_id
-                ORDER BY c.date_heure ASC
+                ORDER BY c.date_heure DESC
         ";
 
         $stmt = $this->prepare($sql);
