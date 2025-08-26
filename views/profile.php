@@ -117,7 +117,7 @@
             {% else %}
             <td class="red-text">{{ mise.montant }} $</td>
             {% endif %}
-            <td>{{ mise.date_mise|date("d/m/Y H:i") }}</td>
+            <td>{{ mise.date_heure|date("d/m/Y H:i") }}</td>
             {% if mise.status == 1 %}
             <td><span class="timer" data-fin="{{ mise.fin }}"></span></td>
             {% else %}
