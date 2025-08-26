@@ -116,4 +116,47 @@ class Mises extends CRUD
 
         return $row && $row['id_utilisateur'] == $idUser;
     }
+
+    public function getMyBidLog($idUser, $limit = null)
+    {
+        $sql = "
+        SELECT 
+        e.id AS enchere_id,
+        e.fin,
+        e.status,
+        e.prix_depart,
+
+        t.id AS timbre_id,
+        t.titre,
+
+        m.montant AS my_bid,
+        m.date_heure,
+        MAX(m2.montant) AS highest_bid
+
+        FROM encheres e
+        INNER JOIN timbres t ON e.id_timbre = t.id
+
+        -- my bids
+        INNER JOIN mises m ON e.id = m.id_enchere AND m.id_utilisateur = :userId
+
+        -- all bids (to get highest)
+        LEFT JOIN mises m2 ON e.id = m2.id_enchere
+
+        GROUP BY e.id, m.id
+        ORDER BY m.date_heure DESC;
+        ";
+
+        if ($limit) {
+            $sql .= " LIMIT " . $limit;
+        }
+
+        $stmt = $this->prepare($sql);
+        $stmt->bindValue(':userId', $idUser, \PDO::PARAM_INT);
+        if ($limit) {
+            $stmt->bindValue(':limit', $limit, \PDO::PARAM_INT);
+        }
+        $stmt->execute();
+
+        return $stmt->fetchAll();
+    }
 }
