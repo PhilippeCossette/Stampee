@@ -27,6 +27,6 @@ class CommentController
         $commentaireModel = new Commentaire();
         $commentaireModel->addComment($userId, $enchereId, $contenu);
 
-        View::redirect("/auction?id={$enchereId}");
+        View::redirect("auction?id={$enchereId}");
     }
 }

@@ -48,6 +48,7 @@ Route::post('/bid/store', 'BidController@storeBid');
 Route::post('/favorites/add', 'FavoriteController@addFavorite');
 Route::post('/favorites/remove', 'FavoriteController@removeFavorite');
 
+Route::post('/auction/comment', 'CommentController@createComment');
 
 Route::get('/profile/favorites', 'UserController@profileFavorites');
 Route::get('/profile/myAuctions', 'UserController@profileFavorites');
