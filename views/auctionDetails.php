@@ -157,7 +157,12 @@
             <time class="comments-header-time">{{ comment.date_heure|date("d F Y") }}</time>
           </span>
           {% if comment.utilisateur_id == session.user_id %}
-          <button><i class="fa-solid fa-trash"></i></button>
+          <form method="POST" action="{{ base }}/comment/delete" onsubmit="return confirm('Voulez-vous vraiment supprimer ce commentaire ?');">
+            <input type="hidden" name="comment_id" value="{{ comment.id }}">
+            <button type="submit" class="delete-comment-btn" title="Supprimer">
+              <i class="fa-solid fa-trash"></i>
+            </button>
+          </form>
           {% endif %}
         </header>
         <p class="comments-content">{{ comment.contenu }}</p>
