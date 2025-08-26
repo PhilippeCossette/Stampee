@@ -2,6 +2,7 @@
 <section>
     <header class="profile-section-header">
         <h2 class="profile-section-header-title">Mises récentes</h2>
+        <a class="profile-section-header-link" href="{{ base }}/auction?id={{ enchere_id }}">Retour <i class="fa-solid fa-angle-right"></i></a>
     </header>
     {% if bids is not empty %}
     <div class="table-wrapper">

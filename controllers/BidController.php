@@ -72,7 +72,8 @@ class BidController
         $bids = $misesModel->getBidLogbyID($idEnchere);
 
         return View::render('auctionBids', [
-            'bids' => $bids
+            'bids' => $bids,
+            'enchere_id' => $idEnchere
         ]);
     }
 

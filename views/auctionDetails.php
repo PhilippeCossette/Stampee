@@ -52,7 +52,7 @@
       {% else %}
       <div class="button main-button" onclick="window.location.href='{{ base }}/bid?id_enchere={{ auction.enchere_id }}'">Enchérir</div>
       {% endif %}
-      <div class="button secondary-button">Voir toutes les offres</div>
+      <div class="button secondary-button" onclick="window.location.href='{{ base }}/auction/bids?id={{ auction.enchere_id }}'">Voir toutes les offres</div>
       {% if session.user_id %}
       <button class="fav-btn button {{ auction.isFavori ? 'favorited' : '' }}" data-id="{{ auction.enchere_id }}">
         {{ auction.isFavori ? 'Favori ajouté' : 'Ajouter aux favoris' }}
@@ -74,8 +74,8 @@
 </section>
 <section>
   <header class="profile-section-header">
-      <h2 class="profile-section-header-title">Mises récentes</h2>
-    </header>
+    <h2 class="profile-section-header-title">Mises récentes</h2>
+  </header>
   {% if bids is not empty %}
   <div class="table-wrapper">
     <table>
