@@ -11,7 +11,11 @@
     <img class="auction-card-certified" src="{{asset}}img/certified.png" alt="">
     {% endif %}
     <script>
-      const images = {{(images is defined ? images : []) | json_encode | raw}};
+      const images = {
+        {
+          (images is defined ? images : []) | json_encode | raw
+        }
+      };
     </script>
     <div class="image-slider">
       <picture>
@@ -125,4 +129,51 @@
   <p class="empty-message">Aucune mise trouvée.</p>
   {% endif %}
 </section>
+{% if auction.status == 0 %}
+<section class="comments-section">
+  <header class="profile-section-header">
+    <h2 class="profile-section-header-title">Commentaires ({{ comments|length }})</h2>
+  </header>
+  <form class="comments-form" method="POST" action="{{ base }}/auction/comment">
+    <input type="hidden" name="id_enchere" value="{{ auction.enchere_id }}">
+    <textarea class="form-input" name="comment" id="comment" {% if not session.user_id %} placeholder="Connectez vous pour commenter" {% else %} placeholder="Ajouter un commentaire..." {% endif %} {% if not session.user_id %}disabled{% endif %}></textarea>
+    {% if session.user_id %}
+    <button class="button main-button" type="submit">Envoyer</button>
+    {% else %}
+    <button class="button inactive-button" type="submit" disabled>Envoyer</button>
+    {% endif %}
+  </form>
+  <div class="comments-container">
+
+    {% if comments is not empty %}
+    {% for comment in comments %}
+    {% if comment.utilisateur_id == session.user_id %}
+    <div class="comments current-user">
+      {% else %}
+      <div class="comments">
+        {% endif %}
+        <header class="comments-header">
+          <span>
+            <h3 class="comments-header-title">{{ comment.nom_utilisateur }}</h3>
+            <p class="comments-header-time">{{ comment.date_heure|date("d F Y") }}</p>
+          </span>
+          {% if comment.utilisateur_id == session.user_id %}
+          <form method="POST" action="{{ base }}/comment/delete" onsubmit="return confirm('Voulez-vous vraiment supprimer ce commentaire ?');">
+            <input type="hidden" name="auction_id" value="{{ auction.enchere_id }}">
+            <input type="hidden" name="comment_id" value="{{ comment.commentaire_id }}">
+            <button type="submit" class="delete-comment-btn" title="Supprimer">
+              <i class="fa-solid fa-trash"></i>
+            </button>
+          </form>
+          {% endif %}
+        </header>
+        <p class="comments-content">{{ comment.contenu }}</p>
+      </div>
+      {% endfor %}
+      {% else %}
+      <p class="empty-message">Aucun commentaire pour cette enchère.</p>
+      {% endif %}
+    </div>
+</section>
+{% endif %}
 {{ include("layouts/footer.php") }}
