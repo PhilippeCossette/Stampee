@@ -60,6 +60,7 @@ class Favoris extends CRUD
         LEFT JOIN mises m ON e.id = m.id_enchere
         WHERE f.id_utilisateur = :userId
         GROUP BY e.id
+        ORDER BY e.fin DESC
     ";
         if ($limit) {
             $sql .= " LIMIT :limit";
