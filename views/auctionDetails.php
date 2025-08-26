@@ -53,9 +53,15 @@
       <div class="button main-button" onclick="window.location.href='{{ base }}/bid?id_enchere={{ auction.enchere_id }}'">Enchérir</div>
       {% endif %}
       <div class="button secondary-button">Voir toutes les offres</div>
+      {% if session.user_id %}
       <button class="fav-btn button {{ auction.isFavori ? 'favorited' : '' }}" data-id="{{ auction.enchere_id }}">
         {{ auction.isFavori ? 'Favori ajouté' : 'Ajouter aux favoris' }}
       </button>
+      {% else %}
+      <button class="fav-btn button {{ auction.isFavori ? 'favorited' : '' }}"  onclick="window.location.href='{{ base }}/login'">
+        {{ auction.isFavori ? 'Favori ajouté' : 'Ajouter aux favoris' }}
+      </button>
+      {% endif %}
       <p class="auction-card_action-info">
         {% if auction.favoris_count > 1 %}
         {{ auction.favoris_count }} personnes suivent cette enchère.

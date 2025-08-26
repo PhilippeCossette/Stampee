@@ -23,14 +23,17 @@ class FavoriteController
         $idEnchere = $data['id_enchere'] ?? null;
 
         if (!$idEnchere) {
+            header('Content-Type: application/json');
             echo json_encode(['success' => false, 'message' => 'ID enchère manquant']);
-            return;
+            exit; // <- prevents Twig/layout from rendering
         }
 
         $favoris = new Favoris();
         $success = $favoris->addFavorite($userId, $idEnchere);
 
-        echo json_encode(['success' => $success]);
+        header('Content-Type: application/json');
+        echo json_encode(['success' => true]);
+        exit; // prevent any further output
     }
 
     public function removeFavorite()
@@ -43,14 +46,16 @@ class FavoriteController
         $idEnchere = $data['id_enchere'] ?? null;
 
         if (!$idEnchere) {
+            header('Content-Type: application/json');
             echo json_encode(['success' => false, 'message' => 'ID enchère manquant']);
-            return;
+            exit; // <- prevents Twig/layout from rendering
         }
 
         $favoris = new Favoris();
         $success = $favoris->removeFavorite($userId, $idEnchere);
 
-        echo json_encode(['success' => $success]);
+        header('Content-Type: application/json');
+        echo json_encode(['success' => true]);
+        exit; // prevent any further output
     }
-
 }

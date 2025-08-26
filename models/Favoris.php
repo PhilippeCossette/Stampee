@@ -26,7 +26,7 @@ class Favoris extends CRUD
     public function addFavorite($idUser, $idEnchere)
     {
         $sql = "
-        INSERT INTO {$this->table} (id_utilisateur, id_enchere)
+        INSERT IGNORE INTO {$this->table} (id_utilisateur, id_enchere)
         VALUES (:id_utilisateur, :id_enchere)
         ";
         $stmt = $this->prepare($sql);
