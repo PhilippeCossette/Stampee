@@ -1,0 +1,82 @@
+.comments-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.comments-container {
+  display: grid;
+  gap: 1em;
+  grid-template-columns: 1fr; /* 1 fraction + 2 fraction, flexible */
+}
+
+.comments-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.comments-form button {
+  align-self: flex-end;
+}
+
+#comment {
+  resize: none;
+  font-size: 16px;
+  min-height: 100px;
+}
+
+.comments {
+  border-bottom: 1px solid var(--light-grey-accent);
+  padding: 1em;
+  width: 50%;
+  background-color: var(--light-grey-accent);
+  border-radius: 0.5em;
+}
+
+.comments.current-user {
+  justify-self: end;
+  background-color: var(--light-blue);
+}
+
+.comments-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.comments-header-title {
+  font-family: inter;
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+.comments-header-time {
+  font-family: inter;
+  font-size: 0.75em;
+  color: rgb(0, 0, 0);
+}
+
+.comments-header span {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  gap: 0.5em;
+}
+
+.delete-comment-btn {
+  cursor: pointer;
+  transition: all 2ms ease-in-out;
+}
+
+.delete-comment-btn:hover {
+  color: black;
+  scale: 1.05;
+}
+
+@media screen and (max-width: 450px) {
+  .comments {
+    width: 80%;
+  }
+}

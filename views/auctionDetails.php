@@ -134,16 +134,17 @@
   <header class="profile-section-header">
     <h2 class="profile-section-header-title">Commentaires ({{ comments|length }})</h2>
   </header>
+  <form class="comments-form" method="POST" action="{{ base }}/auction/comment">
+    <input type="hidden" name="id_enchere" value="{{ auction.enchere_id }}">
+    <textarea class="form-input" name="comment" id="comment" {% if not session.user_id %} placeholder="Connectez vous pour commenter" {% else %} placeholder="Ajouter un commentaire..." {% endif %} {% if not session.user_id %}disabled{% endif %}></textarea>
+    {% if session.user_id %}
+    <button class="button main-button" type="submit">Envoyer</button>
+    {% else %}
+    <button class="button inactive-button" type="submit" disabled>Envoyer</button>
+    {% endif %}
+  </form>
   <div class="comments-container">
-    <form method="POST" action="{{ base }}/auction/comment">
-      <input type="hidden" name="id_enchere" value="{{ auction.enchere_id }}">
-      <textarea name="comment" id="comment" {% if not session.user_id %} placeholder="Connectez vous pour commenter" {% else %} placeholder="Ajouter un commentaire..." {% endif %} {% if not session.user_id %}disabled{% endif %}></textarea>
-      {% if session.user_id %}
-      <button class="button main-button" type="submit">Envoyer</button>
-      {% else %}
-      <button class="button inactive-button" type="submit" disabled>Envoyer</button>
-      {% endif %}
-    </form>
+
     {% if comments is not empty %}
     {% for comment in comments %}
     {% if comment.utilisateur_id == session.user_id %}
@@ -154,7 +155,7 @@
         <header class="comments-header">
           <span>
             <h3 class="comments-header-title">{{ comment.nom_utilisateur }}</h3>
-            <time class="comments-header-time">{{ comment.date_heure|date("d F Y") }}</time>
+            <p class="comments-header-time">{{ comment.date_heure|date("d F Y") }}</p>
           </span>
           {% if comment.utilisateur_id == session.user_id %}
           <form method="POST" action="{{ base }}/comment/delete" onsubmit="return confirm('Voulez-vous vraiment supprimer ce commentaire ?');">
