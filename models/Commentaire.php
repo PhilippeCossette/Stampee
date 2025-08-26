@@ -34,4 +34,20 @@ class Commentaire extends CRUD
 
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
+
+    public function addComment($userId, $enchereId, $contenu)
+    {
+        $sql = "
+                INSERT INTO {$this->table} (contenu, id_utilisateur, id_enchere) 
+                VALUES (:contenu,:id_utilisateur, :id_enchere)
+                ";
+
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindValue(':contenu', $contenu, \PDO::PARAM_STR);
+        $stmt->bindValue(':id_utilisateur', $userId, \PDO::PARAM_INT);
+        $stmt->bindValue(':id_enchere', $enchereId, \PDO::PARAM_INT);
+
+        return $stmt->execute();
+
+    }
 }
