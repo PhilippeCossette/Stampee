@@ -152,9 +152,6 @@ class Mises extends CRUD
 
         $stmt = $this->prepare($sql);
         $stmt->bindValue(':userId', $idUser, \PDO::PARAM_INT);
-        if ($limit) {
-            $stmt->bindValue(':limit', $limit, \PDO::PARAM_INT);
-        }
         $stmt->execute();
 
         return $stmt->fetchAll();

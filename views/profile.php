@@ -113,9 +113,9 @@
           <td>{{ mise.montant }} $</td>
           <td>{{ mise.date_mise|date("d/m/Y H:i") }}</td>
           <td>
-            {% if mise.status == 'active' %}
+            {% if mise.status == 1 %}
             <span class="status-indicator active">En cours</span>
-            {% elseif mise.status == 'ended' %}
+            {% elseif mise.status == 2 %}
             {% if mise.is_highest_bidder %}
             <span class="status-indicator won">Gagnée</span>
             {% else %}

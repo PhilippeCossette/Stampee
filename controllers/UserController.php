@@ -27,8 +27,8 @@ class UserController
         $enchereModel = new Encheres();
         $mesEncheres = $enchereModel->getMyAuction($_SESSION['user_id'], 4);
 
-        $misesModel = new Mises();  
-        $mesMises = $misesModel->getMyBids($_SESSION['user_id'], 10);
+        $misesModel = new Mises();
+        $mesMises = $misesModel->getMyBidLog($_SESSION['user_id'], 10);
 
         return View::render('profile', ['favoris' => $favoris, 'mesEncheres' => $mesEncheres, 'mesMises' => $mesMises]);
     }

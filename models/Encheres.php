@@ -42,10 +42,9 @@ class Encheres extends CRUD
             $sql .= " WHERE $conditionColumn = :conditionValue";
         }
 
-        $sql .= " ORDER BY RAND() LIMIT :limit";
+        $sql .= " ORDER BY RAND() LIMIT " . $limit;
 
         $stmt = $this->prepare($sql);
-        $stmt->bindValue(':limit', (int)$limit, \PDO::PARAM_INT);
         if ($conditionColumn && $conditionValue) {
             $stmt->bindValue(':conditionValue', $conditionValue);
         }
@@ -286,13 +285,10 @@ class Encheres extends CRUD
         ";
 
         if ($limit) {
-            $sql .= " LIMIT :limit";
+            $sql .= " LIMIT " . $limit;
         }
         $stmt = $this->prepare($sql);
         $stmt->bindValue(':idUser', $idUser, \PDO::PARAM_INT);
-        if ($limit) {
-            $stmt->bindValue(':limit', $limit, \PDO::PARAM_INT);
-        }
         $stmt->execute();
         return $stmt->fetchAll();
     }

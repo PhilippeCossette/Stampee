@@ -63,14 +63,11 @@ class Favoris extends CRUD
         ORDER BY e.fin DESC
     ";
         if ($limit) {
-            $sql .= " LIMIT :limit";
+            $sql .= " LIMIT " . $limit;
         }
 
         $stmt = $this->prepare($sql);
         $stmt->bindValue(':userId', $userId, \PDO::PARAM_INT);
-        if ($limit) {
-            $stmt->bindValue(':limit', $limit, \PDO::PARAM_INT);
-        }
         $stmt->execute();
         return $stmt->fetchAll();
     }
