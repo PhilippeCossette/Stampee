@@ -129,7 +129,7 @@ class Mises extends CRUD
         t.id AS timbre_id,
         t.titre,
 
-        m.montant AS my_bid,
+        m.montant,
         m.date_heure,
         MAX(m2.montant) AS highest_bid
 
