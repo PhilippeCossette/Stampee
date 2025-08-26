@@ -21,7 +21,11 @@
                     {% for mise in mesMises %}
                     <tr>
                         <td><a href="{{ base }}/auction?id={{ mise.enchere_id }}">{{ mise.titre }}<i class="fa-solid fa-angle-right"></i></a></td>
-                        <td>{{ mise.montant }} $</td>
+                        {% if mise.montant >= mise.highest_bid %}
+                        <td class="green-text">{{ mise.montant }} $</td>
+                        {% else %}
+                        <td class="red-text">{{ mise.montant }} $</td>
+                        {% endif %}
                         <td>{{ mise.date_mise|date("d/m/Y H:i") }}</td>
                         {% if mise.status == 1 %}
                         <td><span class="timer" data-fin="{{ mise.fin }}"></span></td>

@@ -43,7 +43,11 @@ img {
 }
 
 .red-text {
-  color: red;
+  color: rgb(202, 25, 25);
+}
+
+.green-text {
+  color: rgb(27, 147, 27);
 }
 
 .max-1200 {
