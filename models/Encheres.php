@@ -257,4 +257,43 @@ class Encheres extends CRUD
 
         return $result['COUNT(*)'] > 0;
     }
+
+    public function getMyAuction($idUser, $limit = null)
+    {
+        $sql = "
+        SELECT 
+            e.id AS enchere_id,
+            e.fin,
+            e.coup_coeur,
+            e.prix_depart,
+            e.status,
+
+            t.id AS timbre_id,
+            t.titre,
+            t.certifie,
+            
+
+            i.url_image AS image_principale,
+            COALESCE(MAX(m.montant), e.prix_depart) AS prix_actuel
+
+        FROM {$this->table} e
+        INNER JOIN timbres t ON e.id_timbre = t.id
+        LEFT JOIN images_timbre i ON t.id = i.id_timbre AND i.principale = 1
+        LEFT JOIN mises m ON e.id = m.id_enchere
+        WHERE t.id_proprietaire = :idUser
+        GROUP BY e.id
+        ORDER BY e.fin DESC
+        ";
+
+        if ($limit) {
+            $sql .= " LIMIT :limit";
+        }
+        $stmt = $this->prepare($sql);
+        $stmt->bindValue(':idUser', $idUser, \PDO::PARAM_INT);
+        if ($limit) {
+            $stmt->bindValue(':limit', $limit, \PDO::PARAM_INT);
+        }
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
 }

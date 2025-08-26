@@ -48,5 +48,5 @@ Route::post('/favorites/remove', 'FavoriteController@removeFavorite');
 
 
 Route::get('/profile/favorites', 'UserController@profileFavorites');
-
+Route::get('/profile/myAuctions', 'UserController@profileFavorites');
 Route::dispatch();

@@ -23,7 +23,10 @@ class UserController
         $favorisModel = new Favoris();
         $favoris = $favorisModel->getFavByUserId($_SESSION['user_id'], 4);
 
-        return View::render('profile', ['favoris' => $favoris]);
+        $enchereModel = new Encheres();
+        $mesEncheres = $enchereModel->getMyAuction($_SESSION['user_id'], 4);
+
+        return View::render('profile', ['favoris' => $favoris, 'mesEncheres' => $mesEncheres]);
     }
 
     public function profileFavorites()
@@ -37,6 +40,19 @@ class UserController
         $favoris = $favorisModel->getFavByUserId($_SESSION['user_id']);
 
         return View::render('myFavorites', ['favoris' => $favoris]);
+    }
+
+    public function profileMyAuctions()
+    {
+        Auth::session(); // Ensure the user is authenticated
+
+        $enchereModel = new Encheres();
+        $enchereModel->updateStatus();
+
+        $enchereModel = new Encheres();
+        $mesEncheres = $enchereModel->getMyAuction($_SESSION['user_id']);
+
+        return View::render('myAuctions', ['mesEncheres' => $mesEncheres]);
     }
 
     public function updateIndex()
