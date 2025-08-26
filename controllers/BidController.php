@@ -56,6 +56,26 @@ class BidController
         return View::render('myBidLog', ['mesMises' => $mesMises]);
     }
 
+    public function showAuctionBids()
+    {
+
+        $idEnchere = $_GET['id'] ?? null;
+        if (!$idEnchere) {
+            View::redirect('auctionlist');
+            return;
+        }
+
+        $enchereModel = new Encheres();
+        $enchereModel->updateStatus();
+
+        $misesModel = new Mises();
+        $bids = $misesModel->getBidLogbyID($idEnchere);
+
+        return View::render('auctionBids', [
+            'bids' => $bids
+        ]);
+    }
+
     public function storeBid()
     {
         Auth::session();
