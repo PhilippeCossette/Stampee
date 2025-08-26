@@ -280,7 +280,7 @@ class Encheres extends CRUD
         INNER JOIN timbres t ON e.id_timbre = t.id
         LEFT JOIN images_timbre i ON t.id = i.id_timbre AND i.principale = 1
         LEFT JOIN mises m ON e.id = m.id_enchere
-        WHERE t.id_proprietaire = :userId
+        WHERE t.id_proprietaire = :idUser
         GROUP BY e.id
         ORDER BY e.fin DESC
         ";
@@ -289,7 +289,7 @@ class Encheres extends CRUD
             $sql .= " LIMIT :limit";
         }
         $stmt = $this->prepare($sql);
-        $stmt->bindValue(':userId', $userId, \PDO::PARAM_INT);
+        $stmt->bindValue(':idUser', $idUser, \PDO::PARAM_INT);
         if ($limit) {
             $stmt->bindValue(':limit', $limit, \PDO::PARAM_INT);
         }
