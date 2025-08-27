@@ -321,4 +321,33 @@ class StampController
         $_SESSION['success'] = 'Timbre mis à jour avec succès !';
         return View::redirect('profile');
     }
+
+    public function deleteImage()
+    {
+        Auth::session();
+        $imageId = $_POST['image_id'] ?? null;
+        if (!$imageId) {
+            echo json_encode(['success' => false, 'message' => 'ID manquant']);
+            return;
+        }
+
+        $imageModel = new ImagesTimbre();
+        $image = $imageModel->selectbyId($imageId);
+        if (!$image) {
+            echo json_encode(['success' => false, 'message' => 'Image non trouvée']);
+            return;
+        }
+
+        // Delete image file
+        $targetDir = __DIR__ . '/../public/uploads/';
+        @unlink($targetDir . $image['url_image']);
+
+        // Delete image from database
+        $deleted = $imageModel->delete($imageId);
+        if ($deleted) {
+            echo json_encode(['success' => true]);
+        } else {
+            echo json_encode(['success' => false, 'message' => 'Suppression impossible']);
+        }
+    }
 }

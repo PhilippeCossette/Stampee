@@ -5,14 +5,20 @@ import { filterMenu } from "./script/filter-menu.js";
 import { imageSlider } from "./script/image-slider.js";
 import { initFavorites } from "./script/favorite.js";
 import { initZoomImages } from "./script/zoom-img.js";
+import { deleteImg } from "./script/delete-img.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   if (document.getElementById("delete-btn")) {
     initConfirm("delete-btn", "/Stampee/user/delete");
   }
-  initNav();
+
+  deleteImg();
   filterMenu();
   initFavorites();
+
+  if (document.querySelectorAll(".delete-button")) {
+    deleteImg();
+  }
 
   if (document.querySelector("[data-zoom='true']")) {
     initZoomImages();
