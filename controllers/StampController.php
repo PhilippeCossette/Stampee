@@ -231,6 +231,10 @@ class StampController
                 ->maxDimensionsFile(2000, 2000);
         }
 
+        $imageModel = new ImagesTimbre();
+        $currentImgCount = $imageModel->countByTimbre($timbre_id);
+        $newImgCount = $imageModel->countFiles($files['images'] ?? []);
+
         // Validate additional images
         if (isset($files['images'])) {
             foreach ($files['images']['name'] as $i => $name) {

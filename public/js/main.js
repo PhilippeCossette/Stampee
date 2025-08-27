@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
     initZoomImages();
   }
 
-  if (document.querySelectorAll(".delete-button")) {
+  if (document.querySelectorAll(".delete-button").length > 0) {
     deleteImg();
   }
 

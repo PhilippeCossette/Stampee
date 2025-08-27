@@ -162,6 +162,13 @@ class Validator
         return $this;
     }
 
+    public function maxValue($max){
+        if (!empty($this->value) && is_numeric($this->value) && $this->value > $max) {
+            $this->errors[$this->key] = "$this->name ne peut pas dépasser $max.";
+        }
+        return $this;
+    }
+
 
 
 

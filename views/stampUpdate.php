@@ -1,5 +1,4 @@
 {{ include("layouts/header.php", { title: "Modifier Timbre - Stampee" }) }}
-
 <div class="wrapper-centered margin-block">
     <form class="form" action="{{ base }}/stamp/update?id={{ timbre.id }}" method="post" enctype="multipart/form-data">
         <header class="form-header">
@@ -162,5 +161,4 @@
         <button class="button main-button" type="submit">Mettre à jour le timbre</button>
     </form>
 </div>
-
 {{ include("layouts/footer.php") }}
