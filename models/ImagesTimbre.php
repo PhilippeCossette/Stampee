@@ -36,13 +36,4 @@ class ImagesTimbre extends CRUD
         $stmt->execute();
         return $stmt->fetchAll();
     }
-
-    public function selectById($id)
-    {
-        $sql = "SELECT * FROM {$this->table} WHERE id = :id";
-        $stmt = $this->prepare($sql);
-        $stmt->bindValue(':id', $id);
-        $stmt->execute();
-        return $stmt->fetch();
-    }
 }
