@@ -8,7 +8,7 @@
     <h1 class="banner-title">
       Des enchères de timbres sans effort, en un clin d'œil !
     </h1>
-    <button class="button main-button">Parcourir Enchere</button>
+    <a href="{{ base }}/auctionlist" class="button main-button">Parcourir Enchere</a>
   </section>
   <section>
     <h2>Notre Mission</h2>
@@ -25,7 +25,7 @@
   <section class="auctionShowcase max-1200">
     <header class="header-secondary">
       <h2 class="header-secondary-title">Coups de Coeur</h2>
-      <a class="button main-button" href="">Voir Tout</a>
+      <a class="button main-button" href="{{base}}/auctionlist?status=&coup_coeur=1">Voir Tout</a>
     </header>
     <div class="popularAuction grid">
 
@@ -50,7 +50,7 @@
   <section class="auctionShowcase max-1200">
     <header class="header-secondary">
       <h2 class="header-secondary-title">Enchères en Cours</h2>
-      <a class="button main-button" href="">Voir Tout</a>
+      <a class="button main-button" href="{{ base }}/auctionlist?status=1">Voir Tout</a>
     </header>
     <div class="currentAuction grid">
       {% if encheres is not empty %}

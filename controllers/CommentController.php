@@ -22,7 +22,7 @@ class CommentController
         $validator = new Validator();
         $validator->field('comment', $contenu, 'Commentaire')->required()->min(2)->max(500);
 
-        if (!$userId || !$enchereId || !$validator->isValid()) {
+        if (!$userId || !$enchereId || !$validator->isSuccess()) {
             View::redirect('auctionlist');
             return;
         }
