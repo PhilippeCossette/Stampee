@@ -135,7 +135,9 @@ class Validator
     public function allowedTypesFile(array $types)
     {
         if (!in_array($this->currentValue['type'], $types)) {
-            $this->errors[$this->currentField] = "Type de fichier non autorisé. Seuls : " . implode(', ', $types);
+            if (!isset($this->errors[$this->currentField])) {
+                $this->errors[$this->currentField] = "Type de fichier non autorisé. Seuls : " . implode(', ', $types);
+            }
         }
         return $this;
     }
@@ -144,10 +146,14 @@ class Validator
     {
         $info = getimagesize($this->currentValue['tmp_name']);
         if ($info === false) {
-            $this->errors[$this->currentField] = "Le fichier n'est pas une image valide.";
+            if (!isset($this->errors[$this->currentField])) {
+                $this->errors[$this->currentField] = "Le fichier n'est pas une image valide.";
+            }
         } else {
             if ($info[0] > $maxWidth || $info[1] > $maxHeight) {
-                $this->errors[$this->currentField] = "Image trop grande. Max {$maxWidth}x{$maxHeight}px.";
+                if (!isset($this->errors[$this->currentField])) {
+                    $this->errors[$this->currentField] = "Image trop grande. Max {$maxWidth}x{$maxHeight}px.";
+                }
             }
         }
         return $this;
@@ -162,7 +168,8 @@ class Validator
         return $this;
     }
 
-    public function maxValue($max){
+    public function maxValue($max)
+    {
         if (!empty($this->value) && is_numeric($this->value) && $this->value > $max) {
             $this->errors[$this->key] = "$this->name ne peut pas dépasser $max.";
         }

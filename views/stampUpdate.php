@@ -132,7 +132,7 @@
             {% endfor %}
             <label for="image_principale">Remplacez l'image principale :</label>
             <input type="file" id="image_principale" name="image_principale" accept="image/*">
-            {% if errors.image_principale is not defined %}
+            {% if errors.image_principale is defined %}
             <span class="error">{{ errors.image_principale }}</span>
             {% endif %}
         </div>
@@ -140,6 +140,9 @@
         <div>
             <label for="images">Ajoutez d'Autres images :</label>
             <input type="file" id="images" name="images[]" multiple accept="image/*">
+            {% if errors.images is defined %}
+            <span class="error">{{ errors.images }}</span>
+            {% endif %}
             {% for key, error in errors %}
             {% if key starts with 'images[' %}
             <span class="error">{{ error }}</span>

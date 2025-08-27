@@ -41,9 +41,9 @@ class ImagesTimbre extends CRUD
     {
         $sql = "SELECT COUNT(*) as total FROM images_timbre WHERE id_timbre = :timbreId";
         $stmt = $this->prepare($sql);
-        $stmt->bindValue(':timbreId', $timbreId, PDO::PARAM_INT);
+        $stmt->bindValue(':timbreId', $timbreId, \PDO::PARAM_INT);
         $stmt->execute();
-        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        $row = $stmt->fetch(\PDO::FETCH_ASSOC);
 
         return (int) $row['total'];
     }
