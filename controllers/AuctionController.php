@@ -19,9 +19,11 @@ class AuctionController
 {
     public function auctionList()
     {
+        // Update auction status to archive or active
         $enchereModel = new Encheres();
         $enchereModel->updateStatus();
 
+        //data from _GET
         $filters = [
             'color' => $_GET['color'] ?? null,
             'condition' => $_GET['condition'] ?? null,
@@ -30,7 +32,7 @@ class AuctionController
             'search' => $_GET['search'] ?? null,
             'pays' => $_GET['pays'] ?? null,
             'coup_coeur' => isset($_GET['coup_coeur']) ? 1 : null,
-            'status' => $_GET['status'] ?? 1 // par défaut, on montre que les actives
+            'status' => $_GET['status'] ?? 1 // Show active by default
         ];
 
 
@@ -46,11 +48,14 @@ class AuctionController
 
     public function showAuction()
     {
+        // Update auction status to archive or active
         $enchereModel = new Encheres();
         $enchereModel->updateStatus();
 
 
+        //Grab id from _Get
         $id = $_GET['id'] ?? null;
+        //Check if id is valid  
         if (!$id) {
             View::redirect('/auctionlist');
             return;
@@ -67,10 +72,12 @@ class AuctionController
         $imagesModel = new ImagesTimbre();
         $images = $imagesModel->selectByTimbre($auction['timbre_id']);
 
+        //Display message if exists
         $success = $_SESSION['success'] ?? null;
         $errors = $_SESSION['errors'] ?? null;
+        // Clear session messages
         unset($_SESSION['errors']);
-        unset($_SESSION['success']); // clear after reading
+        unset($_SESSION['success']);
 
         // Check if auction is already favorite for current user
         if (isset($_SESSION['user_id'])) {

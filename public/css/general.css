@@ -58,3 +58,8 @@ img {
 .inlineP-huge {
   padding-inline: var(--huge-spacing);
 }
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}

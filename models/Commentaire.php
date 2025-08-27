@@ -10,6 +10,7 @@ class Commentaire extends CRUD
     protected $primaryKey = 'id';
     protected $fillable = ['contenu', 'date_heure', 'id_utilisateur', 'id_enchere'];
 
+    // Function to show comments for a specific auction
     public function showCommentaire($id)
     {
         $sql = "
@@ -29,12 +30,13 @@ class Commentaire extends CRUD
         ";
 
         $stmt = $this->prepare($sql);
-        $stmt->bindValue(':enchere_id', $id, \PDO::PARAM_INT);
+        $stmt->bindValue(':enchere_id', $id, \PDO::PARAM_INT); // Send value in integer format safer
         $stmt->execute();
 
-        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC); // Fetch all comments in an associative array
     }
 
+    // Function to add a comment   
     public function addComment($userId, $enchereId, $contenu)
     {
         $sql = "
@@ -43,9 +45,9 @@ class Commentaire extends CRUD
                 ";
 
         $stmt = $this->prepare($sql);
-        $stmt->bindValue(':contenu', $contenu, \PDO::PARAM_STR);
-        $stmt->bindValue(':id_utilisateur', $userId, \PDO::PARAM_INT);
-        $stmt->bindValue(':id_enchere', $enchereId, \PDO::PARAM_INT);
+        $stmt->bindValue(':contenu', $contenu, \PDO::PARAM_STR); // Bind content parameter tells that it's a string
+        $stmt->bindValue(':id_utilisateur', $userId, \PDO::PARAM_INT); // Bind user ID parameter tells that it's an integer
+        $stmt->bindValue(':id_enchere', $enchereId, \PDO::PARAM_INT); // Bind auction ID parameter tells that it's an integer
 
         return $stmt->execute();
     }
@@ -54,22 +56,22 @@ class Commentaire extends CRUD
     public function getCommentById($id){
         $sql = "
         SELECT * 
-        FROM commentaire 
+        FROM {$this->table} 
         WHERE id = :id
         ";
         $stmt = $this->prepare($sql);
-        $stmt->bindValue(':id', $id, \PDO::PARAM_INT);
+        $stmt->bindValue(':id', $id, \PDO::PARAM_INT); // Bind comment ID parameter tells that it's an integer
         $stmt->execute();
-        return $stmt->fetch(\PDO::FETCH_ASSOC);
+        return $stmt->fetch(\PDO::FETCH_ASSOC); // Fetch the comment in an associative array
     }
 
     public function deleteComment($id){
         $sql = "
-        DELETE FROM commentaire 
+        DELETE FROM {$this->table} 
         WHERE id = :id
         ";
         $stmt = $this->prepare($sql);
-        $stmt->bindValue(':id', $id, \PDO::PARAM_INT);
+        $stmt->bindValue(':id', $id, \PDO::PARAM_INT); // Bind comment ID parameter tells that it's an integer
         return $stmt->execute();
     }
 }

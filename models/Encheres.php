@@ -11,6 +11,7 @@ class Encheres extends CRUD
     protected $primaryKey = 'id';
     protected $fillable = ['id_timbre', 'prix_depart'];
 
+    // Get limited auctions
     public function getLimitedAuctions($limit, $conditionColumn = null, $conditionValue = null)
     {
         $sql = "
@@ -33,7 +34,7 @@ class Encheres extends CRUD
 
                 i.url_image
 
-            FROM $this->table e
+            FROM {$this->table} e
             INNER JOIN timbres t ON e.id_timbre = t.id
             LEFT JOIN images_timbre i ON t.id = i.id_timbre AND i.principale = 1
         ";
@@ -52,6 +53,7 @@ class Encheres extends CRUD
         return $stmt->fetchAll();
     }
 
+    // Get auctions with filters
     public function getAuctionsWithFilters($filters = [])
     {
         $sql = "
@@ -79,7 +81,7 @@ class Encheres extends CRUD
                 i.url_image AS image_principale,
                 COALESCE(MAX(m.montant), e.prix_depart) AS prix_actuel
 
-            FROM $this->table e
+            FROM {$this->table} e
             INNER JOIN timbres t ON e.id_timbre = t.id
             LEFT JOIN images_timbre i ON t.id = i.id_timbre AND i.principale = 1
             LEFT JOIN pays p ON t.id_pays = p.id_pays
@@ -92,42 +94,49 @@ class Encheres extends CRUD
         $params = [];
 
         // Filters
+        // Colors
         if (!empty($filters['color'])) {
             $sql .= " AND t.id_couleur = :color";
             $params['color'] = $filters['color'];
         }
 
+        // Countries
         if (!empty($filters['pays'])) {
             $sql .= " AND t.id_pays = :pays";
             $params['pays'] = $filters['pays'];
         }
 
+        // Conditions
         if (!empty($filters['condition'])) {
             $sql .= " AND t.id_condition = :condition";
             $params['condition'] = $filters['condition'];
         }
 
+        // Status
         if (isset($filters['status']) && $filters['status'] !== '') {
             $sql .= " AND e.status = :status";
             $params['status'] = $filters['status'];
         }
 
-
+        // Years
         if (!empty($filters['year'])) {
             $sql .= " AND t.annee = :year";
             $params['year'] = $filters['year'];
         }
 
+        // Certified
         if (!empty($filters['certified'])) {
             $sql .= " AND t.certifie = :certified";
             $params['certified'] = $filters['certified'];
         }
 
+        // Favorite of the Lord
         if (!empty($filters['coup_coeur'])) {
             $sql .= " AND e.coup_coeur = :coup_coeur";
             $params['coup_coeur'] = $filters['coup_coeur'];
         }
 
+        // Search   
         if (!empty($filters['search'])) {
             $sql .= " AND t.titre LIKE :search";
             $params['search'] = '%' . $filters['search'] . '%';
@@ -140,6 +149,7 @@ class Encheres extends CRUD
         return $stmt->fetchAll();
     }
 
+    // Get filter options
     public function getFilterOptions()
     {
         // Colors
@@ -150,7 +160,7 @@ class Encheres extends CRUD
             ORDER BY c.couleur ASC
         ");
         $stmt->execute();
-        $colors = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+        $colors = $stmt->fetchAll(\PDO::FETCH_ASSOC); // Fetch all colors
 
         // Pays
         $stmt = $this->prepare("
@@ -160,7 +170,7 @@ class Encheres extends CRUD
             ORDER BY p.pays ASC
         ");
         $stmt->execute();
-        $pays = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+        $pays = $stmt->fetchAll(\PDO::FETCH_ASSOC); // Fetch all countries
 
         // Conditions
         $stmt = $this->prepare("
@@ -170,10 +180,14 @@ class Encheres extends CRUD
             ORDER BY co.condition ASC
         ");
         $stmt->execute();
-        $conditions = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+        $conditions = $stmt->fetchAll(\PDO::FETCH_ASSOC); // Fetch all conditions
 
         // Years
-        $stmt = $this->prepare("SELECT DISTINCT annee FROM timbres ORDER BY annee DESC");
+        $stmt = $this->prepare("
+        SELECT DISTINCT annee 
+        FROM timbres 
+        ORDER BY annee DESC
+        ");
         $stmt->execute();
         $years = $stmt->fetchAll(\PDO::FETCH_COLUMN); // Gives [2024, 2025, 2055] instead of [['annee'=>2024],['annee'=>2025],['annee'=>2055]]
 
@@ -186,6 +200,7 @@ class Encheres extends CRUD
         ];
     }
 
+    // Update auction status
     public function updateStatus()
     {
         $sql = "UPDATE $this->table
@@ -195,6 +210,7 @@ class Encheres extends CRUD
         $stmt->execute();
     }
 
+    // Get auction by ID
     public function getAuctionById($id)
     {
         $sql = "
@@ -221,8 +237,8 @@ class Encheres extends CRUD
 
             COALESCE(MAX(m.montant), e.prix_depart) AS prix_actuel,
             COUNT(DISTINCT f.id_utilisateur) AS favoris_count -- Nombre unique de personnes ayant mis en favoris
-            
-        FROM $this->table e
+
+        FROM {$this->table} e
         INNER JOIN timbres t ON e.id_timbre = t.id
         LEFT JOIN utilisateur u ON t.id_proprietaire = u.id
         LEFT JOIN `condition` c ON t.id_condition = c.id_condition
@@ -288,7 +304,7 @@ class Encheres extends CRUD
             $sql .= " LIMIT " . $limit;
         }
         $stmt = $this->prepare($sql);
-        $stmt->bindValue(':idUser', $idUser, \PDO::PARAM_INT);
+        $stmt->bindValue(':idUser', $idUser, \PDO::PARAM_INT); // Bind user ID
         $stmt->execute();
         return $stmt->fetchAll();
     }

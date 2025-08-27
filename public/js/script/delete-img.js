@@ -2,6 +2,7 @@ export function deleteImg() {
   const deletebtn = document.querySelectorAll(".delete-button");
   deletebtn.forEach((btn) => {
     btn.addEventListener("click", async (e) => {
+      // Prevent default action
       e.preventDefault();
       const imgContainer = e.target.closest(".img-container");
       const imageId = imgContainer.dataset.id;
@@ -11,6 +12,7 @@ export function deleteImg() {
         return;
       }
 
+      // Send delete request
       try {
         const response = await fetch("/Stampee/stamp/deleteImage", {
           method: "POST",
@@ -21,11 +23,9 @@ export function deleteImg() {
         });
 
         const result = await response.json();
-        console.log(result);
         
         if (result.success) {
-            console.log("deleted");
-            
+          // Remove image from DOM
           imgContainer.remove();
         } else {
           alert("Erreur lors de la suppression de l'image");

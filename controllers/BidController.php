@@ -11,23 +11,29 @@ use App\Providers\Auth;
 use App\Providers\Validator;
 
 class BidController
-{
+{   
+    // Display Bid
     public function showBid()
     {
         Auth::session();
 
         $idUser = $_SESSION['user_id'];
         $idEnchere = $_GET['id_enchere'] ?? null;
+
+        // Check if id is valid
         if (!$idEnchere) {
             View::redirect('auctionlist');
             return;
         }
 
+        // Fetch auction details by ID
         $enchereModel = new Encheres();
         $auction = $enchereModel->getAuctionById($idEnchere);
 
+        // Read session messages
         $errors = $_SESSION['errors'] ?? null;
         $inputs = $_SESSION['inputs'] ?? null;
+        // Unset After
         unset($_SESSION['errors'], $_SESSION['inputs']);
 
         $misesModel = new Mises();
@@ -41,10 +47,13 @@ class BidController
         ]);
     }
 
+    // Display log of bid
     public function showMyBidLog()
     {
+        // Prevent access if not logged in
         Auth::session();
 
+        // Update auction status
         $enchereModel = new Encheres();
         $enchereModel->updateStatus();
 
@@ -56,15 +65,17 @@ class BidController
         return View::render('myBidLog', ['mesMises' => $mesMises]);
     }
 
+    // Display auction bids
     public function showAuctionBids()
     {
-
+        // Check if id is valid
         $idEnchere = $_GET['id'] ?? null;
         if (!$idEnchere) {
             View::redirect('auctionlist');
             return;
         }
 
+        // Update auction status
         $enchereModel = new Encheres();
         $enchereModel->updateStatus();
 
@@ -77,10 +88,13 @@ class BidController
         ]);
     }
 
+    // Store a new bid
     public function storeBid()
     {
+        // Prevent access if not logged in
         Auth::session();
 
+        // Get user input   
         $idUser = $_SESSION['user_id'];
         $idEnchere = $_POST['id_enchere'];
         $montant = $_POST['montant'];
@@ -96,6 +110,7 @@ class BidController
         $validator->field('montant', $montant)
             ->required()
             ->number()
+            //Check if bid is the highest amount
             ->higherThan($currentHighest);
 
         if (!$validator->isSuccess()) {

@@ -10,6 +10,7 @@ class Favoris extends CRUD
     protected $primaryKey = ['id_utilisateur', 'id_enchere'];
     protected $fillable = ['id_utilisateur', 'id_enchere'];
 
+    // Function to remove a favorite
     public function removeFavorite($idUser, $idEnchere)
     {
         $sql = "
@@ -18,11 +19,12 @@ class Favoris extends CRUD
         WHERE id_utilisateur = :id_utilisateur AND id_enchere = :id_enchere
         ";
         $stmt = $this->prepare($sql);
-        $stmt->bindValue(':id_utilisateur', $idUser, \PDO::PARAM_INT);
-        $stmt->bindValue(':id_enchere', $idEnchere, \PDO::PARAM_INT);
+        $stmt->bindValue(':id_utilisateur', $idUser, \PDO::PARAM_INT); // Bind user ID parameter tells that it's an integer
+        $stmt->bindValue(':id_enchere', $idEnchere, \PDO::PARAM_INT); // Bind auction ID parameter tells that it's an integer   
         return $stmt->execute();
     }
 
+    // Function to add a favorite
     public function addFavorite($idUser, $idEnchere)
     {
         $sql = "
@@ -30,11 +32,13 @@ class Favoris extends CRUD
         VALUES (:id_utilisateur, :id_enchere)
         ";
         $stmt = $this->prepare($sql);
-        $stmt->bindValue(':id_utilisateur', $idUser, \PDO::PARAM_INT);
-        $stmt->bindValue(':id_enchere', $idEnchere, \PDO::PARAM_INT);
+        $stmt->bindValue(':id_utilisateur', $idUser, \PDO::PARAM_INT); // Bind user ID parameter tells that it's an integer
+        $stmt->bindValue(':id_enchere', $idEnchere, \PDO::PARAM_INT); // Bind auction ID parameter tells that it's an integer
         return $stmt->execute();
     }
 
+    // Function to get favorites by user ID
+    // This function retrieves all favorite auctions for a specific user
     public function getFavByUserId($userId, $limit = null)
     {
         $sql = "
@@ -67,7 +71,7 @@ class Favoris extends CRUD
         }
 
         $stmt = $this->prepare($sql);
-        $stmt->bindValue(':userId', $userId, \PDO::PARAM_INT);
+        $stmt->bindValue(':userId', $userId, \PDO::PARAM_INT); // Bind user ID parameter tells that it's an integer 
         $stmt->execute();
         return $stmt->fetchAll();
     }

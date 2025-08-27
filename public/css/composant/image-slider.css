@@ -15,6 +15,7 @@
 
 .image-slider > picture {
   max-width: 600px;
+  width: 100%;
   display: block;
   aspect-ratio: 1;
   background: #eee;

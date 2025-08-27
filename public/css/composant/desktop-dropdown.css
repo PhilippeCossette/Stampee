@@ -25,3 +25,12 @@
     top: 0;
   }
 }
+
+@media screen and (max-width: 520px) {
+  .desktop-dropdown {
+    background-color: white;
+    right: 0;
+    top: 100%;
+    max-width: 100%;
+  }
+}

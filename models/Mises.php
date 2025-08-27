@@ -10,19 +10,21 @@ class Mises extends CRUD
     protected $primaryKey = 'id';
     protected $fillable = ['montant'];
 
+    // Place a bid on an auction
     public function placeBid($idEnchere, $idUser, $montant)
     {
+        // Check if the auction is active
         $sql = "
             SELECT prix_depart, fin, status
                 FROM encheres
                 WHERE id = :id AND status = 1
         ";
         $stmt = $this->prepare($sql);
-        $stmt->bindValue(':id', $idEnchere, \PDO::PARAM_INT);
+        $stmt->bindValue(':id', $idEnchere, \PDO::PARAM_INT); // Bind auction ID parameter as integer
         $stmt->execute();
         $enchere = $stmt->fetch();
 
-        if (!$enchere || new \DateTime() > new \DateTime($enchere['fin'])) {
+        if (!$enchere || new \DateTime() > new \DateTime($enchere['fin'])) { // Check if auction is active
             return [
                 'success' => false,
                 'message' => "Auction is not active."
@@ -35,10 +37,10 @@ class Mises extends CRUD
                 WHERE id_enchere = :id
         ";
         $stmt = $this->prepare($sql);
-        $stmt->bindValue(':id', $idEnchere, \PDO::PARAM_INT);
+        $stmt->bindValue(':id', $idEnchere, \PDO::PARAM_INT); // Bind auction ID parameter as integer
         $stmt->execute();
         $row = $stmt->fetch();
-        $min = $row['max_mise'] ? $row['max_mise'] : $enchere['prix_depart'];
+        $min = $row['max_mise'] ? $row['max_mise'] : $enchere['prix_depart']; // Determine minimum bid
 
         if ($montant <= $min) {
             return [
@@ -53,9 +55,9 @@ class Mises extends CRUD
             VALUES (:enchere, :user, :montant, NOW())
             ";
         $stmt = $this->prepare($sql);
-        $stmt->bindValue(':enchere', $idEnchere, \PDO::PARAM_INT);
-        $stmt->bindValue(':user', $idUser, \PDO::PARAM_INT);
-        $stmt->bindValue(':montant', $montant, \PDO::PARAM_STR);
+        $stmt->bindValue(':enchere', $idEnchere, \PDO::PARAM_INT); // Bind auction ID parameter as integer
+        $stmt->bindValue(':user', $idUser, \PDO::PARAM_INT); // Bind user ID parameter as integer
+        $stmt->bindValue(':montant', $montant, \PDO::PARAM_STR); // Bind bid amount parameter as string
 
         if ($stmt->execute()) {
             return [
@@ -70,6 +72,7 @@ class Mises extends CRUD
         ];
     }
 
+    // Get the current price of an auction
     public function getCurrentPrice($idEnchere)
     {
         $sql = "
@@ -93,13 +96,14 @@ class Mises extends CRUD
         WHERE id = :id
         ";
         $stmt = $this->prepare($sql);
-        $stmt->bindValue(':id', $idEnchere, \PDO::PARAM_INT);
+        $stmt->bindValue(':id', $idEnchere, \PDO::PARAM_INT); // Bind auction ID parameter as integer
         $stmt->execute();
         $enchere = $stmt->fetch();
 
         return $enchere['prix_depart'] ?? 0;
     }
 
+    // Check if the user is the highest bidder
     public function isHighestBidder($idEnchere, $idUser)
     {
         $sql = "
@@ -110,13 +114,14 @@ class Mises extends CRUD
         LIMIT 1
         ";
         $stmt = $this->prepare($sql);
-        $stmt->bindValue(':id', $idEnchere, \PDO::PARAM_INT);
+        $stmt->bindValue(':id', $idEnchere, \PDO::PARAM_INT); // Bind auction ID parameter as integer
         $stmt->execute();
         $row = $stmt->fetch();
 
         return $row && $row['id_utilisateur'] == $idUser;
     }
 
+    // Get the user's bid log
     public function getMyBidLog($idUser, $limit = null)
     {
         $sql = "
@@ -153,12 +158,13 @@ class Mises extends CRUD
         }
 
         $stmt = $this->prepare($sql);
-        $stmt->bindValue(':userId', $idUser, \PDO::PARAM_INT);
+        $stmt->bindValue(':userId', $idUser, \PDO::PARAM_INT); // Bind user ID parameter as integer
         $stmt->execute();
 
         return $stmt->fetchAll();
     }
 
+    // Get bid log by auction ID
     public function getBidLogbyID($enchere_id, $limit = null)
     {
         $sql = "
@@ -194,7 +200,7 @@ class Mises extends CRUD
         }
 
         $stmt = $this->prepare($sql);
-        $stmt->bindValue(':enchere_id', $enchere_id, \PDO::PARAM_INT);
+        $stmt->bindValue(':enchere_id', $enchere_id, \PDO::PARAM_INT); // Bind auction ID parameter as integer
         $stmt->execute();
 
         return $stmt->fetchAll();

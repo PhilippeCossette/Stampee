@@ -15,8 +15,10 @@ class Utilisateur extends CRUD
     protected $fillable = ['nom_utilisateur', 'email', 'mot_de_passe'];
 
 
+    // Create a new user
     public function createUser($nom, $email, $motDePasse)
     {
+        // Hash the password
         $hashedPassword = password_hash($motDePasse, PASSWORD_DEFAULT);
 
         $data = [
@@ -28,6 +30,7 @@ class Utilisateur extends CRUD
         return $this->insert($data);
     }
 
+    // Check user credentials
     public function checkUser($username, $password)
     {
         $user = $this->unique('nom_utilisateur', $username);
@@ -48,6 +51,7 @@ class Utilisateur extends CRUD
         }
     }
 
+    // Update user data
     public function updateUserData($id, $nom, $email, $motDePasse = null)
     {
         $data = [

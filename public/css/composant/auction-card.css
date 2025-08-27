@@ -19,10 +19,6 @@
 }
 
 .auction-card_left-section {
-  justify-content: start;
-  flex-direction: column-reverse;
-  display: flex;
-  flex-wrap: wrap-reverse;
   gap: 20px;
   position: relative;
 }

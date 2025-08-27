@@ -11,7 +11,7 @@ export function imageSlider(images) {
   showImage(currentIndex);
 
   document.getElementById("prev-btn").onclick = function () {
-    currentIndex = (currentIndex - 1 + images.length) % images.length;
+    currentIndex = (currentIndex - 1 + images.length) % images.length; // Go to previous image
     showImage(currentIndex);
   };
 

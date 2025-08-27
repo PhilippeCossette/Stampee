@@ -27,6 +27,7 @@ class AuthController
     public function registerAccount()
     {
 
+        // Get user input   
         $nom = $_POST['nom_utilisateur'];
         $email = $_POST['email'];
         $motDePasse = $_POST['mot_de_passe'];
@@ -52,6 +53,7 @@ class AuthController
             $_SESSION['nom_utilisateur'] = $nom;
             $_SESSION['email'] = $email;
             $_SESSION['finger_print'] = md5($_SERVER['HTTP_USER_AGENT'] . $_SERVER['REMOTE_ADDR']);
+            $_SESSION['success'] = "Inscription réussie. Bienvenue, $nom !";
             return View::redirect('');
         }
 
@@ -73,6 +75,7 @@ class AuthController
             $utilisateurModel = new Utilisateur();
             $isAuthenticated = $utilisateurModel->checkUser($nom, $motDePasse);
             if ($isAuthenticated) {
+                $_SESSION['success'] = "Connexion réussie. Bienvenue, $nom !";
                 return View::redirect(''); // Redirect to homepage after successful login
             } else {
                 $errors["message"] = "Nom d'utilisateur ou mot de passe incorrect.";

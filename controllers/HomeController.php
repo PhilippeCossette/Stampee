@@ -10,13 +10,16 @@ use App\Providers\Validator;
 
 // This controller handles the home page rendering
 class HomeController
-{
+{   
+    // Display the home page
     public function index()
     {
+        // Read session messages
         $success = $_SESSION['success'] ?? null;
         $errors = $_SESSION['errors'] ?? null;
+        // Unset after reading
         unset($_SESSION['errors']);
-        unset($_SESSION['success']); // clear after reading
+        unset($_SESSION['success']);
 
         $enchereModel = new Encheres();
         $encheres_CP = $enchereModel->getLimitedAuctions(4, 'e.coup_coeur', 1);

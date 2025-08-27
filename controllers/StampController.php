@@ -14,6 +14,7 @@ use App\Providers\Validator;
 
 class StampController
 {
+    // Display the create stamp form    
     public function createIndex()
     {
         Auth::session(); // Ensure the user is authenticated
@@ -35,6 +36,7 @@ class StampController
         ]);
     }
 
+    // Handle stamp creation    
     public function storeStamp($data)
     {
         $files = $_FILES; // Retrieve uploaded files
@@ -106,7 +108,7 @@ class StampController
             'id_condition' => $data['id_condition'],
             'tirage' => $data['tirage'],
             'dimension' => $dimension,
-            'certifie' => $data['certifie'] === 'Oui' ? 1 : 0,
+            'certifie' => $data['certifie'] === 'Oui' ? 1 : 0, // if value Oui = 1 else = 0
             'id_proprietaire' => $_SESSION['user_id']
         ];
 
@@ -115,13 +117,13 @@ class StampController
             return View::render('error', ['message' => 'Impossible d\'ajouter le timbre']);
         }
 
-        $targetDir = __DIR__ . '/../public/uploads/';
+        $targetDir = __DIR__ . '/../public/uploads/'; // Set target directory for uploads   
 
         // --- Save main image ---
-        $file = $files['image_principale'];
-        $fileName = uniqid() . '_' . basename($file['name']);
-        $targetFile = $targetDir . $fileName;
-        move_uploaded_file($file['tmp_name'], $targetFile);
+        $file = $files['image_principale']; // Get main image file
+        $fileName = uniqid() . '_' . basename($file['name']); // Generate unique file name
+        $targetFile = $targetDir . $fileName;   // Set target file path
+        move_uploaded_file($file['tmp_name'], $targetFile); // Move uploaded file to target directory
 
         (new ImagesTimbre())->insert([
             'id_timbre' => $timbre_id,
@@ -132,11 +134,11 @@ class StampController
         // --- Save additional images ---
         if (isset($files['images'])) {
             foreach ($files['images']['name'] as $i => $name) {
-                if ($name == '') continue;
+                if ($name == '') continue; // Skip empty file names
 
-                $fileName = uniqid() . '_' . basename($name);
-                $targetFile = $targetDir . $fileName;
-                move_uploaded_file($files['images']['tmp_name'][$i], $targetFile);
+                $fileName = uniqid() . '_' . basename($name); // Generate unique file name
+                $targetFile = $targetDir . $fileName; // Set target file path
+                move_uploaded_file($files['images']['tmp_name'][$i], $targetFile); // Move uploaded file to target directory
 
                 (new ImagesTimbre())->insert([
                     'id_timbre' => $timbre_id,
@@ -150,6 +152,7 @@ class StampController
         return View::redirect('');
     }
 
+    // Display the update stamp form
     public function updateStampIndex() // Gets from Url ?id=5 exemple
     {
         Auth::session();
@@ -164,7 +167,8 @@ class StampController
         $timbre = $timbreModel->selectId($timbre_id);
 
         if (!$timbre || $timbre['id_proprietaire'] != $_SESSION['user_id']) {
-            return View::render('error', ['message' => 'Timbre introuvable ou accès refusé.']);
+            $_SESSION['errors'] = 'Timbre introuvable ou accès refusé.';
+            return View::redirect('');
         }
 
         $condition = new Condition();
@@ -188,9 +192,10 @@ class StampController
         ]);
     }
 
+    // Handle stamp update
     public function updateStamp($data, $queryParams)
     {
-        $timbre_id = $queryParams['id'] ?? null;
+        $timbre_id = $queryParams['id'] ?? null; // Get the stamp ID from query parameters  
         if (!$timbre_id) {
             return View::render('error', ['message' => 'ID du timbre manquant']);
         }
@@ -204,7 +209,8 @@ class StampController
 
         // Only owner can update
         if ($timbre['id_proprietaire'] != $_SESSION['user_id']) {
-            return View::render('error', ['message' => 'Vous n’êtes pas autorisé à modifier ce timbre']);
+            $_SESSION['errors'] = 'Vous n’êtes pas autorisé à modifier ce timbre';
+            return View::redirect('');
         }
 
         $files = $_FILES;
@@ -224,6 +230,7 @@ class StampController
 
         $imageModel = new ImagesTimbre();
         $currentImgCount = $imageModel->countImagesByTimbre($timbre_id);
+        // If $files['images'] is set count the number of images
         $newImgCount = isset($files['images']['name']) ? count(array_filter($files['images']['name'])) : 0;
 
         // Max total images validation
@@ -286,24 +293,24 @@ class StampController
             'id_condition' => $data['id_condition'],
             'tirage' => $data['tirage'],
             'dimension' => $dimension,
-            'certifie' => $data['certifie'] === 'Oui' ? 1 : 0
+            'certifie' => $data['certifie'] === 'Oui' ? 1 : 0 // Certifié ou non
         ];
 
         $timbreModel->update($updateData, $timbre_id);
 
-        $targetDir = __DIR__ . '/../public/uploads/';
+        $targetDir = __DIR__ . '/../public/uploads/'; // Set target directory for uploads
 
         // Replace main image
         if (isset($files['image_principale']) && $files['image_principale']['name'] != '') {
             $oldMainImage = $imageModel->selectMainByTimbre($timbre_id);
             if ($oldMainImage) {
-                @unlink($targetDir . $oldMainImage['url_image']);
+                @unlink($targetDir . $oldMainImage['url_image']); // Delete old image file
                 $imageModel->delete($oldMainImage['id']);
             }
 
-            $file = $files['image_principale'];
-            $fileName = uniqid() . '_' . basename($file['name']);
-            move_uploaded_file($file['tmp_name'], $targetDir . $fileName);
+            $file = $files['image_principale']; // Get main image file
+            $fileName = uniqid() . '_' . basename($file['name']); // Generate unique file name
+            move_uploaded_file($file['tmp_name'], $targetDir . $fileName); // Move uploaded file
 
             $imageModel->insert([
                 'id_timbre' => $timbre_id,
@@ -315,7 +322,7 @@ class StampController
         // Upload additional images
         if (isset($files['images'])) {
             foreach ($files['images']['name'] as $i => $name) {
-                if ($name == '') continue;
+                if ($name == '') continue; // Skip empty file names
                 $fileName = uniqid() . '_' . basename($name);
                 move_uploaded_file($files['images']['tmp_name'][$i], $targetDir . $fileName);
 
@@ -334,7 +341,9 @@ class StampController
 
     public function deleteImage()
     {
+        // Ensure user is authenticated
         Auth::session();
+        // Check if user is authorized to delete the image
         $imageId = $_POST['id'] ?? null;
 
         header('Content-Type: application/json');

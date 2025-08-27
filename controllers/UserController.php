@@ -18,21 +18,27 @@ class UserController
     {
         Auth::session(); // Ensure the user is authenticated
 
+        // Update auction status    
         $enchereModel = new Encheres();
         $enchereModel->updateStatus();
 
+        // Get user favorites   
         $favorisModel = new Favoris();
         $favoris = $favorisModel->getFavByUserId($_SESSION['user_id'], 4);
 
+        // Get user auctions
         $enchereModel = new Encheres();
         $mesEncheres = $enchereModel->getMyAuction($_SESSION['user_id'], 4);
 
+        // Get user bids
         $misesModel = new Mises();
         $mesMises = $misesModel->getMyBidLog($_SESSION['user_id'], 10);
 
+        // Read session messages
         $success = $_SESSION['success'] ?? null;
         $errors = $_SESSION['errors'] ?? null;
-        unset($_SESSION['errors'], $_SESSION['success']); // clear after reading
+        // Unset after reading
+        unset($_SESSION['errors'], $_SESSION['success']);
 
         return View::render('profile', ['favoris' => $favoris, 'mesEncheres' => $mesEncheres, 'mesMises' => $mesMises, 'success' => $success, 'errors' => $errors]);
     }
@@ -41,6 +47,7 @@ class UserController
     {
         Auth::session(); // Ensure the user is authenticated
 
+        // Update auction status
         $enchereModel = new Encheres();
         $enchereModel->updateStatus();
 
@@ -54,6 +61,7 @@ class UserController
     {
         Auth::session(); // Ensure the user is authenticated
 
+        // Update auction status
         $enchereModel = new Encheres();
         $enchereModel->updateStatus();
 

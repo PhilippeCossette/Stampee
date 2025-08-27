@@ -13,13 +13,14 @@ use App\Providers\Validator;
 
 class FavoriteController
 {
+    // Add a favorite auction   
     public function addFavorite()
     {
+        // prevent access if not logged in
         Auth::session();
         $userId = $_SESSION['user_id'];
 
-        // Get JSON payload from fetch
-        $data = json_decode(file_get_contents('php://input'), true);
+        $data = json_decode(file_get_contents('php://input'), true); // Get JSON payload    
         $idEnchere = $data['id_enchere'] ?? null;
 
         if (!$idEnchere) {
@@ -28,16 +29,19 @@ class FavoriteController
             exit; // <- prevents Twig/layout from rendering
         }
 
+        // Add favorite
         $favoris = new Favoris();
         $success = $favoris->addFavorite($userId, $idEnchere);
 
-        header('Content-Type: application/json');
+        header('Content-Type: application/json'); // Set content type to JSON
         echo json_encode(['success' => true]);
         exit; // prevent any further output
     }
 
+    // Remove a favorite auction
     public function removeFavorite()
     {
+        // Prevent access if not logged in
         Auth::session();
         $userId = $_SESSION['user_id'];
 
