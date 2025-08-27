@@ -20,11 +20,11 @@ document.addEventListener("DOMContentLoaded", () => {
     initZoomImages();
   }
 
-  if (document.querySelectorAll(".delete-button").length > 0) {
+  if (document.querySelectorAll(".delete-button")) {
     deleteImg();
   }
 
-  if (document.querySelector(".slider-img")) {
+  if (document.querySelector("#slider-img")) {
     imageSlider(images);
   }
 

@@ -27,7 +27,7 @@
             <a href="#" class="nav-link">Catégories</a>
             {% if guest %}
             {% else %}
-            <a href="#" class="nav-link">Mes enchères</a>
+            <a href="{{ base }}/profile/myAuctions" class="nav-link">Mes enchères</a>
             <a href="{{ base }}/create" class="nav-link">Ajouter une enchère</a>
             {% endif %}
             <a href="#" class="nav-link">Offres récentes</a>
@@ -65,7 +65,7 @@
       </div>
     </nav>
     <nav class="nav-mobile">
-      <a href="#" class="nav-mobile_logo"><img src="{{ asset }}/img/logo.webp" alt="logo stampee" /></a>
+      <a href="{{ base }}/" class="nav-mobile_logo"><img src="{{ asset }}/img/logo.webp" alt="logo stampee" /></a>
       <a href="#" class="nav-mobile_menu"><img src="{{ asset }}/img/hamburger.webp" alt="hamburger" /></a>
     </nav>
     <div class="nav-mobile-menu" id="mobile-menu">
@@ -91,7 +91,7 @@
           <a href="#" class="nav-link">Catégories</a>
           {% if guest %}
           {% else %}
-          <a href="#" class="nav-link">Mes enchères</a>
+          <a href="{{ base }}/profile/myAuctions" class="nav-link">Mes enchères</a>
           <a href="{{ base }}/create" class="nav-link">Ajouter une enchère</a>
           {% endif %}
           <a href="#" class="nav-link">Offres récentes</a>
