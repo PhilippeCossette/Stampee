@@ -17,11 +17,7 @@
     <img class="auction-card-certified" src="{{asset}}img/certified.png" alt="">
     {% endif %}
     <script>
-      const images = {
-        {
-          (images is defined ? images : []) | json_encode | raw
-        }
-      };
+      const images = {{(images is defined ? images : []) | json_encode | raw)}};
     </script>
     <div class="image-slider">
       <picture>
