@@ -178,8 +178,8 @@ class StampController
 
         /// Need changes
         $images = (new ImagesTimbre())->selectByTimbre($timbre_id);
-        foreach ($images as $img) {
-            
+
+
         return View::render('stampUpdate', [
             'timbre' => $timbre,
             'conditions' => $conditions,
@@ -188,6 +188,7 @@ class StampController
             'images' => $images
         ]);
     }
+
     public function updateStamp($data, $queryParams)
     {
         $timbre_id = $queryParams['id'] ?? null;
