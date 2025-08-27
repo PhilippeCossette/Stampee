@@ -325,17 +325,19 @@ class StampController
     public function deleteImage()
     {
         Auth::session();
-        $imageId = $_POST['image_id'] ?? null;
+        $imageId = $_POST['id'] ?? null;
+
+        header('Content-Type: application/json');
         if (!$imageId) {
             echo json_encode(['success' => false, 'message' => 'ID manquant']);
-            return;
+            exit;
         }
 
         $imageModel = new ImagesTimbre();
-        $image = $imageModel->selectbyId($imageId);
+        $image = $imageModel->selectId($imageId);
         if (!$image) {
             echo json_encode(['success' => false, 'message' => 'Image non trouvée']);
-            return;
+            exit;
         }
 
         // Delete image file

@@ -35,6 +35,8 @@ Route::post('/create', 'StampController@storeStamp');
 Route::get('/stamp/update', 'StampController@updateStampIndex');
 Route::post('/stamp/update', 'StampController@updateStamp');
 
+Route::post('/stamp/deleteImage', 'StampController@deleteImage'); 
+
 Route::get('/auctionlist', 'AuctionController@auctionList');
 Route::post('/auctionlist', 'AuctionController@auctionList');
 

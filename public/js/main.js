@@ -12,19 +12,19 @@ document.addEventListener("DOMContentLoaded", () => {
     initConfirm("delete-btn", "/Stampee/user/delete");
   }
 
-  deleteImg();
+  initNav();
   filterMenu();
   initFavorites();
-
-  if (document.querySelectorAll(".delete-button")) {
-    deleteImg();
-  }
 
   if (document.querySelector("[data-zoom='true']")) {
     initZoomImages();
   }
 
-  if (typeof images !== "undefined") {
+  if (document.querySelectorAll(".delete-button")) {
+    deleteImg();
+  }
+
+  if (document.querySelector(".slider-img")) {
     imageSlider(images);
   }
 

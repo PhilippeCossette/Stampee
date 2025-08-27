@@ -125,7 +125,7 @@
         <div class="delete-img">
             {% for img in images %}
             <div class="img-container" data-id="{{ img.id }}">
-                <img src="{{ base }}/public/uploads/{{ img.url_image }}" alt="Image" width="100">
+                <img src="{{ base }}/public/uploads/{{ img.url_image }}" alt="Image" width="150">
                 <button type="button" class="delete-button"><i class="fa-solid fa-trash"></i></button>
             </div>
             {% endfor %}
