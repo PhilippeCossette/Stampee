@@ -54,6 +54,12 @@ class StampController
         $validator->field('height', $data['height'])->required()->number()->min(1);
         $validator->field('certifie', $data['certifie'])->required();
 
+        // If $files['images'] is set count the number of images
+        $newImgCount = isset($files['images']['name']) ? count(array_filter($files['images']['name'])) : 0;
+
+        // Max total images validation
+        $validator->field('images', $newImgCount, 'Nombre d\'images')
+            ->maxValue(5);
         // --- Validate main image ---
         if (isset($files['image_principale']) && $files['image_principale']['name'] != '') {
             $validator->file('image_principale', $files['image_principale'])
