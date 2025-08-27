@@ -176,10 +176,9 @@ class StampController
         $pays = new Pays();
         $pays = $pays->select("pays");
 
-        /// Need changes
+
         $images = (new ImagesTimbre())->selectByTimbre($timbre_id);
-        foreach ($images as $img) {
-            
+
         return View::render('stampUpdate', [
             'timbre' => $timbre,
             'conditions' => $conditions,
@@ -188,6 +187,7 @@ class StampController
             'images' => $images
         ]);
     }
+
     public function updateStamp($data, $queryParams)
     {
         $timbre_id = $queryParams['id'] ?? null;
@@ -203,14 +203,14 @@ class StampController
         }
 
         // Only owner can update
-        if (!$timbre || $timbre['id_proprietaire'] != $_SESSION['user_id']) {
+        if ($timbre['id_proprietaire'] != $_SESSION['user_id']) {
             return View::render('error', ['message' => 'Vous n’êtes pas autorisé à modifier ce timbre']);
         }
 
         $files = $_FILES;
         $validator = new Validator();
 
-        // Validate fields (same as storeStamp)
+        // Basic field validation
         $validator->field('titre', $data['titre'])->required()->min(2)->max(100);
         $validator->field('description', $data['description'])->required()->min(2)->max(200);
         $validator->field('annee', $data['annee'])->required()->number();
@@ -221,6 +221,14 @@ class StampController
         $validator->field('width', $data['width'])->required()->number()->min(1);
         $validator->field('height', $data['height'])->required()->number()->min(1);
         $validator->field('certifie', $data['certifie'])->required();
+
+        $imageModel = new ImagesTimbre();
+        $currentImgCount = $imageModel->countImagesByTimbre($timbre_id);
+        $newImgCount = isset($files['images']['name']) ? count(array_filter($files['images']['name'])) : 0;
+
+        // Max total images validation
+        $validator->field('images', $currentImgCount + $newImgCount, 'Nombre d\'images')
+            ->maxValue(5);
 
         // Validate main image if uploaded
         if (isset($files['image_principale']) && $files['image_principale']['name'] != '') {
@@ -250,19 +258,24 @@ class StampController
             }
         }
 
+        // If validation fails, re-render with inputs, errors, AND current images
         if (!$validator->isSuccess()) {
             $errors = $validator->getErrors();
+            $images = $imageModel->selectByTimbre($timbre_id); // fetch existing images
             return View::render('stampUpdate', [
                 'errors' => $errors,
                 'inputs' => $data,
                 'timbre' => $timbre,
                 'pays' => (new Pays())->select('pays'),
                 'couleurs' => (new Couleur())->select('couleur'),
-                'conditions' => (new Condition())->select('condition')
+                'conditions' => (new Condition())->select('condition'),
+                'images' => $images
             ]);
         }
 
-        // Update stamp data
+        // -------------------
+        // Update stamp
+        // -------------------
         $dimension = $data['width'] . 'x' . $data['height'];
         $updateData = [
             'titre' => $data['titre'],
@@ -280,17 +293,14 @@ class StampController
 
         $targetDir = __DIR__ . '/../public/uploads/';
 
-        $imageModel = new ImagesTimbre();
-        $oldMainImage = $imageModel->selectMainByTimbre($timbre_id);
-
         // Replace main image
         if (isset($files['image_principale']) && $files['image_principale']['name'] != '') {
-            // Delete old main image if exists
+            $oldMainImage = $imageModel->selectMainByTimbre($timbre_id);
             if ($oldMainImage) {
-                @unlink($targetDir . $oldMainImage['url_image']); // Delete old main image
-                $imageModel->delete($oldMainImage['id']); // Remove from DB
+                @unlink($targetDir . $oldMainImage['url_image']);
+                $imageModel->delete($oldMainImage['id']);
             }
-            // Upload new main image
+
             $file = $files['image_principale'];
             $fileName = uniqid() . '_' . basename($file['name']);
             move_uploaded_file($file['tmp_name'], $targetDir . $fileName);
@@ -302,7 +312,7 @@ class StampController
             ]);
         }
 
-        // Additional images
+        // Upload additional images
         if (isset($files['images'])) {
             foreach ($files['images']['name'] as $i => $name) {
                 if ($name == '') continue;
@@ -319,5 +329,37 @@ class StampController
 
         $_SESSION['success'] = 'Timbre mis à jour avec succès !';
         return View::redirect('profile');
+    }
+
+
+    public function deleteImage()
+    {
+        Auth::session();
+        $imageId = $_POST['id'] ?? null;
+
+        header('Content-Type: application/json');
+        if (!$imageId) {
+            echo json_encode(['success' => false, 'message' => 'ID manquant']);
+            exit;
+        }
+
+        $imageModel = new ImagesTimbre();
+        $image = $imageModel->selectId($imageId);
+        if (!$image) {
+            echo json_encode(['success' => false, 'message' => 'Image non trouvée']);
+            exit;
+        }
+
+        // Delete image file
+        $targetDir = __DIR__ . '/../public/uploads/';
+        @unlink($targetDir . $image['url_image']);
+
+        // Delete image from database
+        $deleted = $imageModel->delete($imageId);
+        if ($deleted) {
+            echo json_encode(['success' => true]);
+        } else {
+            echo json_encode(['success' => false, 'message' => 'Suppression impossible']);
+        }
     }
 }

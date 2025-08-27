@@ -1,0 +1,22 @@
+.img-container {
+  max-width: fit-content;
+  position: relative;
+}
+
+.img-container img {
+  max-width: 100%;
+  aspect-ratio: 1;
+  display: block;
+  object-fit: cover;
+}
+
+.delete-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: var(--main-blue);
+  color: white;
+  padding: 5px;
+  border: none;
+  cursor: pointer;
+}

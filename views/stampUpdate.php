@@ -1,5 +1,4 @@
 {{ include("layouts/header.php", { title: "Modifier Timbre - Stampee" }) }}
-
 <div class="wrapper-centered margin-block">
     <form class="form" action="{{ base }}/stamp/update?id={{ timbre.id }}" method="post" enctype="multipart/form-data">
         <header class="form-header">
@@ -122,13 +121,16 @@
             {% endif %}
         </div>
 
+
         <div>
-            <label for="image_principale">Remplacez l'image principale :</label>
-            {% if timbre.image_principale is defined %}
+            {% for image in images %}
+            {% if image.principale == 1 %}
             <div>
-                <img src="{{ base }}/uploads/{{ timbre.image_principale }}" alt="Image principale" width="200">
+                <img src="{{ asset }}/uploads/{{ image.url_image }}" alt="Image principale" width="200">
             </div>
             {% endif %}
+            {% endfor %}
+            <label for="image_principale">Remplacez l'image principale :</label>
             <input type="file" id="image_principale" name="image_principale" accept="image/*">
             {% if errors.image_principale is defined %}
             <span class="error">{{ errors.image_principale }}</span>
@@ -138,6 +140,9 @@
         <div>
             <label for="images">Ajoutez d'Autres images :</label>
             <input type="file" id="images" name="images[]" multiple accept="image/*">
+            {% if errors.images is defined %}
+            <span class="error">{{ errors.images }}</span>
+            {% endif %}
             {% for key, error in errors %}
             {% if key starts with 'images[' %}
             <span class="error">{{ error }}</span>
@@ -145,8 +150,18 @@
             {% endfor %}
         </div>
 
+        <div class="delete-img">
+            {% for img in images %}
+            {% if img.principale == 0 %}
+            <div class="img-container" data-id="{{ img.id }}">
+                <img src="{{ base }}/public/uploads/{{ img.url_image }}" alt="Image" width="150">
+                <button type="button" class="delete-button"><i class="fa-solid fa-trash"></i></button>
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+
         <button class="button main-button" type="submit">Mettre à jour le timbre</button>
     </form>
 </div>
-
 {{ include("layouts/footer.php") }}

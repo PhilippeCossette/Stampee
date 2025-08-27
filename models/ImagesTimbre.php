@@ -21,7 +21,8 @@ class ImagesTimbre extends CRUD
 
     public function selectMainByTimbre($id_timbre)
     {
-        $stmt = $this->prepare("SELECT * FROM {$this->table} WHERE id_timbre = :id_timbre AND principale = 1 LIMIT 1");
+        $sql = "SELECT * FROM {$this->table} WHERE id_timbre = :id_timbre AND principale = 1 LIMIT 1";
+        $stmt = $this->prepare($sql);
         $stmt->bindValue(':id_timbre', $id_timbre);
         $stmt->execute();
         return $stmt->fetch();
@@ -29,9 +30,21 @@ class ImagesTimbre extends CRUD
 
     public function selectAdditionalByTimbre($id_timbre)
     {
-        $stmt = $this->prepare("SELECT * FROM {$this->table} WHERE id_timbre = :id_timbre AND principale = 0");
-        $stmt->bindValue(':id_timbre', $id_timbre);
+        $sql = "SELECT COUNT(*) as total FROM images_timbre WHERE id_timbre = :timbreId AND principale = 0";
+        $stmt = $this->prepare($sql);
+        $stmt->bindValue(':timbreId', $id_timbre);
         $stmt->execute();
         return $stmt->fetchAll();
+    }
+
+    public function countImagesByTimbre($timbreId)
+    {
+        $sql = "SELECT COUNT(*) as total FROM images_timbre WHERE id_timbre = :timbreId";
+        $stmt = $this->prepare($sql);
+        $stmt->bindValue(':timbreId', $timbreId, \PDO::PARAM_INT);
+        $stmt->execute();
+        $row = $stmt->fetch(\PDO::FETCH_ASSOC);
+
+        return (int) $row['total'];
     }
 }
