@@ -122,17 +122,8 @@
             {% endif %}
         </div>
 
-        <div class="delete-img">
-            {% for img in images %}
-            <div class="img-container" data-id="{{ img.id }}">
-                <img src="{{ base }}/public/uploads/{{ img.url_image }}" alt="Image" width="150">
-                <button type="button" class="delete-button"><i class="fa-solid fa-trash"></i></button>
-            </div>
-            {% endfor %}
-        </div>
 
         <div>
-            <label for="image_principale">Remplacez l'image principale :</label>
             {% for image in images %}
             {% if image.principale == 1 %}
             <div>
@@ -140,8 +131,9 @@
             </div>
             {% endif %}
             {% endfor %}
+            <label for="image_principale">Remplacez l'image principale :</label>
             <input type="file" id="image_principale" name="image_principale" accept="image/*">
-            {% if errors.image_principale is defined %}
+            {% if errors.image_principale is not defined %}
             <span class="error">{{ errors.image_principale }}</span>
             {% endif %}
         </div>
@@ -152,6 +144,17 @@
             {% for key, error in errors %}
             {% if key starts with 'images[' %}
             <span class="error">{{ error }}</span>
+            {% endif %}
+            {% endfor %}
+        </div>
+
+        <div class="delete-img">
+            {% for img in images %}
+            {% if img.principale == 0 %}
+            <div class="img-container" data-id="{{ img.id }}">
+                <img src="{{ base }}/public/uploads/{{ img.url_image }}" alt="Image" width="150">
+                <button type="button" class="delete-button"><i class="fa-solid fa-trash"></i></button>
+            </div>
             {% endif %}
             {% endfor %}
         </div>
