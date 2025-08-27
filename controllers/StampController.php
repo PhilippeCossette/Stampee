@@ -235,6 +235,10 @@ class StampController
         $currentImgCount = $imageModel->countByTimbre($timbre_id);
         $newImgCount = $imageModel->countFiles($files['images'] ?? []);
 
+        $validator->field('images', $currentImgCount + $newImgCount, 'Nombre d\'images')
+            ->maxValue(5); // Max 5 images total
+
+            
         // Validate additional images
         if (isset($files['images'])) {
             foreach ($files['images']['name'] as $i => $name) {
