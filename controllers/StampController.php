@@ -176,7 +176,7 @@ class StampController
         $pays = new Pays();
         $pays = $pays->select("pays");
 
-        /// Need changes
+        
         $images = (new ImagesTimbre())->selectByTimbre($timbre_id);
 
 

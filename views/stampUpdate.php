@@ -133,11 +133,13 @@
 
         <div>
             <label for="image_principale">Remplacez l'image principale :</label>
-            {% if timbre.image_principale is defined %}
+            {% for image in images %}
+            {% if image.principale == 1 %}
             <div>
-                <img src="{{ base }}/uploads/{{ timbre.image_principale }}" alt="Image principale" width="200">
+                <img src="{{ asset }}/uploads/{{ image.url_image }}" alt="Image principale" width="200">
             </div>
             {% endif %}
+            {% endfor %}
             <input type="file" id="image_principale" name="image_principale" accept="image/*">
             {% if errors.image_principale is defined %}
             <span class="error">{{ errors.image_principale }}</span>
