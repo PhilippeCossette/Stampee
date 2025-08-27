@@ -65,6 +65,7 @@ class AuctionController
 
         $miseModel = new Mises();
         $EnchereBids = $miseModel->getBidLogbyID($id, 5);
+        $highestBidder = $miseModel->isHighestBidder($id, $_SESSION['user_id'] ?? null);
 
         $commentaireModel = new Commentaire();
         $comments = $commentaireModel->showCommentaire($id);
@@ -89,6 +90,6 @@ class AuctionController
             return View::render('error', ['message' => 'Impossible de trouver l\'enchère']);
         }
 
-        return View::render('auctionDetails', ['auction' => $auction, 'images' => $images, 'success' => $success, 'errors' => $errors,  'bids' => $EnchereBids, 'comments' => $comments]);
+        return View::render('auctionDetails', ['auction' => $auction, 'images' => $images, 'success' => $success, 'errors' => $errors,  'bids' => $EnchereBids, 'highestBidder' => $highestBidder, 'comments' => $comments]);
     }
 }

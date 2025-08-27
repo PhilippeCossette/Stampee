@@ -17,7 +17,11 @@
     <img class="auction-card-certified" src="{{asset}}img/certified.png" alt="">
     {% endif %}
     <script>
-      const images = {{(images is defined ? images : []) | json_encode | raw}};
+      const images = {
+        {
+          (images is defined ? images : []) | json_encode | raw
+        }
+      };
     </script>
     <div class="image-slider">
       <picture>
@@ -113,13 +117,13 @@
             {% if bid.status == 1 %}
             <span class="status-indicator active">En cours</span>
             {% elseif bid.status == 0 %}
-            {% if bid.is_highest_bidder %}
+            {% if bid.montant >= bid.highest_bid %}
             <span class="status-indicator won">Gagnée</span>
-            {% else %}
+            {% elseif bid.montant < bid.highest_bid %}
             <span class="status-indicator lost">Perdue</span>
-            {% endif %}
             {% else %}
             <span class="status-indicator unknown">Inconnu</span>
+            {% endif %}
             {% endif %}
           </td>
         </tr>

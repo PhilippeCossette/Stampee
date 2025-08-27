@@ -11,7 +11,7 @@ use App\Providers\Auth;
 use App\Providers\Validator;
 
 class BidController
-{   
+{
     // Display Bid
     public function showBid()
     {
@@ -38,7 +38,7 @@ class BidController
 
         $misesModel = new Mises();
         $highestBidder = $misesModel->isHighestBidder($idEnchere, $idUser);
-
+        
         return View::render('bid', [
             'auction' => $auction,
             'errors' => $errors,

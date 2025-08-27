@@ -138,13 +138,13 @@
               {% if mise.status == 1 %}
               <span class="status-indicator active">En cours</span>
               {% elseif mise.status == 0 %}
-              {% if mise.is_highest_bidder %}
+              {% if mise.montant == mise.highest_bid %}
               <span class="status-indicator won">Gagnée</span>
-              {% else %}
+              {% elseif mise.montant < mise.highest_bid %}
               <span class="status-indicator lost">Perdue</span>
-              {% endif %}
               {% else %}
               <span class="status-indicator unknown">Inconnu</span>
+              {% endif %}
               {% endif %}
             </td>
           </tr>
