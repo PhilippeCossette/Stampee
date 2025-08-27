@@ -30,7 +30,11 @@ class UserController
         $misesModel = new Mises();
         $mesMises = $misesModel->getMyBidLog($_SESSION['user_id'], 10);
 
-        return View::render('profile', ['favoris' => $favoris, 'mesEncheres' => $mesEncheres, 'mesMises' => $mesMises]);
+        $success = $_SESSION['success'] ?? null;
+        $errors = $_SESSION['errors'] ?? null;
+        unset($_SESSION['errors'], $_SESSION['success']); // clear after reading
+
+        return View::render('profile', ['favoris' => $favoris, 'mesEncheres' => $mesEncheres, 'mesMises' => $mesMises, 'success' => $success, 'errors' => $errors]);
     }
 
     public function profileFavorites()
@@ -56,7 +60,7 @@ class UserController
         $enchereModel = new Encheres();
         $mesEncheres = $enchereModel->getMyAuction($_SESSION['user_id']);
 
-        return View::render('myAuctions', ['mesEncheres' => $mesEncheres]);
+        return View::render('myAuction', ['mesEncheres' => $mesEncheres]);
     }
 
     public function updateIndex()
@@ -96,10 +100,12 @@ class UserController
         if ($userModel->updateUserData($userId, $nom, $email, $motDePasse)) {
             $_SESSION['nom_utilisateur'] = $nom;
             $_SESSION['email'] = $email;
-            return View::redirect('profile', ['success' => 'Profil mis à jour avec succès.']);
+            $_SESSION['success'] = 'Profil mis à jour avec succès.';
+            return View::redirect('profile');
         }
 
-        return View::render('error', ['message' => 'Erreur lors de la mise à jour du profil.']);
+        $_SESSION['errors'] = 'Erreur lors de la mise à jour du profil.';
+        return View::redirect('profile');
     }
 
     // Handle user deletion
@@ -111,9 +117,9 @@ class UserController
         if ($userModel->deleteUserAccount($_SESSION['user_id'])) {
             session_unset();
             session_destroy();
-            return View::redirect('', ['success' => 'Compte supprimé avec succès.']);
+            return View::redirect('');
         } else {
-            return View::render('profile', ['error' => 'Erreur lors de la suppression du compte.']);
+            return View::render('profile', ['errors' => 'Erreur lors de la suppression du compte.']);
         }
     }
 }

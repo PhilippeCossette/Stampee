@@ -112,9 +112,8 @@ class BidController
             return View::redirect('auction?id=' . $idEnchere);
         } else {
             //return error message to view
-            return View::render('error', [
-                'message' => $result['message']
-            ]);
+            $_SESSION['errors'] = [$result['message']];
+            return View::redirect('auction?id=' . $idEnchere);
         }
     }
 }

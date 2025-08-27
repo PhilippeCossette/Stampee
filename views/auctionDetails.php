@@ -5,6 +5,12 @@
   {{ success }}
 </div>
 {% endif %}
+{% if errors is defined and errors %}
+<div class="error-msg">
+  <i class="fa fa-times"></i>
+  {{ errors }}
+</div>
+{% endif %}
 <section class="auction-card">
   <div class="auction-card_left-section">
     {% if auction.certifie == 1 %}

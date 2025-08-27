@@ -6,8 +6,8 @@
             <a class="profile-section-header-link" href="{{ base }}/profile">Mon Profile <i class="fa-solid fa-angle-right"></i></a>
         </header>
         <div class="grid">
-            {% if mesEnchere is not empty %}
-            {% for mesEnchere in mesEnchere %}
+            {% if mesEncheres is not empty %}
+            {% for mesEnchere in mesEncheres %}
             <a href="{{base}}/auction?id={{mesEnchere.enchere_id}}" class="auctionShowcase-card">
                 <header class="auctionShowcase-card-header">
                     {% if mesEnchere.coup_coeur == 1 %}
@@ -30,7 +30,7 @@
             </a>
             {% endfor %}
             {% else %}
-            <p class="empty-message">Aucune enchère favorite trouvée.</p>
+            <p class="empty-message">Aucune enchère trouvée.</p>
             {% endif %}
         </div>
     </article>

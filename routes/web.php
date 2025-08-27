@@ -35,7 +35,7 @@ Route::post('/create', 'StampController@storeStamp');
 Route::get('/stamp/update', 'StampController@updateStampIndex');
 Route::post('/stamp/update', 'StampController@updateStamp');
 
-Route::post('/stamp/deleteImage', 'StampController@deleteImage'); 
+Route::post('/stamp/deleteImage', 'StampController@deleteImage');
 
 Route::get('/auctionlist', 'AuctionController@auctionList');
 Route::post('/auctionlist', 'AuctionController@auctionList');
@@ -54,7 +54,7 @@ Route::post('/auction/comment', 'CommentController@createComment');
 Route::post('/comment/delete', 'CommentController@deleteComment');
 
 Route::get('/profile/favorites', 'UserController@profileFavorites');
-Route::get('/profile/myAuctions', 'UserController@profileFavorites');
+Route::get('/profile/myAuctions', 'UserController@profileMyAuctions');
 Route::get('/profile/myBids', 'BidController@showMyBidLog');
 
 Route::dispatch();

@@ -1,5 +1,16 @@
 {{ include("layouts/header.php", { title: "Mon Profile - Stampee" }) }}
-
+{% if success is defined and success %}
+<div class="success-msg">
+  <i class="fa fa-check"></i>
+  {{ success }}
+</div>
+{% endif %}
+{% if errors is defined and errors %}
+<div class="error-msg">
+  <i class="fa fa-times"></i>
+  {{ errors }}
+</div>
+{% endif %}
 <section class="profile">
   <header class="profile-header">
     <h1>Details du Compte</h1>

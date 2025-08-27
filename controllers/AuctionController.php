@@ -68,6 +68,8 @@ class AuctionController
         $images = $imagesModel->selectByTimbre($auction['timbre_id']);
 
         $success = $_SESSION['success'] ?? null;
+        $errors = $_SESSION['errors'] ?? null;
+        unset($_SESSION['errors']);
         unset($_SESSION['success']); // clear after reading
 
         // Check if auction is already favorite for current user
@@ -80,6 +82,6 @@ class AuctionController
             return View::render('error', ['message' => 'Impossible de trouver l\'enchère']);
         }
 
-        return View::render('auctionDetails', ['auction' => $auction, 'images' => $images, 'success' => $success, 'bids' => $EnchereBids, 'comments' => $comments]);
+        return View::render('auctionDetails', ['auction' => $auction, 'images' => $images, 'success' => $success, 'errors' => $errors,  'bids' => $EnchereBids, 'comments' => $comments]);
     }
 }
