@@ -150,11 +150,12 @@ class StampController
         return View::redirect('');
     }
 
-    public function updateStampIndex($queryParams) // Gets from Url ?id=5 exemple
+    public function updateStampIndex() // Gets from Url ?id=5 exemple
     {
         Auth::session();
 
-        $timbre_id = $queryParams['id'] ?? null;
+
+        $timbre_id = $_GET['id'] ?? null;
         if (!$timbre_id) {
             return View::render('error', ['message' => 'ID du timbre manquant']);
         }
@@ -175,8 +176,10 @@ class StampController
         $pays = new Pays();
         $pays = $pays->select("pays");
 
-        $images = (new ImagesTimbre())->selectByTimbre($queryParams['id']);
-
+        /// Need changes
+        $images = (new ImagesTimbre())->selectByTimbre($timbre_id);
+        foreach ($images as $img) {
+            
         return View::render('stampUpdate', [
             'timbre' => $timbre,
             'conditions' => $conditions,

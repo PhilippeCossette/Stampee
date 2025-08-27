@@ -145,7 +145,7 @@
             {% endfor %}
         </div>
 
-        <button class="main-button" type="submit">Mettre à jour le timbre</button>
+        <button class="button main-button" type="submit">Mettre à jour le timbre</button>
     </form>
 </div>
 
